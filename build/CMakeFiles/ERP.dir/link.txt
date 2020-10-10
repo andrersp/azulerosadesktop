@@ -1,0 +1,1 @@
+/bin/c++  -g   CMakeFiles/ERP.dir/main.cpp.o CMakeFiles/ERP.dir/ERP_autogen/mocs_compilation.cpp.o  -o ERP /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.11.3 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.11.3 /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.11.3 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.11.3 
