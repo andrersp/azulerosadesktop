@@ -19,8 +19,7 @@ set(CMAKE_AUTOMOC ON) # For meta object compiler
 set(CMAKE_AUTOUIC ON) # Resource files
 set(CMAKE_AUTORCC ON) # UI Files
 set(RESOURCE_FILES 
-	resources/media.qrc  
-
+	resources/media.qrc 
 )
 
 find_package(Qt5Core REQUIRED)
