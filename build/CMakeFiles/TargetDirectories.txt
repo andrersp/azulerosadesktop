@@ -1,4 +1,0 @@
-/Files/ERP/AzulERosa/build/CMakeFiles/rebuild_cache.dir
-/Files/ERP/AzulERosa/build/CMakeFiles/ERP.dir
-/Files/ERP/AzulERosa/build/CMakeFiles/edit_cache.dir
-/Files/ERP/AzulERosa/build/CMakeFiles/ERP_autogen.dir
