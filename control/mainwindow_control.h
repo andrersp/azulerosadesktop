@@ -1,7 +1,8 @@
 #ifndef MAINWINDOW_CONTROL_H
 #define MAINWINDOW_CONTROL_H
 
-#include "view/mainwindow_view.h"
+#include "control/layout_control.h"
+#include "view/login_view.h"
 
 
 class MainWindowControl : public QMainWindow {
@@ -9,8 +10,17 @@ class MainWindowControl : public QMainWindow {
 public:
 	explicit MainWindowControl(QWidget *parent = nullptr);
 
+	void window_login();
+	void window_layout();
+	QToolBar *toolbar;
+
+public slots:
+void clear_widget();
+
 private:
-	MainWindowView *view;
+	LayoutControl *view;
+	LoginView *ui_login;
+
 
 };
 

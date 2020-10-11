@@ -1,4 +1,9 @@
 <RCC>
+
+	<qresource prefix="/Images">
+		<file>Images/home.svgz</file>		
+	</qresource>
+
 	<qresource prefix="/Style">
 		<file>Style/layout.qss</file>		
 	</qresource>

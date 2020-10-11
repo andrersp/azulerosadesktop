@@ -1,4 +1,34 @@
 * {
-	margim: 0;
+	margin: 0;
 	padding: 0
+}
+
+#layout_window {
+	background-color: red;
+}
+
+#fr_top { 
+	background-color: pink;
+
+}
+
+#fr_menu {
+	background-color: green
+}
+
+#container {
+	background-color: yellow
+}
+
+QStatusBar {
+	background-color: #069;
+	color: blue
+}
+
+#wd1 {
+	background-color: #000;
+}
+
+#wd2 {
+	background-color: #069;
 }
