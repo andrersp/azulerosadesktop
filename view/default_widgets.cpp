@@ -1,15 +1,37 @@
 #include "view/default_widgets.h"
 
-BtMenu::BtMenu(QWidget *parent) : QToolButton(parent)
-{
-	// QSizePolicy::setHeightForWidth(this->sizePolicy().hasHeightForWidth());
-
+#include <QPainter>
+ButtonMenu::ButtonMenu(const QString &text, const QIcon &icon, QWidget *parent) : QPushButton(text, parent){
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-
-	setFixedHeight(40);
-	setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+	setFixedHeight(35);
+	// setFlat(true);
+	setFocusPolicy(Qt::NoFocus);
 	setCursor(Qt::PointingHandCursor);
-	setObjectName("bt_menu");
-	setIconSize(QSize(30, 30));
+	setObjectName("button_menu");
+	setCheckable(true);
+
+
+	m_pixmap = icon.pixmap(QSize(20, 20));
+
+
+	qDebug() << m_pixmap;
 }
-BtMenu::~BtMenu() {}
+ButtonMenu::~ButtonMenu(){}
+
+QSize ButtonMenu::sizeHint() const {
+	const auto parentHint = QPushButton::sizeHint();
+	return  QSize(parentHint.width() + m_pixmap.width(), std::max(parentHint.height(), m_pixmap.height()));
+
+}
+
+void ButtonMenu::paintEvent(QPaintEvent *e){
+
+	QPushButton::paintEvent(e);
+
+	if (!m_pixmap.isNull()){
+		const int y = (height() - m_pixmap.height()) / 2;
+		QPainter painter(this);
+		painter.drawPixmap(10, y, m_pixmap);
+	}
+
+}

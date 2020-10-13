@@ -3,32 +3,56 @@
 	padding: 0
 }
 
+#window_login {
+	background-color: #343a40 !important
+}
+
 #layout_window {
 	background-color: red;
 }
 
 #fr_top { 
-	background-color: pink;
-
+	background-color: #FFF;
+	border-bottom: 1px solid #e8e9ed;
 }
 
 #fr_menu {
-	background-color: green
+	background-color: #FFF
 }
 
 #container {
-	background-color: yellow
+	background-color: #f1f2f7
+}
+
+#button_menu{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: #607d8b;
+	border: none;
+	text-align: left;
+	padding-left: 40px;
+}
+
+#button_menu::hover, #button_menu::checked {
+	color: #03a9f3;
+	background: #fafafa;
+
+}
+
+#label_menu {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	margin-left:10px;
 }
 
 QStatusBar {
-	background-color: #069;
+	background-color: #fafafa;
 	color: blue
 }
 
-#wd1 {
-	background-color: #000;
-}
-
-#wd2 {
-	background-color: #069;
+#dash_window {
+	background-color: green;
 }

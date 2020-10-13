@@ -1,6 +1,7 @@
 #ifndef LAYOUT_CONTROL_H
 #define LAYOUT_CONTROL_H
 #include "view/layout_view.h"
+#include "control/dashboard_control.h"
 
 
 
@@ -10,7 +11,9 @@ public:
 	LayoutControl(QObject *parent);
 	~LayoutControl();
 
-private slots:
+	DashBoardControl *dashboard_frame;
+
+public slots:
 	void tamanho();
 	void set_window_produto();
 

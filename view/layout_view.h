@@ -11,7 +11,7 @@
 #include <QPushButton>
 #include <QDebug>
 
-#include "view/toolbar_view.h"
+#include "view/frame_side_menu.h"
 class MainWindowView : public QWidget{
 	
 public:
@@ -20,18 +20,17 @@ public:
 
 	QGridLayout *central_grid;
 
-	QFrame *fr_top, *fr_menu;
+	QFrame *fr_top;
+
+	FrameMenu *fr_menu;
 	QVBoxLayout *grid_menu;
 	QHBoxLayout *grid_top;
 
 	QStackedWidget *container;
 
-	QStatusBar *status_bar;
-	QPushButton *bt, *bt2;
+	QStatusBar *status_bar;	
 
-	QWidget *wd1, *wd2;
-
-	ToolBarView *toolbar;
+	QWidget *wd1, *wd2;	
 
 };
 

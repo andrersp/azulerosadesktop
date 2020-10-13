@@ -2,13 +2,28 @@
 #define DEFAULT_WIDGETS_H
 
 #include <QToolButton>
+#include <QPushButton>
+#include <QLabel>
+#include <QHBoxLayout>
+#include <QDebug>
 
-class BtMenu : public QToolButton
-{
+
+class ButtonMenu : public QPushButton {
 public:
-	BtMenu(QWidget *parent = nullptr);
-	~BtMenu();
+	explicit ButtonMenu(const QString &text, const QIcon &icon, QWidget *parent = nullptr);
+	virtual ~ButtonMenu();
+
+	virtual QSize sizeHint() const override;
+protected:
+	virtual void paintEvent(QPaintEvent *e) override;
+
+private:
+	QPixmap m_pixmap;
+
+
 };
+
+
 
 
 

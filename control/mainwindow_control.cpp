@@ -11,7 +11,7 @@ MainWindowControl::MainWindowControl(QWidget *parent): QMainWindow(parent){
 	setMinimumSize(QSize(1268, 684));
 	setUnifiedTitleAndToolBarOnMac(true);
 	// takeCentralWidget();
-	window_layout();	
+	window_login();	
 
 	
 	// connect(quit2, &QAction::triggered, this, &MainWindowControl::window_layout);

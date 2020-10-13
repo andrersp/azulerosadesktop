@@ -1,11 +1,19 @@
 <RCC>
 
 	<qresource prefix="/Images">
-		<file>Images/home.svgz</file>		
+		<file>Images/dashboard.svgz</file>
+		<file>Images/tag.svgz</file>
+		<file>Images/products.svgz</file>
+		<file>Images/clients.svgz</file>
+		<file>Images/providers.svgz</file>
 	</qresource>
 
 	<qresource prefix="/Style">
 		<file>Style/layout.qss</file>		
+	</qresource>
+
+	<qresource prefix="/Fonts">
+		<file>Fonts/OpenSans-Regular.ttf</file>		
 	</qresource>
 
 </RCC>

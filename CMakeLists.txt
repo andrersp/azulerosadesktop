@@ -26,6 +26,7 @@ find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Gui REQUIRED)
+find_package(Qt5Charts REQUIRED)
 
 
 # macOS Bundle building
@@ -76,4 +77,4 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 )
 
 # Link Libs
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network)
+target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::Charts)
