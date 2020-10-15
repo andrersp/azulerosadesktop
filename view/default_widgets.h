@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QDebug>
+#include <QLineEdit>
 
 
 class ButtonMenu : public QPushButton {
@@ -19,6 +20,20 @@ protected:
 
 private:
 	QPixmap m_pixmap;
+
+};
+
+
+class LineEditIconLeft :  public QLineEdit {
+	
+public:
+	explicit LineEditIconLeft(const QIcon &icon, QWidget *parent = nullptr);
+	virtual ~LineEditIconLeft();
+	void setIcon(QIcon icon);
+protected:
+	virtual void paintEvent(QPaintEvent *e);
+private:
+	QIcon _icon;
 
 
 };

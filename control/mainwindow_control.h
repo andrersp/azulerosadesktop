@@ -21,6 +21,10 @@ private:
 	LayoutControl *view;
 	LoginView *ui_login;
 
+	void login();
+
+
+
 
 };
 

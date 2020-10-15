@@ -6,6 +6,9 @@
 		<file>Images/products.svgz</file>
 		<file>Images/clients.svgz</file>
 		<file>Images/providers.svgz</file>
+		<file>Images/icon_user.svgz</file>
+		<file>Images/icon_password.svgz</file>
+		<file>Images/logo.svgz</file>
 	</qresource>
 
 	<qresource prefix="/Style">
@@ -13,7 +16,10 @@
 	</qresource>
 
 	<qresource prefix="/Fonts">
-		<file>Fonts/OpenSans-Regular.ttf</file>		
+		<file>Fonts/OpenSans-Regular.ttf</file>	
+		<file>Fonts/Poppins-Bold.ttf</file>
+        <file>Fonts/Poppins-Medium.ttf</file>
+        <file>Fonts/Montserrat-Bold.ttf</file>	
 	</qresource>
 
 </RCC>

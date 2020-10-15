@@ -10,6 +10,9 @@ int main(int argc, char *argv[])
 
 	QFontDatabase *db_font = new QFontDatabase();
 	db_font->addApplicationFont(":Fonts/Fonts/OpenSans-Regular.ttf");
+	db_font->addApplicationFont(":Fonts/Fonts/Poppins-Bold.ttf");
+	db_font->addApplicationFont(":Fonts/Fonts/Poppins-Medium.ttf");
+	db_font->addApplicationFont(":Fonts/Fonts/Montserrat-Bold.ttf");
 	
 	
 

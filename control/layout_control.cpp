@@ -9,6 +9,7 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent){
 	dashboard_frame = new DashBoardControl(this);
 	container->addWidget(dashboard_frame);
 	container->setCurrentWidget(dashboard_frame);
+	fr_menu->bt_home->setChecked(true);
 
 	// window->clear_widget();
 

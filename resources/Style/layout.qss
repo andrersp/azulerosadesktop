@@ -4,7 +4,40 @@
 }
 
 #window_login {
-	background-color: #343a40 !important
+	background-color: #59afa1 !important
+}
+
+#container_login {
+	background-color: #3da395; 
+	border: 15px solid #389489; 
+	border-radius: 30px
+}
+
+#tx_login {
+    font-family: "Poppins";
+    font-weight: 400;
+    background: #e6e6e6;
+    /* border: 1px solid #666; */
+    border-radius: 15px;
+    font-size: 13px;
+    color: #666;
+    padding-left: 40px;
+    border: 4px solid #9cccc0;
+}
+
+#bt_login {
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #3da395;
+    border: 4px solid #9cccc0;
+    color: #9cccc0; 
+    border-radius: 15px;
+}
+
+#bt_login:hover {
+	background-color: #4a9d92;
+	color: #FFF
 }
 
 #layout_window {
