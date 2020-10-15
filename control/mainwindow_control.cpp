@@ -16,6 +16,7 @@ MainWindowControl::MainWindowControl(QWidget *parent): QMainWindow(parent){
 	setMinimumSize(QSize(1268, 684));
 	setUnifiedTitleAndToolBarOnMac(true);
 	// takeCentralWidget();
+	setWindowTitle("Azul E Rosa Personalizados");
 	window_login();	
 
 	
