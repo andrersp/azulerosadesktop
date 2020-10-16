@@ -17,7 +17,7 @@ MainWindowControl::MainWindowControl(QWidget *parent): QMainWindow(parent){
 	setUnifiedTitleAndToolBarOnMac(true);
 	// takeCentralWidget();
 	setWindowTitle("Azul E Rosa Personalizados");
-	window_layout();	
+	window_login();	
 	// connect(quit2, &QAction::triggered, this, &MainWindowControl::window_layout);
 	// connect(login, &QAction::triggered, this, &MainWindowControl::window_login);
 
@@ -55,6 +55,12 @@ void MainWindowControl::login(){
 
 	model_login.set_user(user, password);
 	model_login.login();
+
+}
+
+void MainWindowControl::closeEvent(QCloseEvent *e){
+	ModelLogin model_login(this);
+	model_login.logout();
 
 }
 

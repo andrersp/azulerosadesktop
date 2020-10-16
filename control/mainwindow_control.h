@@ -23,7 +23,9 @@ private:
 	LayoutControl *view;
 	LoginView *ui_login;
 
-	void login();
+	void login();	
+protected:
+	void closeEvent(QCloseEvent *e);
 
 
 

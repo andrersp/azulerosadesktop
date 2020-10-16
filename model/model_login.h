@@ -10,8 +10,9 @@ public:
 	explicit ModelLogin(QObject *parent =nullptr) : QObject(parent){};
 	virtual ~ModelLogin();
 	void set_user(QString &user, QString &password);
-
+public slots:
 	void login();
+	void logout();
 private:
 	QString user, password;
 

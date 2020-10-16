@@ -17,7 +17,7 @@ void ModelLogin::login() {
 
   };
 
-  auto [status, response] = request.post("user/login", data);
+  auto [status, response] = request.post("/login", data);
 
   if (status) {
     QJsonObject data{response.value("data").toObject()};
@@ -52,6 +52,14 @@ void ModelLogin::login() {
   emit err(status, response.value("message").toString());
 
   // qDebug() << response;
+}
+
+void ModelLogin::logout(){
+  ModelRequest request(this);
+
+  QJsonObject data{};
+
+  request.post("/logout", data);
 }
 
 ModelLogin::~ModelLogin() {}
