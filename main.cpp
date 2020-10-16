@@ -17,8 +17,13 @@ int main(int argc, char *argv[])
 	
 
 	QFile layout_qss(":Style/Style/layout.qss");
+	QFile labels_qss(":Style/Style/labels.qss");
 	layout_qss.open(QFile::ReadOnly);
-	app.setStyleSheet(QLatin1String(layout_qss.readAll()));
+	labels_qss.open(QFile::ReadOnly);
+	app.setStyleSheet(QLatin1String(
+		layout_qss.readAll() + 
+		labels_qss.readAll()
+		));
 
 	MainWindowControl main;
 	

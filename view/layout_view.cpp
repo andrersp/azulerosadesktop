@@ -34,6 +34,9 @@ MainWindowView::MainWindowView(QObject *parent) {
 
   // Stack WIdget Container
   container = new QStackedWidget(this);
+  container->setContentsMargins(40, 40, 40, 40);
+  container->setFrameShape(QFrame::NoFrame);
+  container->setFrameShadow(QFrame::Plain);
   container->setObjectName("container");
 
   central_grid->addWidget(container, 1, 1, 1, 1);  

@@ -57,9 +57,7 @@ void LoginView::setup_ui() {
 
   grid_container_login->addWidget(fr_login);
 
-  grid_qw_login->addWidget(container_login, 0, Qt::AlignCenter);
-
-  qDebug() << "Testando";
+  grid_qw_login->addWidget(container_login, 0, Qt::AlignCenter);  
 }
 
-LoginView::~LoginView() { qDebug() << "Saindo"; }
+LoginView::~LoginView() {}

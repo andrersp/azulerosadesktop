@@ -17,9 +17,7 @@ MainWindowControl::MainWindowControl(QWidget *parent): QMainWindow(parent){
 	setUnifiedTitleAndToolBarOnMac(true);
 	// takeCentralWidget();
 	setWindowTitle("Azul E Rosa Personalizados");
-	window_login();	
-
-	
+	window_layout();	
 	// connect(quit2, &QAction::triggered, this, &MainWindowControl::window_layout);
 	// connect(login, &QAction::triggered, this, &MainWindowControl::window_login);
 
@@ -30,30 +28,30 @@ void MainWindowControl::window_login(){
 	ui_login->setup_ui();
 	setCentralWidget(ui_login);
 
-	
-
-	qDebug() << centralWidget();
+	connect(ui_login->tx_user, &QLineEdit::returnPressed, this, &MainWindowControl::login);
+	connect(ui_login->tx_password, &QLineEdit::returnPressed, this, &MainWindowControl::login);
 	connect(ui_login->bt_login, &QPushButton::clicked, this, &MainWindowControl::login);
 
 }
 
 void MainWindowControl::login(){
 
-	if (ui_login->tx_user->text().isEmpty()){
-		qDebug() << "Sem USuario";
-		return;
-	}
+	// if (ui_login->tx_user->text().isEmpty()){
+	// 	qDebug() << "Sem USuario";
+	// 	return;
+	// }
 
-	if (ui_login->tx_password->text().isEmpty()){
-		qDebug() << "sem senha";
-		return;
-	}
+	// if (ui_login->tx_password->text().isEmpty()){
+	// 	qDebug() << "sem senha";
+	// 	return;
+	// }
 
 	QString user{ui_login->tx_user->text()};
 	QString password{ui_login->tx_password->text()};
 
 	ModelLogin model_login(this);
 	connect(&model_login, &ModelLogin::success, this, &MainWindowControl::window_layout);
+	connect(&model_login, &ModelLogin::err, this, &MainWindowControl::dialog_err);
 
 	model_login.set_user(user, password);
 	model_login.login();
@@ -70,6 +68,12 @@ void MainWindowControl::window_layout(){
 }
 
 
-void MainWindowControl::clear_widget(){
-	qDebug() << "Clear widgets";
+void MainWindowControl::dialog_err(int status, QString msg){
+	
+	DialogMsg *dialog = new DialogMsg(this, status, msg);
+	dialog->show();
+
+	// DialogMsg dialog(this, status, msg);
+	// dialog.exec();
 }
+

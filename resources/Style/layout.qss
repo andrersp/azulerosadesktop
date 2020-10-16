@@ -86,6 +86,8 @@ QStatusBar {
 	color: blue
 }
 
-#dash_window {
-	background-color: green;
+
+/* Stylesheet for Dash Board */
+#frame_info {
+	background: #FFF
 }

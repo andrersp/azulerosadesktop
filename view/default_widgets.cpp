@@ -13,8 +13,7 @@ ButtonMenu::ButtonMenu(const QString &text, const QIcon &icon, QWidget *parent)
   setCheckable(true);
 
   m_pixmap = icon.pixmap(QSize(20, 20));
-
-  qDebug() << m_pixmap;
+  
 }
 
 QSize ButtonMenu::sizeHint() const {

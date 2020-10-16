@@ -2,7 +2,7 @@
 
 DashBoardControl::DashBoardControl(QWidget *parent) : DashBoardView(parent){
 
-	setObjectName("dash_window");
+	info_client->set_value("25");
 	
 }
 DashBoardControl::~DashBoardControl(){}

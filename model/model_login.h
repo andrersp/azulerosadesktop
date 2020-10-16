@@ -17,7 +17,7 @@ private:
 
 signals:
 	void success();
-	void err(bool &status, QString &msg);
+	void err(int status, QString msg);
 
 
 };

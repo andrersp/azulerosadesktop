@@ -1,0 +1,12 @@
+#info_value {
+	color: #455a64;
+	font-size: 20px;
+	font-weight: bold;
+	
+}
+
+#info_title {
+	color: #99abb4;
+	font-size: 14px;
+	
+}

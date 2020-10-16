@@ -8,7 +8,11 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent){
 
 	dashboard_frame = new DashBoardControl(this);
 	container->addWidget(dashboard_frame);
+
+	// Current widget container
 	container->setCurrentWidget(dashboard_frame);
+
+	// Set Checked Menu
 	fr_menu->bt_home->setChecked(true);
 
 	// window->clear_widget();
@@ -22,9 +26,7 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent){
 
 }
 
-LayoutControl::~LayoutControl(){
-	qDebug() << "Delete Layout Control";
-}
+LayoutControl::~LayoutControl(){}
 
 void LayoutControl::tamanho(){
 

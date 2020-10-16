@@ -3,6 +3,7 @@
 
 #include "control/layout_control.h"
 #include "view/login_view.h"
+#include "view/dialog_ui.h"
 
 
 class MainWindowControl : public QMainWindow {
@@ -15,7 +16,8 @@ public:
 	QToolBar *toolbar;
 
 public slots:
-void clear_widget();
+	void dialog_err(int status, QString msg);
+
 
 private:
 	LayoutControl *view;

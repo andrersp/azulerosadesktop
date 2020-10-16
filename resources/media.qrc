@@ -5,14 +5,24 @@
 		<file>Images/tag.svgz</file>
 		<file>Images/products.svgz</file>
 		<file>Images/clients.svgz</file>
+		<file>Images/clients_info.svgz</file>
 		<file>Images/providers.svgz</file>
 		<file>Images/icon_user.svgz</file>
 		<file>Images/icon_password.svgz</file>
 		<file>Images/logo.svgz</file>
+		<file>Images/bt_close.svgz</file>
+		<file>Images/attention.svgz</file>
+		<file>Images/error.svgz</file>
+		<file>Images/success.svgz</file>
+		<file>Images/cash.svgz</file>
+		<file>Images/cart.svgz</file>
+		<file>Images/box.svgz</file>
 	</qresource>
 
 	<qresource prefix="/Style">
 		<file>Style/layout.qss</file>		
+		<file>Style/dialog.qss</file>
+		<file>Style/labels.qss</file>
 	</qresource>
 
 	<qresource prefix="/Fonts">
