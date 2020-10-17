@@ -27,7 +27,8 @@
 	</qresource>
 
 	<qresource prefix="/Fonts">
-		<file>Fonts/OpenSans-Regular.ttf</file>	
+		<file>Fonts/OpenSans-Regular.ttf</file>
+		<file>Fonts/OpenSans-Bold.ttf</file>
 		<file>Fonts/Poppins-Bold.ttf</file>
         <file>Fonts/Poppins-Medium.ttf</file>
         <file>Fonts/Montserrat-Bold.ttf</file>	

@@ -18,11 +18,11 @@ DefaultTable::DefaultTable(QWidget *parent) : QTableView(parent){
 	setSelectionMode(QAbstractItemView::SingleSelection);
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+	setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	setFocusPolicy(Qt::NoFocus);
 	setIconSize(QSize(25, 20));
 	setObjectName("default_table");
-	setSortingEnabled(true);
+	// setSortingEnabled(true);
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	setCursor(Qt::PointingHandCursor);
 	setAlternatingRowColors(true);

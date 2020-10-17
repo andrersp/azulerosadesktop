@@ -39,7 +39,7 @@ public:
 
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-	QStringList header = {"ID", "Produto", "Categoria", "Quantidade \nDisponível", "Valor \nde Venda"};
+	QStringList header = {"#", "Produto", "Categoria", "Disponível", "Valor", "Editar"};
 
 	QVector<QStringList> itens = {};
 

@@ -9,6 +9,7 @@ MainProductControl::MainProductControl(QWidget *parent) : MainProductView(parent
 	// Stretch Table Model Columns
 	QHeaderView *header = table_product->horizontalHeader();
 	header->setSectionResizeMode(1, QHeaderView::Stretch);
+	table_product->setColumnWidth(0, 70);
 
 }
 

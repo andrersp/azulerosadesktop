@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QFont>
 
 ModelMainProduct::ModelMainProduct(QObject *parent) : QObject(parent) {}
 
@@ -22,7 +23,8 @@ void ModelMainProduct::get_products() {
           QString::number(obj.value("id").toInt()),
           obj.value("name").toString(), obj.value("category").toString(),
           QString::number(obj.value("available_stock").toDouble()),
-          QString::number(obj.value("sale_price").toDouble(), 'f', 2)};
+          QString::number(obj.value("sale_price").toDouble(), 'f', 2),
+          "Editar"};
       products.append(data);
     }
 
@@ -47,6 +49,24 @@ int ModelTableProduct::columnCount(const QModelIndex &parent) const {
 }
 
 QVariant ModelTableProduct::data(const QModelIndex &index, int role) const {
+
+	// Alignment
+	if (role == Qt::TextAlignmentRole) {
+		if (index.column() == 1 || index.column() == 2 ){
+			return Qt::AlignLeft + Qt::AlignVCenter;
+		}
+
+		return Qt::AlignCenter;
+	}
+
+	if (role == Qt::FontRole) {
+		if (index.column() == 0 || index.column() == 5){
+			QFont bold;
+			bold.setBold(true);
+			return bold;
+		}
+	}
+
 
 	if (role == Qt::DisplayRole || role == Qt::EditRole){
 		return itens.at(index.row()).at(index.column());
