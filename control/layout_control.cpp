@@ -6,8 +6,15 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent){
 
 	MainWindowControl *window = qobject_cast<MainWindowControl *>(parent);
 
-	dashboard_frame = new DashBoardControl(this);
+	dashboard_frame = new DashBoardControl(this); 
+
+	main_product = new MainProductControl(this);
+
+
+
+	// Add Widgets into container
 	container->addWidget(dashboard_frame);
+	container->addWidget(main_product);
 
 	// Current widget container
 	container->setCurrentWidget(dashboard_frame);
@@ -23,17 +30,22 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent){
 	// connect(bt2, &QPushButton::clicked, this, &LayoutControl::set_window_produto);
 	// connect(toolbar->bt_home, &QToolButton::clicked, this, &LayoutControl::set_window_produto);
 	connect(fr_menu->bt_home, &QPushButton::clicked, this, &LayoutControl::tamanho);
+	connect(fr_menu->bt_product, &QPushButton::clicked, this, &LayoutControl::set_window_produto);
 
 }
 
 LayoutControl::~LayoutControl(){}
 
 void LayoutControl::tamanho(){
+	container->setCurrentWidget(dashboard_frame);
 
 
 }
 
 void LayoutControl::set_window_produto(){
+	qDebug() << "Produto";
+	container->setCurrentWidget(main_product);
+	main_product->get_products();
 	
 
 }

@@ -23,6 +23,7 @@
 		<file>Style/layout.qss</file>		
 		<file>Style/dialog.qss</file>
 		<file>Style/labels.qss</file>
+		<file>Style/table.qss</file>		
 	</qresource>
 
 	<qresource prefix="/Fonts">

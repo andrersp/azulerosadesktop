@@ -13,7 +13,7 @@ public:
 
 	void window_login();
 	void window_layout();
-	QToolBar *toolbar;
+	
 
 public slots:
 	void dialog_err(int status, QString msg);

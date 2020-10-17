@@ -2,6 +2,7 @@
 #define LAYOUT_CONTROL_H
 #include "view/layout_view.h"
 #include "control/dashboard_control.h"
+#include "control/main_product_control.h"
 
 
 
@@ -12,6 +13,7 @@ public:
 	~LayoutControl();
 
 	DashBoardControl *dashboard_frame;
+	MainProductControl *main_product;
 
 public slots:
 	void tamanho();

@@ -27,23 +27,23 @@ FrameMenu::FrameMenu(QWidget *parent) : QFrame(parent) {
   grid->addWidget(bt_product);
 
 
-  QIcon icon_tag(":Images/Images/tag.svgz");
-  bt_product = new ButtonMenu("Categorias", icon_tag, this);
-  grid->addWidget(bt_product);
-  // end Stock Session
+  // QIcon icon_tag(":Images/Images/tag.svgz");
+  // bt_product = new ButtonMenu("Categorias", icon_tag, this);
+  // grid->addWidget(bt_product);
+  // // end Stock Session
 
-  label = new QLabel(this);
-  label->setText("Cadastros");
-  label->setObjectName("label_menu");
-  label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-  label->setFixedHeight(25);
-  grid->addWidget(label);
+  // label = new QLabel(this);
+  // label->setText("Cadastros");
+  // label->setObjectName("label_menu");
+  // label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  // label->setFixedHeight(25);
+  // grid->addWidget(label);
 
-  bt_product = new ButtonMenu("Clientes", QIcon(":Images/Images/clients.svgz"), this);
-  grid->addWidget(bt_product);
+  // bt_product = new ButtonMenu("Clientes", QIcon(":Images/Images/clients.svgz"), this);
+  // grid->addWidget(bt_product);
 
-  bt_product = new ButtonMenu("Fornecedores", QIcon(":Images/Images/providers.svgz"), this);
-  grid->addWidget(bt_product);
+  // bt_product = new ButtonMenu("Fornecedores", QIcon(":Images/Images/providers.svgz"), this);
+  // grid->addWidget(bt_product);
 
   button_group = new QButtonGroup(this);
 
