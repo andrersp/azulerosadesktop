@@ -32,6 +32,8 @@
 		<file>Fonts/Poppins-Bold.ttf</file>
         <file>Fonts/Poppins-Medium.ttf</file>
         <file>Fonts/Montserrat-Bold.ttf</file>	
+        <file>Fonts/Amble-Regular.ttf</file>
+        
 	</qresource>
 
 </RCC>

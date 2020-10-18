@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 	db_font->addApplicationFont(":Fonts/Fonts/Poppins-Bold.ttf");
 	db_font->addApplicationFont(":Fonts/Fonts/Poppins-Medium.ttf");
 	db_font->addApplicationFont(":Fonts/Fonts/Montserrat-Bold.ttf");
+	db_font->addApplicationFont(":Fonts/Fonts/Amble-Regular.ttf");
 	
 	
 
@@ -26,6 +27,7 @@ int main(int argc, char *argv[])
 		));
 
 	MainWindowControl main;
+	// main.showMaximized();	
 	
 	// mainwindow->show()
 	main.show();

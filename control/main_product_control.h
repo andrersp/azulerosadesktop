@@ -10,7 +10,7 @@ public:
   virtual ~MainProductControl();
 public slots:
   void get_products();
-  void tst_data(const QVector<QStringList> &itens);
+  void set_products(const QVector<QStringList> &itens) ;
 private:
 	ModelTableProduct *table_model;
 

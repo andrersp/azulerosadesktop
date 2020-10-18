@@ -5,6 +5,10 @@
 
 ModelRequest::ModelRequest(QObject *parent) : QObject(parent) {
   manager = new QNetworkAccessManager(this);
+
+  cache_dir = new QNetworkDiskCache(this);
+  cache_dir->setCacheDirectory("cache");
+  manager->setCache(cache_dir);
   //	manager->setNetworkAccessible(QNetworkAccessManager::Accessible);
 
   timer = new QTimer();
@@ -163,6 +167,8 @@ std::tuple<bool, QJsonObject> ModelRequest::gets(const QString &url) {
 QByteArray ModelRequest::get_image(const QString &url_image) {
 
   QNetworkRequest request;
+  request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+
   request.setUrl(QUrl(url_image));
 
   QNetworkReply *reply = this->manager->get(request);
@@ -172,6 +178,8 @@ QByteArray ModelRequest::get_image(const QString &url_image) {
   if (timer->isActive()) {
     timer->stop();
     if (reply->error() == QNetworkReply::NoError) {
+      QVariant fromCache = reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute);
+    qDebug() << "page from cache?" << fromCache.toBool();
       image_data = reply->readAll();
     }
   }

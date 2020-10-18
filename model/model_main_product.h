@@ -17,6 +17,7 @@ public slots:
 	void get_products();
 signals:
 void signal_products(QVector<QStringList> itens);
+void signal_err(int status, QString msg);
 
 
 };

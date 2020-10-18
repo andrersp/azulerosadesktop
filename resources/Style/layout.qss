@@ -91,3 +91,13 @@ QStatusBar {
 #frame_info {
 	background: #FFF
 }
+
+/*Frame Product*/
+#frame_product {
+	border-radius: 10px;
+	background-color: #f1f2f7
+}
+
+#frame_product::hover {
+	border: 1px solid #03a9f3;
+}

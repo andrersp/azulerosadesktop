@@ -7,6 +7,8 @@
 #include <QtCharts/QLegend>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
+
+#include "view/customshadow.h"
 QT_CHARTS_USE_NAMESPACE
 
 
@@ -14,6 +16,14 @@ FrameInfo::FrameInfo(QString text, QPixmap *img, QWidget *parent) : QFrame(paren
 
     setObjectName("frame_info");
     setFixedHeight(100);
+
+    CustomShadow *shadow = new CustomShadow();
+    shadow->setBlurRadius(10.0);
+    shadow->setDistance(3.0);
+    shadow->setColor(QColor(0, 0, 0, 80));
+    setAutoFillBackground(true);
+    setGraphicsEffect(shadow);
+
 
     grid = new QGridLayout(this);
     grid->setContentsMargins(30, 20, 30, 20);

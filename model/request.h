@@ -4,6 +4,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QNetworkDiskCache>
 #include <QTimer>
 
 class ModelRequest : public QObject
@@ -14,6 +15,8 @@ public:
 	~ModelRequest();
 
 	QNetworkAccessManager *manager;
+
+	QNetworkDiskCache *cache_dir;
 	QTimer *timer;
 	QEventLoop *loop;
 	// QNetworkReply *reply;

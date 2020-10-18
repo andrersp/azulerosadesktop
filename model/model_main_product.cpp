@@ -1,9 +1,9 @@
 #include "model/model_main_product.h"
 
 #include <QDebug>
+#include <QFont>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QFont>
 
 ModelMainProduct::ModelMainProduct(QObject *parent) : QObject(parent) {}
 
@@ -21,87 +21,114 @@ void ModelMainProduct::get_products() {
 
       QStringList data = {
           QString::number(obj.value("id").toInt()),
-          obj.value("name").toString(), obj.value("category").toString(),
+          obj.value("name").toString(),
+          obj.value("category").toString(),
           QString::number(obj.value("available_stock").toDouble()),
           QString::number(obj.value("sale_price").toDouble(), 'f', 2),
+          obj.value("cover").toString(),
           "Editar"};
       products.append(data);
     }
 
     emit signal_products(products);
   }
-}
 
+  if (response.value("message").isObject()) {
+    QString msg = "";
+    foreach (const QString &key, response.keys()) {
+      // qDebug() << response.value(key);
+      QJsonObject value = response.value(key).toObject();
+      foreach (const QString &key2, value.keys()) {
+        QJsonArray data_array = value.value(key2).toArray();
+
+        QString error;
+
+        for (int i = 0; i < data_array.count(); i++) {
+
+          error = error + data_array[i].toString();
+        }
+
+        msg = msg + key2 + " - " + error + "\n";
+      }
+    }
+
+    emit signal_err(status, msg);
+    return;
+    // qDebug() << msg;
+  }
+
+  emit signal_err(status, response.value("message").toString());
+
+
+
+}
 
 // Table Model Product
-ModelMainProduct::~ModelMainProduct() { 
-	qDebug() << "Delete Model Product"; 
-}
+ModelMainProduct::~ModelMainProduct() { qDebug() << "Delete Model Product"; }
 
-ModelTableProduct::ModelTableProduct(QObject *parent) : QAbstractTableModel(parent){}
+ModelTableProduct::ModelTableProduct(QObject *parent)
+    : QAbstractTableModel(parent) {}
 
 int ModelTableProduct::rowCount(const QModelIndex &parent) const {
-	return itens.count();
+  return itens.count();
 }
 
 int ModelTableProduct::columnCount(const QModelIndex &parent) const {
-	return header.count();
+  return header.count();
 }
 
 QVariant ModelTableProduct::data(const QModelIndex &index, int role) const {
 
-	// Alignment
-	if (role == Qt::TextAlignmentRole) {
-		if (index.column() == 1 || index.column() == 2 ){
-			return Qt::AlignLeft + Qt::AlignVCenter;
-		}
+  // Alignment
+  if (role == Qt::TextAlignmentRole) {
+    if (index.column() == 1 || index.column() == 2) {
+      return Qt::AlignLeft + Qt::AlignVCenter;
+    }
 
-		return Qt::AlignCenter;
-	}
+    return Qt::AlignCenter;
+  }
 
-	if (role == Qt::FontRole) {
-		if (index.column() == 0 || index.column() == 5){
-			QFont bold;
-			bold.setBold(true);
-			return bold;
-		}
-	}
+  if (role == Qt::FontRole) {
+    if (index.column() == 0 || index.column() == 5) {
+      QFont bold;
+      bold.setBold(true);
+      return bold;
+    }
+  }
 
-
-	if (role == Qt::DisplayRole || role == Qt::EditRole){
-		return itens.at(index.row()).at(index.column());
-	}
-	return QVariant();
+  if (role == Qt::DisplayRole || role == Qt::EditRole) {
+    return itens.at(index.row()).at(index.column());
+  }
+  return QVariant();
 }
 
 Qt::ItemFlags ModelTableProduct::flags(const QModelIndex &index) const {
-	return QAbstractTableModel::flags(index) | Qt::ItemIsEnabled |
-	Qt::ItemIsSelectable | Qt::ItemIsEditable;
+  return QAbstractTableModel::flags(index) | Qt::ItemIsEnabled |
+         Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 
-QVariant ModelTableProduct::headerData(int section, Qt::Orientation orientation, int role) const {
-	if  (role == Qt::TextAlignmentRole) {
-		if (section == 1){
-			return Qt::AlignLeft + Qt::AlignVCenter;
-		}
+QVariant ModelTableProduct::headerData(int section, Qt::Orientation orientation,
+                                       int role) const {
+  if (role == Qt::TextAlignmentRole) {
+    if (section == 1) {
+      return Qt::AlignLeft + Qt::AlignVCenter;
+    }
 
-		return Qt::AlignCenter;
-	}
+    return Qt::AlignCenter;
+  }
 
-	if (role == Qt::DisplayRole && orientation == Qt::Horizontal){
+  if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
 
-		return header.at(section);
+    return header.at(section);
+  }
 
-	}
-
-	return QVariant();
+  return QVariant();
 }
 
 void ModelTableProduct::set_data(const QVector<QStringList> &itens) {
-	beginResetModel();
-	this->itens = itens;
-	endResetModel();
-
+  beginResetModel();
+  this->itens = itens;
+  endResetModel();
 }
 
-ModelTableProduct::~ModelTableProduct(){}
+ModelTableProduct::~ModelTableProduct() {}

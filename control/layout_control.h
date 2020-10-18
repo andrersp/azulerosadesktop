@@ -18,6 +18,8 @@ public:
 public slots:
 	void tamanho();
 	void set_window_produto();
+signals:
+	void dialog_msg(int status, QString msg);
 
 };
 

@@ -10,3 +10,19 @@
 	font-size: 14px;
 	
 }
+
+#lb_name_product {
+	color: red;
+	font-family: 'Amble Regular';
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #6A82A4;
+}
+
+#lb_value_product {
+	color: red;
+	font-family: 'Amble Regular';
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #383838;
+}

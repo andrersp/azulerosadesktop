@@ -26,6 +26,7 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent){
 
 	// connect(bt, &QPushButton::clicked, window, &MainWindowControl::clear_widget);
 	// connect(bt, SIGNAL(clicked()), parent, SLOT(clear_widget()));
+	connect(this, &LayoutControl::dialog_msg, window, &MainWindowControl::dialog_err);
 	// connect(bt, &QPushButton::clicked, this, &LayoutControl::tamanho);
 	// connect(bt2, &QPushButton::clicked, this, &LayoutControl::set_window_produto);
 	// connect(toolbar->bt_home, &QToolButton::clicked, this, &LayoutControl::set_window_produto);
