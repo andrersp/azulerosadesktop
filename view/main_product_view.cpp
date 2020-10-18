@@ -1,95 +1,96 @@
-#include "view/main_product_view.h"
-#include "view/customshadow.h"
 #include "model/request.h"
+#include "view/customshadow.h"
+#include "view/main_product_view.h"
 #include <QDebug>
 
+FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value,
+                           int id, QWidget *parent)
+    : QFrame(parent) {
 
-FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value, int id, QWidget *parent) : QFrame(parent){
-	
-	// Shadow Effect
-	CustomShadow *shadow = new CustomShadow();
+  // Name For Search
+  this->name = name;
 
-	shadow->setBlurRadius(10.0);
-	shadow->setDistance(3.0);
-	shadow->setColor(QColor(0, 0, 0, 80));
-	setAutoFillBackground(true);
-	setGraphicsEffect(shadow);
+  // Shadow Effect
+  CustomShadow *shadow = new CustomShadow();
 
-	setMaximumHeight(280);
-	setCursor(Qt::PointingHandCursor);
+  shadow->setBlurRadius(10.0);
+  shadow->setDistance(3.0);
+  shadow->setColor(QColor(0, 0, 0, 80));
+  setAutoFillBackground(true);
+  setGraphicsEffect(shadow);
 
-	setObjectName("frame_product");
+  setMaximumHeight(230);
+  setCursor(Qt::PointingHandCursor);
 
-	grid = new QGridLayout(this);
-	grid->setMargin(15);
-	grid->setHorizontalSpacing(0);
-	grid->setVerticalSpacing(5);
+  setObjectName("frame_product");
 
-	lb_cover = new QLabel(this);
-	lb_cover->setAlignment(Qt::AlignCenter);
-	lb_cover->setFixedSize(QSize(150, 150));
-	grid->addWidget(lb_cover, 0, 0, 1, 2, Qt::AlignCenter);
+  grid = new QGridLayout(this);
+  grid->setMargin(15);
+  grid->setHorizontalSpacing(0);
+  grid->setVerticalSpacing(5);
 
+  lb_cover = new QLabel(this);
+  lb_cover->setAlignment(Qt::AlignCenter);
+  lb_cover->setFixedSize(QSize(150, 150));
+  grid->addWidget(lb_cover, 0, 0, 1, 2, Qt::AlignCenter);
 
+  lb_name = new QLabel(this);
+  lb_name->setText(name);
+  lb_name->setAlignment(Qt::AlignCenter);
+  lb_name->setObjectName("lb_name_product");
+  grid->addWidget(lb_name, 1, 0, 1, 2);
 
-	lb_name = new QLabel(this);
-	lb_name->setText(name);
-	lb_name->setAlignment(Qt::AlignCenter);
-	lb_name->setObjectName("lb_name_product");
-	grid->addWidget(lb_name, 1, 0, 1, 2);
+  lb_value = new QLabel(this);
+  lb_value->setText(value);
+  lb_value->setAlignment(Qt::AlignCenter);
+  lb_value->setObjectName("lb_value_product");
+  grid->addWidget(lb_value, 2, 0, 1, 1);
 
-	lb_value = new QLabel(this);
-	lb_value->setText(value);
-	lb_value->setAlignment(Qt::AlignCenter);
-	lb_value->setObjectName("lb_value_product");
-	grid->addWidget(lb_value, 2, 0, 1, 1);
-
-
-
-	set_cover(url_image);
-
+  set_cover(url_image);
 }
-void FrameProduct::set_cover(QString &url){
+void FrameProduct::set_cover(QString &url) {
 
-	qDebug() << url;
+  ModelRequest model = ModelRequest(this);
 
-	ModelRequest model = ModelRequest(this);
+  QByteArray img = model.get_image(url);
 
-	QByteArray img = model.get_image(url);
+  QPixmap cover;
+  cover.loadFromData(img);
 
-	QPixmap cover;
-	cover.loadFromData(img);
-
-	lb_cover->setPixmap(cover);
+  lb_cover->setPixmap(cover);
 }
 
+FrameProduct::~FrameProduct() {}
 
+MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
 
-FrameProduct::~FrameProduct(){}
+  grid_main_product = new QVBoxLayout(this);
+  grid_main_product->setSpacing(15);
+  grid_main_product->setMargin(20);
 
-MainProductView::MainProductView(QWidget *parent): QScrollArea(parent){
+  fr_search = new QFrame(this);
+  fr_search->setFixedHeight(30);
+  fr_search->setStyleSheet("background: red");
 
-	setWidgetResizable(true);
-	setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff);
-	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  grid_main_product->addWidget(fr_search);
 
-	fr_product = new QFrame(this);
+  fr_product = new QFrame(this);
+  fr_product->setFrameShape(QFrame::NoFrame);
+  fr_product->setFrameShadow(QFrame::Plain);
 
-	grid = new QGridLayout(fr_product);
-	grid->setMargin(20);
-	grid->setSpacing(15);
-	grid->setAlignment(Qt::AlignTop);
+  grid = new QGridLayout(fr_product);
+  grid->setMargin(20);
+  grid->setSpacing(20);
+  // grid->setAlignment(Qt::AlignTop);
 
-	setWidget(fr_product);
+  scroll = new QScrollArea;
+  scroll->setFrameShape(QFrame::NoFrame);
+  scroll->setWidgetResizable(true);
+  scroll->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-
-	
-	// grid->addWidget(this);
-	// grid->addWidget(scroll);
-
-	// table_product = new DefaultTable(this);
-	// grid->QLayout::addWidget(table_product);
-
+  scroll->setWidget(fr_product);
+  grid_main_product->addWidget(scroll);
 }
 
-MainProductView::~MainProductView(){}
+MainProductView::~MainProductView() {}

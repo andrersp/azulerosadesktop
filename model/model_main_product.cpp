@@ -64,7 +64,7 @@ void ModelMainProduct::get_products() {
 }
 
 // Table Model Product
-ModelMainProduct::~ModelMainProduct() { qDebug() << "Delete Model Product"; }
+ModelMainProduct::~ModelMainProduct() {}
 
 ModelTableProduct::ModelTableProduct(QObject *parent)
     : QAbstractTableModel(parent) {}

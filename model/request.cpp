@@ -178,8 +178,8 @@ QByteArray ModelRequest::get_image(const QString &url_image) {
   if (timer->isActive()) {
     timer->stop();
     if (reply->error() == QNetworkReply::NoError) {
-      QVariant fromCache = reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute);
-    qDebug() << "page from cache?" << fromCache.toBool();
+    //   QVariant fromCache = reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute);
+    // qDebug() << "page from cache?" << fromCache.toBool();
       image_data = reply->readAll();
     }
   }
@@ -236,4 +236,4 @@ std::tuple<bool, QJsonObject> ModelRequest::DEL(const QString &endpoint) {
   return {status, data};
 }
 
-ModelRequest::~ModelRequest() { qDebug() << "Delete Request"; }
+ModelRequest::~ModelRequest() { }

@@ -43,10 +43,9 @@ void LayoutControl::tamanho(){
 
 }
 
+
+// set  Main Window Product current 
 void LayoutControl::set_window_produto(){
-	qDebug() << "Produto";
 	container->setCurrentWidget(main_product);
 	main_product->get_products();
-	
-
 }

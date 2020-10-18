@@ -3,50 +3,45 @@
 
 #include <QFrame>
 #include <QGridLayout>
-#include <QScrollArea>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QLabel>
-#include "view/default_table.h"
-
+#include <QScrollArea>
 
 class FrameProduct : public QFrame {
-	Q_OBJECT
+  Q_OBJECT
 public:
-	explicit FrameProduct(QString &url_image, QString &name, QString &value, int id, QWidget *parent=nullptr);
-	virtual ~FrameProduct();
+  explicit FrameProduct(QString &url_image, QString &name, QString &value,
+                        int id, QWidget *parent = nullptr);
+  virtual ~FrameProduct();
+
+  QString name;
 
 private:
-	QGridLayout *grid;
-	QLabel *lb_name, *lb_value, *lb_id, *lb_cover;
+  QGridLayout *grid;
+  QLabel *lb_name, *lb_value, *lb_id, *lb_cover;
 
 private slots:
-void set_cover(QString &url);
-
-
-
-
+  void set_cover(QString &url);
 };
 
-
-class MainProductView : public QScrollArea{
+class MainProductView : public QWidget {
 public:
-	explicit MainProductView(QWidget *parent = nullptr);
-	virtual ~MainProductView();
+  explicit MainProductView(QWidget *parent = nullptr);
+  virtual ~MainProductView();
 
-	QFrame *fr_product;
+  QFrame *fr_product, *fr_search;
 
-	FrameProduct *frame_product;
+  FrameProduct *frame_product;
 
 protected:
-	DefaultTable *table_product;
-	QGridLayout *grid;
+  QGridLayout *grid;
+  QHBoxLayout *grid_search;
+  QVBoxLayout *grid_main_product;
+  
 
 private:
-
-	QScrollArea *scroll;
-	
-
+  QScrollArea *scroll;
 };
-
-
 
 #endif
