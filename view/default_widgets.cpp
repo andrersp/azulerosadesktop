@@ -77,3 +77,20 @@ void LineEditIconLeft::paintEvent(QPaintEvent *e) {
 }
 
 LineEditIconLeft::~LineEditIconLeft() {}
+
+
+// Default Frame Search
+
+FrameSearch::FrameSearch(QWidget *parent) : QFrame(parent){
+  setObjectName("fr_search");
+  setFixedHeight(50);
+  setFrameShadow(Plain);
+  setFrameShape(NoFrame);
+
+  grid = new QHBoxLayout(this);
+  grid->setMargin(0);
+  grid->setSpacing(0);
+
+}
+
+FrameSearch::~FrameSearch(){}

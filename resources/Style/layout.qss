@@ -101,3 +101,8 @@ QStatusBar {
 #frame_product::hover {
 	border: 1px solid #03a9f3;
 }
+
+#fr_search {
+	background-color: #383838;
+	border-radius: 10px;
+}

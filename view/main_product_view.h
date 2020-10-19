@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
+#include "view/default_widgets.h"
 
 class FrameProduct : public QFrame {
   Q_OBJECT
@@ -30,7 +31,8 @@ public:
   explicit MainProductView(QWidget *parent = nullptr);
   virtual ~MainProductView();
 
-  QFrame *fr_product, *fr_search;
+  QFrame *fr_product;
+  FrameSearch *fr_search;
 
   FrameProduct *frame_product;
 

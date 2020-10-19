@@ -68,9 +68,8 @@ MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
   grid_main_product->setSpacing(15);
   grid_main_product->setMargin(20);
 
-  fr_search = new QFrame(this);
-  fr_search->setFixedHeight(30);
-  fr_search->setStyleSheet("background: red");
+  fr_search = new FrameSearch(this);
+  
 
   grid_main_product->addWidget(fr_search);
 
@@ -79,7 +78,7 @@ MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
   fr_product->setFrameShadow(QFrame::Plain);
 
   grid = new QGridLayout(fr_product);
-  grid->setMargin(20);
+  grid->setMargin(5);
   grid->setSpacing(20);
   // grid->setAlignment(Qt::AlignTop);
 
