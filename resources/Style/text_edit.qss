@@ -1,0 +1,8 @@
+#line_edit_search {
+	border: 1px solid #ced4da;
+	color: #495057;
+	font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+	background: #FFF;
+	border-radius: 4px;
+}

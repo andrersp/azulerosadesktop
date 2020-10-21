@@ -1,3 +1,8 @@
+
+#lb_cover {
+	background: #FFF
+}
+
 #info_value {
 	color: #455a64;
 	font-size: 20px;
@@ -6,7 +11,7 @@
 }
 
 #info_title {
-	color: #99abb4;
+	color: #6A82A4;
 	font-size: 14px;
 	
 }
@@ -20,9 +25,16 @@
 }
 
 #lb_value_product {
-	color: red;
-	font-family: 'Amble Regular';
-	font-size: 16px;
-	text-transform: uppercase;
 	color: #383838;
+	font-size: 17px;
+	font-family: 'Amble Regular';
+	text-transform: uppercase;
+	color: #690;
+	border-top: 1px solid #007bff;
+}
+
+#lb_category {
+	font-size: 12px;
+	font-family: 'Amble Regular';
+	color: #666
 }

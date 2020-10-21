@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QToolButton>
+#include <view/customshadow.h>
 
 class ButtonMenu : public QPushButton {
 public:
@@ -22,6 +23,7 @@ protected:
 
 private:
   QPixmap m_pixmap;
+  QIcon *m_active;
 };
 
 class LineEditIconLeft : public QLineEdit {
@@ -40,10 +42,27 @@ private:
 
 class FrameSearch : public QFrame {
 public:
-	explicit FrameSearch(QWidget *parent = nullptr);
+	explicit FrameSearch(const QString &title, QWidget *parent = nullptr);
 	virtual ~FrameSearch();
 
+private:
+  QLabel *title;
 	QHBoxLayout *grid;
+
+};
+
+class LineEditSearch : public QLineEdit {
+  Q_OBJECT
+public:
+  explicit LineEditSearch(const QString &text, QWidget *parent = nullptr);
+  virtual ~LineEditSearch();
+
+protected:
+  void paintEvent (QPaintEvent *e);
+
+private:
+  QIcon m_icon;
+
 
 };
 

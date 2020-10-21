@@ -23,8 +23,8 @@ void ModelMainProduct::get_products() {
           QString::number(obj.value("id").toInt()),
           obj.value("name").toString(),
           obj.value("category").toString(),
-          QString::number(obj.value("available_stock").toDouble()),
-          QString::number(obj.value("sale_price").toDouble(), 'f', 2),
+          QString::number(obj.value("available_stock").toDouble(), 'f', 2),
+          QString::number(obj.value("sale_price").toDouble(), 'f', 2),          
           obj.value("cover").toString(),
           "Editar"};
       products.append(data);

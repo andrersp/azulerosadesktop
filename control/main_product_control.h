@@ -11,8 +11,12 @@ public:
 public slots:
   void get_products();
   void set_products(const QVector<QStringList> &itens) ;
+  void tamanho();
 private:
 	ModelTableProduct *table_model;
+
+signals:
+	void signal_set_product(QWidget *frame, int x, int y);
 
 };
 

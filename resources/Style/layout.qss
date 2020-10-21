@@ -88,11 +88,15 @@ QStatusBar {
 
 
 /* Stylesheet for Dash Board */
-#frame_info {
-	background: #FFF
+#scroll_area {
+	background: transparent
 }
 
 /*Frame Product*/
+
+#fr_product {
+	background-color: transparent
+}
 #frame_product {
 	border-radius: 10px;
 	background-color: #f1f2f7
@@ -102,7 +106,7 @@ QStatusBar {
 	border: 1px solid #03a9f3;
 }
 
-#fr_search {
-	background-color: #383838;
+#fr_search, #frame_info {
+	background: #fff;
 	border-radius: 10px;
 }

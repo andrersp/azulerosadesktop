@@ -7,7 +7,9 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
+#include <QPushButton>
 #include "view/default_widgets.h"
+
 
 class FrameProduct : public QFrame {
   Q_OBJECT
@@ -17,10 +19,12 @@ public:
   virtual ~FrameProduct();
 
   QString name;
+  QPushButton *bt_add;
 
 private:
   QGridLayout *grid;
-  QLabel *lb_name, *lb_value, *lb_id, *lb_cover;
+  QLabel *lb_name, *lb_value, *lb_id, *lb_cover, *lb_category, *lb_qtde, *label;
+
 
 private slots:
   void set_cover(QString &url);
@@ -35,6 +39,7 @@ public:
   FrameSearch *fr_search;
 
   FrameProduct *frame_product;
+  void set_frame_product(QWidget *frame, int x, int y);
 
 protected:
   QGridLayout *grid;

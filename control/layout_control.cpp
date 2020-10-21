@@ -5,7 +5,7 @@
 LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent){
 
 	MainWindowControl *window = qobject_cast<MainWindowControl *>(parent);
-
+	
 	dashboard_frame = new DashBoardControl(this); 
 
 	main_product = new MainProductControl(this);
@@ -39,6 +39,7 @@ LayoutControl::~LayoutControl(){}
 
 void LayoutControl::tamanho(){
 	container->setCurrentWidget(dashboard_frame);
+	
 
 
 }

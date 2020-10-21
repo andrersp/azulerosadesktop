@@ -1,0 +1,13 @@
+#bt_edit {
+	background-color: #007bff;
+	border: none;
+	color: #FFF;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	} 
+#bt_edit:hover {
+	background-color: #0069d9
+}

@@ -6,6 +6,7 @@
 
 
 
+
 class LayoutControl : public MainWindowView {
 	Q_OBJECT
 public:
@@ -20,6 +21,9 @@ public slots:
 	void set_window_produto();
 signals:
 	void dialog_msg(int status, QString msg);
+
+
+
 
 };
 

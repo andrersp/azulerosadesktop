@@ -17,13 +17,18 @@
 		<file>Images/cash.svgz</file>
 		<file>Images/cart.svgz</file>
 		<file>Images/box.svgz</file>
+		<file>Images/lupa.svgz</file>
+		<file>Images/icon_edit.svg</file>
+		<file>Images/active_menu.svgz</file>		
 	</qresource>
 
 	<qresource prefix="/Style">
 		<file>Style/layout.qss</file>		
 		<file>Style/dialog.qss</file>
 		<file>Style/labels.qss</file>
-		<file>Style/table.qss</file>		
+		<file>Style/table.qss</file>
+		<file>Style/buttons.qss</file>
+		<file>Style/text_edit.qss</file>
 	</qresource>
 
 	<qresource prefix="/Fonts">
