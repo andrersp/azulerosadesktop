@@ -15,8 +15,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 # Qt
 # Set this to your Qt installation
 set(ICON_NAME AppIcon)
-SET(CMAKE_PREFIX_PATH "/Media/Qt/5.15.0/gcc_64")
-SET(Qt5_DIR "/Media/Qt/5.15.0/gcc_64/lib/cmake/Qt5/Qt5Config.cmake")
+SET(CMAKE_PREFIX_PATH "/Files/Dev/Qt5/5.15.0/gcc_64")
+SET(Qt5_DIR "/Files/Dev/Qt5/5.15.0/gcc_64/lib/cmake/Qt5/Qt5Config.cmake")
 set(CMAKE_AUTOMOC ON) # For meta object compiler 
 set(CMAKE_AUTOUIC ON) # Resource files
 set(CMAKE_AUTORCC ON) # UI Files

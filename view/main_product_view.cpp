@@ -71,7 +71,6 @@ FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value,
   lb_qtde->setObjectName("lb_category");
   grid->addWidget(lb_qtde, 3, 1, 1, 1);
 
-
   lb_value = new QLabel(this);
   lb_value->setText(value);
   lb_value->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -91,8 +90,6 @@ FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value,
 
   grid->addWidget(bt_add, 4, 1, 1, 1);
 
-  
-
   set_cover(url_image);
 }
 void FrameProduct::set_cover(QString &url) {
@@ -107,18 +104,19 @@ void FrameProduct::set_cover(QString &url) {
   try {
     if (cover.isNull()) {
       throw 1;
-    }
-    else {
-      lb_cover->setPixmap(cover.scaledToHeight(lb_cover->height(), Qt::SmoothTransformation));
+    } else {
+      lb_cover->setPixmap(
+          cover.scaledToHeight(lb_cover->height(), Qt::SmoothTransformation));
     }
 
-  }catch (int e) {
+  } catch (int e) {
     if (e == 1) {
+      QPixmap cover(":Images/Images/products.svgz");
+      lb_cover->setPixmap(
+          cover.scaledToHeight(lb_cover->height(), Qt::SmoothTransformation));
       return;
     }
   }
-
-  
 }
 
 FrameProduct::~FrameProduct() {}
@@ -130,7 +128,6 @@ MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
   grid_main_product->setMargin(20);
 
   fr_search = new FrameSearch("Produtos", this);
-  
 
   grid_main_product->addWidget(fr_search);
 
@@ -156,10 +153,9 @@ MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
   grid_main_product->addWidget(scroll);
 }
 
-void MainProductView::set_frame_product(QWidget *frame, int x, int y){
+void MainProductView::set_frame_product(QWidget *frame, int x, int y) {
 
   grid->addWidget(frame, x, y, 1, 1);
-
 }
 
 MainProductView::~MainProductView() {}
