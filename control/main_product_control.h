@@ -11,6 +11,7 @@ public:
 public slots:
   void get_products();
   void set_products(const QVector<QStringList> &itens) ;
+  void set_product(const QJsonObject &obj);
   void tamanho();
 private:
 	ModelTableProduct *table_model;

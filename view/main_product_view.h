@@ -28,6 +28,8 @@ private:
 
 private slots:
   void set_cover(QString &url);
+
+  void set_data(QJsonObject &obj);
 };
 
 class MainProductView : public QWidget {

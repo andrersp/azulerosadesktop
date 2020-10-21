@@ -19,6 +19,8 @@ void ModelMainProduct::get_products() {
     foreach (const QJsonValue &value, data_array) {
       QJsonObject obj = value.toObject();
 
+      emit signal_product(obj);      
+
       QStringList data = {
           QString::number(obj.value("id").toInt()),
           obj.value("name").toString(),

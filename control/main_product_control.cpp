@@ -31,7 +31,12 @@ void MainProductControl::get_products() {
   ModelMainProduct model;
   connect(&model, &ModelMainProduct::signal_products, this,
           &MainProductControl::set_products);
+  connect(&model, &ModelMainProduct::signal_product, this, &MainProductControl::set_product);
   model.get_products();
+}
+
+void MainProductControl::set_product(const QJsonObject &obj){
+  qDebug() << obj.value("name").toString();
 }
 
 void MainProductControl::set_products(const QVector<QStringList> &itens) {
@@ -46,6 +51,7 @@ void MainProductControl::set_products(const QVector<QStringList> &itens) {
     QString valor(itens[i][4]);
 
     frame_product = new FrameProduct(url, nome, valor, 1, fr_product);
+
     connect(frame_product->bt_add, &QPushButton::clicked, this, &MainProductControl::tamanho);
     emit signal_set_product(frame_product, y, x++);
 
@@ -54,8 +60,8 @@ void MainProductControl::set_products(const QVector<QStringList> &itens) {
       y++;
     }
 
-    // if (i == 19)
-    //   break;
+    if (i == 19)
+      break;
   }
 }
 

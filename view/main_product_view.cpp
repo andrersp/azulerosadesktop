@@ -92,7 +92,13 @@ FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value,
 
   set_cover(url_image);
 }
+
+void FrameProduct::set_data(QJsonObject &obj) {
+  qDebug() << obj;
+}
 void FrameProduct::set_cover(QString &url) {
+
+  
 
   ModelRequest model = ModelRequest(this);
 
