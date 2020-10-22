@@ -1,24 +1,12 @@
 #include "control/main_product_control.h"
-#include <QMainWindow>
+#include "control/layout_control.h"
+
 MainProductControl::MainProductControl(QWidget *parent)
-  : MainProductView(parent) {
-
-    
-
-  // table_model = new ModelTableProduct(this);
-  // table_product->setModel(table_model);
-
-  // // Stretch Table Model Columns
-  // QHeaderView *header = table_product->horizontalHeader();
-  // header->setSectionResizeMode(1, QHeaderView::Stretch);
-  // table_product->setColumnWidth(0, 70);
-
-  connect(this, &MainProductControl::signal_set_product, this, &MainProductView::set_frame_product);
-}
+  : MainProductView(parent) {}
 
 // Get Products
 void MainProductControl::get_products() {
-
+  // Clear fr_product on reload
   QList<QWidget *> list = this->fr_product->findChildren<QWidget *>(
                             QString(), Qt::FindDirectChildrenOnly);
 
@@ -29,41 +17,45 @@ void MainProductControl::get_products() {
   }
 
   ModelMainProduct model;
-  connect(&model, &ModelMainProduct::signal_products, this,
-          &MainProductControl::set_products);
-  connect(&model, &ModelMainProduct::signal_product, this, &MainProductControl::set_product);
+
+  // Connect Model signal product with this set product grid
+  connect(&model, &ModelMainProduct::signal_product, this,
+          &MainProductControl::set_product_grid);
+
+  // Call Model get produtos
   model.get_products();
 }
 
-void MainProductControl::set_product(const QJsonObject &obj){
-  qDebug() << obj.value("name").toString();
-}
+// Receive signal with Array of products
+void MainProductControl::set_product_grid(const QJsonArray &data_array) {
 
-void MainProductControl::set_products(const QVector<QStringList> &itens) {
+  // Objectcast to layout control
+  LayoutControl *layout_control = new LayoutControl();
+  LayoutControl *control = qobject_cast<LayoutControl *>(layout_control);
 
-  int x = 0;
-  int y = 0;
+  // value for grid in fr_product
+  int x = 0, y = 0;
 
-  for (int i = 0; i < itens.count(); i++) {
+  
 
-    QString url(itens[i][5]);
-    QString nome(itens[i][1]);
-    QString valor(itens[i][4]);
+  foreach (const QJsonValue &value, data_array) {
+    QJsonObject obj = value.toObject();
 
-    frame_product = new FrameProduct(url, nome, valor, 1, fr_product);
+    frame_product = new FrameProduct(fr_product);
+    frame_product->set_data(obj);
+    // Connect send_id_product frame_product to control set_form_product
+    connect(frame_product, &FrameProduct::send_product_id, control, &LayoutControl::set_form_product_window);
 
-    connect(frame_product->bt_add, &QPushButton::clicked, this, &MainProductControl::tamanho);
-    emit signal_set_product(frame_product, y, x++);
+    // Send signal to insert product into grid
+    set_frame_product(frame_product, y, x++);
 
     if (x == 5) {
       x = 0;
       y++;
     }
-
-    if (i == 19)
-      break;
   }
 }
+
 
 void MainProductControl::tamanho() {
   qDebug() << frame_product->size();

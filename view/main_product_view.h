@@ -8,28 +8,32 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QPushButton>
+#include <QJsonObject>
 #include "view/default_widgets.h"
 
 
 class FrameProduct : public QFrame {
   Q_OBJECT
 public:
-  explicit FrameProduct(QString &url_image, QString &name, QString &value,
-                        int id, QWidget *parent = nullptr);
+  explicit FrameProduct(QWidget *parent = nullptr);
   virtual ~FrameProduct();
 
   QString name;
   QPushButton *bt_add;
+  int product_id;
 
 private:
   QGridLayout *grid;
   QLabel *lb_name, *lb_value, *lb_id, *lb_cover, *lb_category, *lb_qtde, *label;
+  QString product_name, product_category, product_value, qtde_available,
+      url_image;
 
-
-private slots:
+ private slots:
   void set_cover(QString &url);
-
+public slots:
   void set_data(QJsonObject &obj);
+signals:
+  void send_product_id(int &produc_id);
 };
 
 class MainProductView : public QWidget {

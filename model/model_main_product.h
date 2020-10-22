@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QAbstractTableModel>
-#include <QJsonObject>
+#include <QJsonArray>
 
 #include "model/request.h"
 
@@ -17,8 +17,7 @@ public:
 public slots:
 	void get_products();
 signals:
-void signal_products(QVector<QStringList> itens);
-void signal_product(QJsonObject obj);
+void signal_product(QJsonArray &array);
 void signal_err(int status, QString msg);
 
 

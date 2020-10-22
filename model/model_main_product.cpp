@@ -7,32 +7,15 @@
 
 ModelMainProduct::ModelMainProduct(QObject *parent) : QObject(parent) {}
 
+
 void ModelMainProduct::get_products() {
   ModelRequest request = ModelRequest(this);
   auto [status, response] = request.GET("/product");
 
   if (status) {
+
     QJsonArray data_array = response.value("data").toArray();
-
-    QVector<QStringList> products = {};
-
-    foreach (const QJsonValue &value, data_array) {
-      QJsonObject obj = value.toObject();
-
-      emit signal_product(obj);      
-
-      QStringList data = {
-          QString::number(obj.value("id").toInt()),
-          obj.value("name").toString(),
-          obj.value("category").toString(),
-          QString::number(obj.value("available_stock").toDouble(), 'f', 2),
-          QString::number(obj.value("sale_price").toDouble(), 'f', 2),          
-          obj.value("cover").toString(),
-          "Editar"};
-      products.append(data);
-    }
-
-    emit signal_products(products);
+    emit signal_product(data_array);     
   }
 
   if (response.value("message").isObject()) {

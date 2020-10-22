@@ -1,14 +1,10 @@
-#include "model/request.h"
-#include "view/customshadow.h"
 #include "view/main_product_view.h"
 #include <QDebug>
+#include "model/request.h"
+#include "view/customshadow.h"
 
-FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value,
-                           int id, QWidget *parent)
-    : QFrame(parent) {
-
+FrameProduct::FrameProduct(QWidget *parent) : QFrame(parent) {
   // Name For Search
-  this->name = name;
 
   // Shadow Effect
   CustomShadow *shadow = new CustomShadow();
@@ -51,7 +47,7 @@ FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value,
   grid->addWidget(label, 2, 0, 1, 1);
 
   lb_category = new QLabel(this);
-  lb_category->setText("Caneca");
+  // lb_category->setText("Caneca");
   lb_category->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
   lb_category->setFixedHeight(20);
   lb_category->setObjectName("lb_category");
@@ -65,14 +61,14 @@ FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value,
   grid->addWidget(label, 3, 0, 1, 1);
 
   lb_qtde = new QLabel(this);
-  lb_qtde->setText("25");
+  // lb_qtde->setText("25");
   lb_qtde->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
   lb_qtde->setFixedHeight(20);
   lb_qtde->setObjectName("lb_category");
   grid->addWidget(lb_qtde, 3, 1, 1, 1);
 
   lb_value = new QLabel(this);
-  lb_value->setText(value);
+  // lb_value->setText(value);
   lb_value->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
   lb_value->setMinimumWidth(80);
   lb_value->setFixedHeight(30);
@@ -90,19 +86,35 @@ FrameProduct::FrameProduct(QString &url_image, QString &name, QString &value,
 
   grid->addWidget(bt_add, 4, 1, 1, 1);
 
-  set_cover(url_image);
+  // Connect QPushButton Add a singal send id product
+  connect(bt_add, &QPushButton::clicked, [=] (const int &id) {emit send_product_id(product_id);} );
+
+
+  // set_cover(url_image);
 }
 
+// Set Values to Labels and Get Cover
 void FrameProduct::set_data(QJsonObject &obj) {
-  qDebug() << obj;
+  product_name = obj.value("name").toString();
+  product_category = obj.value("category").toString();
+  product_value = QString::number(obj.value("sale_price").toDouble(), 'f', 2);
+  qtde_available =
+      QString::number(obj.value("available_stock").toDouble(), 'f', 2);
+  product_id = obj.value("id").toInt();
+
+  url_image = obj.value("cover").toString();
+
+  set_cover(url_image);
+
+  lb_name->setText(product_name);
+  lb_category->setText(product_category);
+  lb_qtde->setText(qtde_available);
+  lb_value->setText(product_value);
 }
 void FrameProduct::set_cover(QString &url) {
+  ModelRequest request = ModelRequest(this);
 
-  
-
-  ModelRequest model = ModelRequest(this);
-
-  QByteArray img = model.get_image(url);
+  QByteArray img = request.get_image(url);
 
   QPixmap cover;
   cover.loadFromData(img);
@@ -120,7 +132,7 @@ void FrameProduct::set_cover(QString &url) {
       QPixmap cover(":Images/Images/products.svgz");
       lb_cover->setPixmap(
           cover.scaledToHeight(lb_cover->height(), Qt::SmoothTransformation));
-      return;
+      
     }
   }
 }
@@ -128,7 +140,6 @@ void FrameProduct::set_cover(QString &url) {
 FrameProduct::~FrameProduct() {}
 
 MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
-
   grid_main_product = new QVBoxLayout(this);
   grid_main_product->setSpacing(20);
   grid_main_product->setMargin(20);
@@ -160,7 +171,6 @@ MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
 }
 
 void MainProductView::set_frame_product(QWidget *frame, int x, int y) {
-
   grid->addWidget(frame, x, y, 1, 1);
 }
 

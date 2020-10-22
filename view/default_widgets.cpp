@@ -84,7 +84,6 @@ LineEditIconLeft::~LineEditIconLeft() {}
 
 
 // Default Frame Search
-
 FrameSearch::FrameSearch(const QString &title, QWidget *parent) : QFrame(parent) {
 
   // Shadow Effect
@@ -113,6 +112,11 @@ FrameSearch::FrameSearch(const QString &title, QWidget *parent) : QFrame(parent)
   this->title->setFixedHeight(30);
   this->title->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
   this->grid->addWidget(this->title);
+
+  // Button To Add
+  button = new QPushButton(this);
+  button->setText("Adicionar");
+  grid->addWidget(button);
 
   LineEditSearch *tx_search = new LineEditSearch("Buscar", this);
   grid->addWidget(tx_search, 0, Qt::AlignRight);

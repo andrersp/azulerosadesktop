@@ -10,6 +10,7 @@
 class LayoutControl : public MainWindowView {
 	Q_OBJECT
 public:
+	LayoutControl(){};
 	LayoutControl(QObject *parent);
 	~LayoutControl();
 
@@ -19,8 +20,10 @@ public:
 public slots:
 	void tamanho();
 	void set_window_produto();
+	void set_form_product_window(const int &product_id);
 signals:
 	void dialog_msg(int status, QString msg);
+
 
 
 
