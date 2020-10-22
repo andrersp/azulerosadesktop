@@ -7,6 +7,8 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   dashboard_frame = new DashBoardControl(this);
 
   main_product = new MainProductControl(this);
+  // Connect Button new to this set_form_product_window
+  connect(main_product->fr_search->button, &QPushButton::clicked, [=] {set_form_product_window(0);});
 
   // Add Widgets into container
   container->addWidget(dashboard_frame);
@@ -35,8 +37,7 @@ void LayoutControl::set_window_produto() {
   container->setCurrentWidget(main_product);
   main_product->get_products();
 
-  // Connect Button new to this set_form_product_window
-  connect(main_product->fr_search->button, &QPushButton::clicked, [=] {set_form_product_window(0);});
+  
 }
 
 void LayoutControl::set_form_product_window(const int &product_id = 0) {

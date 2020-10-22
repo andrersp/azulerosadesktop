@@ -115,7 +115,12 @@ FrameSearch::FrameSearch(const QString &title, QWidget *parent) : QFrame(parent)
 
   // Button To Add
   button = new QPushButton(this);
-  button->setText("Adicionar");
+  button->setText("Novo");
+  button->setFixedSize(QSize(80, 30));  
+  button->setCursor(Qt::PointingHandCursor);
+  button->setObjectName("bt_edit");
+  button->setIcon(QIcon(":Images/Images/icon_edit.svg"));
+
   grid->addWidget(button);
 
   LineEditSearch *tx_search = new LineEditSearch("Buscar", this);
