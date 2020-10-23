@@ -26,6 +26,27 @@ class ButtonMenu : public QPushButton {
   QIcon *m_active;
 };
 
+// Custom Buttom Menu
+class ButtonAdd : public QPushButton {
+ public:
+  explicit ButtonAdd(const QString &text,
+                      QWidget *parent = nullptr);
+  virtual ~ButtonAdd();
+
+  virtual QSize sizeHint() const override;
+
+ protected:
+  virtual void paintEvent(QPaintEvent *e) override;
+  virtual bool event(QEvent *event) override;
+
+
+ private:
+  QPixmap *m_pixmap;
+  QPixmap *m_active;
+  bool is_focus = false;
+};
+
+// Line Edit With Left Icon
 class LineEditIconLeft : public QLineEdit {
  public:
   explicit LineEditIconLeft(const QIcon &icon, QWidget *parent = nullptr);
@@ -43,7 +64,7 @@ class FrameSearch : public QFrame {
  public:
   explicit FrameSearch(const QString &title, QWidget *parent = nullptr);
   virtual ~FrameSearch();
-  QPushButton *button;
+  ButtonAdd *button;
 
  private:
   QLabel *title;

@@ -11,3 +11,17 @@
 #bt_edit:hover {
 	background-color: #0069d9
 }
+
+#bt_new {
+	background-color: #FFF;
+	border: 1px solid #007bff;
+	border-radius: 5px;
+	color: #007bff;
+	font-size: 16px;
+	text-align: center;
+	text-transform: uppercase;
+}
+#bt_new:hover {
+	background-color: #007bff;
+	color: #FFF
+}

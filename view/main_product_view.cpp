@@ -81,7 +81,7 @@ FrameProduct::FrameProduct(QWidget *parent) : QFrame(parent) {
   bt_add->setFixedHeight(30);
   bt_add->setCursor(Qt::PointingHandCursor);
   bt_add->setObjectName("bt_edit");
-  bt_add->setIcon(QIcon(":Images/Images/icon_edit.svg"));
+  bt_add->setIcon(QIcon(":Images/Images/icon_edit.svgz"));
   bt_add->setIconSize(QSize(13, 13));
 
   grid->addWidget(bt_add, 4, 1, 1, 1);

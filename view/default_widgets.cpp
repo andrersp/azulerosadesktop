@@ -1,9 +1,11 @@
 #include "view/default_widgets.h"
-
+#include <QEvent>
 #include <QPainter>
 #include <QPainterPath>
+
+// Default Button Left Menu
 ButtonMenu::ButtonMenu(const QString &text, const QIcon &icon, QWidget *parent)
-  : QPushButton(text, parent) {
+    : QPushButton(text, parent) {
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
   setFixedHeight(35);
   // setFlat(true);
@@ -14,7 +16,6 @@ ButtonMenu::ButtonMenu(const QString &text, const QIcon &icon, QWidget *parent)
 
   m_pixmap = icon.pixmap(QSize(20, 20));
   m_active = new QIcon(":Images/Images/active_menu.svgz");
-
 }
 
 QSize ButtonMenu::sizeHint() const {
@@ -24,16 +25,14 @@ QSize ButtonMenu::sizeHint() const {
 }
 
 void ButtonMenu::paintEvent(QPaintEvent *e) {
-
   QPushButton::paintEvent(e);
   QPainter painter(this);
   if (!m_pixmap.isNull()) {
-
     const int y = (height() - m_pixmap.height()) / 2;
     painter.drawPixmap(10, y, m_pixmap);
   }
 
-  if (this->isChecked()){
+  if (this->isChecked()) {
     QPixmap pxm = m_active->pixmap(height() - 20, height() - 20);
 
     painter.drawPixmap(width() - 15, 10, pxm);
@@ -42,13 +41,65 @@ void ButtonMenu::paintEvent(QPaintEvent *e) {
 
 ButtonMenu::~ButtonMenu() {}
 
-// End Button Menu
+// end Default Button Left Menu
+
+// Custom Button Add
+ButtonAdd::ButtonAdd(const QString &text, QWidget *parent)
+    : QPushButton(text, parent) {
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  setFixedHeight(40);
+  setFixedWidth(120);
+  // setFlat(true);
+  setFocusPolicy(Qt::NoFocus);
+  setCursor(Qt::PointingHandCursor);
+  setObjectName("bt_new");
+  setCheckable(true);
+
+  m_pixmap = new QPixmap(QIcon(":Images/Images/icon_add.svgz").pixmap(20, 25));
+  m_active =
+      new QPixmap(QIcon(":Images/Images/icon_add_active.svgz").pixmap(20, 25));
+}
+
+QSize ButtonAdd::sizeHint() const {
+  const auto parentHint = QPushButton::sizeHint();
+  return QSize(parentHint.width() + m_pixmap->width(),
+               std::max(parentHint.height(), m_pixmap->height()));
+}
+
+void ButtonAdd::paintEvent(QPaintEvent *e) {
+  QPushButton::paintEvent(e);
+  QPainter painter(this);
+
+  if (is_focus) {
+    painter.drawPixmap(10, 7, *m_active);
+  } else {
+    painter.drawPixmap(10, 7, *m_pixmap);
+  }
+}
+
+bool ButtonAdd::event(QEvent *event) {
+  switch (event->type()) {
+  case QEvent::HoverEnter:
+    is_focus = true;
+    break;
+  case QEvent::HoverLeave:
+    is_focus = false;
+
+    break;
+  default:
+    break;
+  }
+
+  return QWidget::event(event);
+}
+
+ButtonAdd::~ButtonAdd() {}
+// End Custom Button Add
+
 
 // start Line Edit Icon Left
-
 LineEditIconLeft::LineEditIconLeft(const QIcon &icon, QWidget *parent)
-  : QLineEdit(parent) {
-
+    : QLineEdit(parent) {
   setIcon(icon);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
@@ -76,16 +127,17 @@ void LineEditIconLeft::paintEvent(QPaintEvent *e) {
 
     painter.drawPixmap(x, 6, pxm);
     // painter.drawLine(40, 3, 40, height() - 4);
-
   }
 }
 
 LineEditIconLeft::~LineEditIconLeft() {}
+// end Line Edit Icon Left
+
 
 
 // Default Frame Search
-FrameSearch::FrameSearch(const QString &title, QWidget *parent) : QFrame(parent) {
-
+FrameSearch::FrameSearch(const QString &title, QWidget *parent)
+    : QFrame(parent) {
   // Shadow Effect
   CustomShadow *shadow = new CustomShadow();
   shadow->setBlurRadius(10.0);
@@ -102,6 +154,7 @@ FrameSearch::FrameSearch(const QString &title, QWidget *parent) : QFrame(parent)
   grid = new QHBoxLayout(this);
   grid->setContentsMargins(10, 5, 10, 5);
   grid->setSpacing(10);
+  grid->setDirection(QHBoxLayout::LeftToRight);
   // grid->setAlignment(Qt::AlignLeft);
 
   // Title
@@ -114,26 +167,20 @@ FrameSearch::FrameSearch(const QString &title, QWidget *parent) : QFrame(parent)
   this->grid->addWidget(this->title);
 
   // Button To Add
-  button = new QPushButton(this);
-  button->setText("Novo");
-  button->setFixedSize(QSize(80, 30));  
-  button->setCursor(Qt::PointingHandCursor);
-  button->setObjectName("bt_edit");
-  button->setIcon(QIcon(":Images/Images/icon_edit.svg"));
-
+  button = new ButtonAdd("Novo", this);
   grid->addWidget(button);
 
   LineEditSearch *tx_search = new LineEditSearch("Buscar", this);
   grid->addWidget(tx_search, 0, Qt::AlignRight);
-
-  
-
 }
 
 FrameSearch::~FrameSearch() {}
+// End Default Frame Search
+
 
 // Custon Line Edit Search
-LineEditSearch::LineEditSearch(const QString &text, QWidget *parent) : QLineEdit(parent) {
+LineEditSearch::LineEditSearch(const QString &text, QWidget *parent)
+    : QLineEdit(parent) {
   setObjectName("line_edit_search");
   setPlaceholderText(text);
   setFixedHeight(30);
@@ -141,25 +188,20 @@ LineEditSearch::LineEditSearch(const QString &text, QWidget *parent) : QLineEdit
 
   m_icon = QIcon(":Images/Images/lupa.svgz");
   setTextMargins(2, 1, 1, 1);
-
 }
 
 void LineEditSearch::paintEvent(QPaintEvent *e) {
-
   QLineEdit::paintEvent(e);
 
   if (!m_icon.isNull()) {
-
     QPainter painter(this);
     QPixmap pxm = m_icon.pixmap(height() - 10, height() - 10);
     int x = 2, cx = pxm.width();
 
     painter.drawPixmap(width() - 25, 5, pxm);
-    painter.setPen(QColor("lightgrey"));
-    // painter.drawLine(cx + 4, 3, cx + 4, height() - 4);
+    painter.setPen(QColor("lightgrey"));    
   }
-
 }
 
 LineEditSearch::~LineEditSearch() {}
-
+// End Custon Line Edit Search

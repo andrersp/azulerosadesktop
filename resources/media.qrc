@@ -18,8 +18,10 @@
 		<file>Images/cart.svgz</file>
 		<file>Images/box.svgz</file>
 		<file>Images/lupa.svgz</file>
-		<file>Images/icon_edit.svg</file>
-		<file>Images/active_menu.svgz</file>		
+		<file>Images/icon_edit.svgz</file>
+		<file>Images/active_menu.svgz</file>
+		<file>Images/icon_add.svgz</file>
+		<file>Images/icon_add_active.svgz</file>
 	</qresource>
 
 	<qresource prefix="/Style">
