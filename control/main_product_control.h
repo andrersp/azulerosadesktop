@@ -11,8 +11,11 @@ class MainProductControl : public MainProductView {
   virtual ~MainProductControl();
  public slots:
   void get_products();
-  void set_product_grid(const QJsonArray &data_array);
+  void set_product_grid(const QVector<QStringList> &data);
   void tamanho();
+private:
+	ModelTableProduct *table_model;
+	DelegateProduct *delegate_product;
 };
 
 #endif

@@ -148,30 +148,14 @@ MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
 
   grid_main_product->addWidget(fr_search);
 
-  fr_product = new QFrame(this);
-  fr_product->setFrameShape(QFrame::NoFrame);
-  fr_product->setFrameShadow(QFrame::Plain);
-  fr_product->setObjectName("fr_product");
+  table_products = new DefaultTable(this);
+  grid_main_product->addWidget(table_products);
 
-  grid = new QGridLayout(fr_product);
-  grid->setMargin(10);
-  grid->setSpacing(20);
+  
   // grid->setAlignment(Qt::AlignTop);
 
-  scroll = new QScrollArea;
-  scroll->setFrameShape(QFrame::NoFrame);
-  scroll->setFrameShadow(QFrame::Plain);
-  scroll->setWidgetResizable(true);
-  scroll->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  scroll->setObjectName("scroll_area");
-
-  scroll->setWidget(fr_product);
-  grid_main_product->addWidget(scroll);
+  
 }
 
-void MainProductView::set_frame_product(QWidget *frame, int x, int y) {
-  grid->addWidget(frame, x, y, 1, 1);
-}
 
 MainProductView::~MainProductView() {}

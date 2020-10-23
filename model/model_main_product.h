@@ -3,12 +3,16 @@
 
 #include <QObject>
 #include <QAbstractTableModel>
+#include <QStyledItemDelegate>
+#include <QJsonObject>
 #include <QJsonArray>
+#include <QPainter>
 
 #include "model/request.h"
 
 
 
+// Default Model
 class ModelMainProduct : public QObject{
 	Q_OBJECT
 public:
@@ -17,7 +21,7 @@ public:
 public slots:
 	void get_products();
 signals:
-void signal_product(QJsonArray &array);
+void signal_product(QVector<QStringList> &data);
 void signal_err(int status, QString msg);
 
 
@@ -41,11 +45,28 @@ public:
 
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-	QStringList header = {"#", "Produto", "Categoria", "Disponível", "Valor", "Editar"};
+	QStringList header = {"#", "Cover", "Produto", "Categoria", "Disponível", "Valor", "Editar"};
 
 	QVector<QStringList> itens = {};
 
 	void set_data(const QVector<QStringList> &itens);
+
+};
+
+// Delegetate
+
+class DelegateProduct : public QStyledItemDelegate {
+public:
+	explicit DelegateProduct(QObject *parent = nullptr);
+	
+	// virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+	// QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+	QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+	void setEditorData(QWidget *editor, const QModelIndex &index) const override;
+	void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
+                              const QModelIndex &index) const override;
+
+
 
 };
 

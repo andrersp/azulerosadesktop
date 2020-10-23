@@ -2,19 +2,34 @@
 #include "control/layout_control.h"
 
 MainProductControl::MainProductControl(QWidget *parent)
-  : MainProductView(parent) {}
+  : MainProductView(parent) {
+
+    table_model = new ModelTableProduct(this);
+    table_products->setModel(table_model);
+
+    delegate_product = new DelegateProduct();
+    table_products->setItemDelegate(delegate_product);
+
+    // Resize Coluns
+    QHeaderView *header = table_products->horizontalHeader();
+    header->setSectionResizeMode(2, QHeaderView::Stretch);
+    header->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+    table_products->setColumnWidth(0, 70);
+
+
+  }
 
 // Get Products
 void MainProductControl::get_products() {
   // Clear fr_product on reload
-  QList<QWidget *> list = this->fr_product->findChildren<QWidget *>(
-                            QString(), Qt::FindDirectChildrenOnly);
+  // QList<QWidget *> list = this->fr_product->findChildren<QWidget *>(
+  //                           QString(), Qt::FindDirectChildrenOnly);
 
-  foreach (QWidget *w, list) {
-    w->disconnect();
-    w->setParent(NULL);
-    w->deleteLater();
-  }
+  // foreach (QWidget *w, list) {
+  //   w->disconnect();
+  //   w->setParent(NULL);
+  //   w->deleteLater();
+  // }
 
   ModelMainProduct model;
 
@@ -27,40 +42,20 @@ void MainProductControl::get_products() {
 }
 
 // Receive signal with Array of products
-void MainProductControl::set_product_grid(const QJsonArray &data_array) {
+void MainProductControl::set_product_grid(const QVector<QStringList> &data) {
 
   // Objectcast to layout control
   LayoutControl *layout_control = new LayoutControl();
   LayoutControl *control = qobject_cast<LayoutControl *>(layout_control);
 
-  // value for grid in fr_product
-  int x = 0, y = 0;
+  table_model->set_data(data);
 
-  
 
-  foreach (const QJsonValue &value, data_array) {
-    QJsonObject obj = value.toObject();
-
-    frame_product = new FrameProduct(fr_product);
-    frame_product->set_data(obj);
-    // Connect send_id_product frame_product to control set_form_product
-    connect(frame_product, &FrameProduct::send_product_id, control, &LayoutControl::set_form_product_window);
-
-    // Send signal to insert product into grid
-    set_frame_product(frame_product, y, x++);
-
-    if (x == 5) {
-      x = 0;
-      y++;
-    }
-  }
 }
 
 
 void MainProductControl::tamanho() {
-  qDebug() << frame_product->size();
-  qDebug() << fr_product->parentWidget()->parentWidget()->size();
-  qDebug() << fr_product->parentWidget()->objectName();
+
 }
 
 MainProductControl::~MainProductControl() {}

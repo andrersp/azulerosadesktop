@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QJsonObject>
 #include "view/default_widgets.h"
+#include "view/default_table.h"
 
 
 class FrameProduct : public QFrame {
@@ -28,6 +29,7 @@ private:
   QString product_name, product_category, product_value, qtde_available,
       url_image;
 
+
  private slots:
   void set_cover(QString &url);
 public slots:
@@ -36,6 +38,8 @@ signals:
   void send_product_id(int &produc_id);
 };
 
+
+// Main Product View
 class MainProductView : public QWidget {
 public:
   explicit MainProductView(QWidget *parent = nullptr);
@@ -43,12 +47,11 @@ public:
 
   QFrame *fr_product;
   FrameSearch *fr_search;
+  DefaultTable *table_products;
 
-  FrameProduct *frame_product;
-  void set_frame_product(QWidget *frame, int x, int y);
+  
 
 protected:
-  QGridLayout *grid;
   QHBoxLayout *grid_search;
   QVBoxLayout *grid_main_product;
   
