@@ -49,6 +49,7 @@ DefaultTextEdit::DefaultTextEdit(const QString &placeholder, QWidget *parent)
   setPlaceholderText(placeholder);
   setContentsMargins(4, 0, 0, 0);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  setTabChangesFocus(true);  
 }
 
 DefaultTextEdit::~DefaultTextEdit() {}

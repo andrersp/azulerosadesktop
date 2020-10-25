@@ -64,9 +64,6 @@ ProductForm::ProductForm(QWidget *parent)
   label = new DefaultLabel("Comprimento", this);
   addWidget(label, 4, 3, 1, 1);
 
-  label = new DefaultLabel("Estoque Mínimo", this);
-  addWidget(label, 4, 4, 1, 1);
-
   // Row 5
   tx_weight = new DefaultLineEditFloat("Peso", this);
   addWidget(tx_weight, 5, 0, 1, 1);
@@ -80,8 +77,52 @@ ProductForm::ProductForm(QWidget *parent)
   tx_length = new DefaultLineEditFloat("Comprimento", this);
   addWidget(tx_length, 5, 3, 1, 1);
 
+  // Row 6
+  
+
+  label = new DefaultLabel("Valor de Compra", this);
+  addWidget(label, 6, 0, 1, 1);
+
+  label = new DefaultLabel("Margem de Lucro", this);
+  addWidget(label, 6, 1, 1, 1);
+
+  label = new DefaultLabel("Valor de Venda", this);
+  addWidget(label, 6, 2, 1, 1);
+
+  label = new DefaultLabel("Estoque Mínimo", this);
+  addWidget(label, 6, 3, 1, 1);
+
+  label = new DefaultLabel("Estoque Máximo", this);
+  addWidget(label, 6, 4, 1, 1);
+
+  label = new DefaultLabel("Estoque Atual", this);
+  addWidget(label, 6, 5, 1, 1);
+
+
+  // Row 7
+
+  tx_purchase_price = new DefaultLineEditFloat("Valor de Compra", this);
+  addWidget(tx_purchase_price, 7, 0, 1, 1);
+
+  percentage_sale = new DefaultLineEditFloat("Margem de Lucro", this);
+  addWidget(percentage_sale, 7, 1, 1, 1);
+
+  tx_sale_price = new DefaultLineEditFloat("Valor de Venda", this);
+  addWidget(tx_sale_price, 7, 2, 1, 1);
+
   tx_minimum_stock = new DefaultLineEditFloat("Estoque Mínimo", this);
-  addWidget(tx_minimum_stock, 5, 4, 1, 1);
+  addWidget(tx_minimum_stock, 7, 3, 1, 1);
+
+  tx_maximum_stock = new DefaultLineEditFloat("Estoque Máximo", this);
+  addWidget(tx_maximum_stock, 7, 4, 1, 1);
+
+  tx_available_stock = new DefaultLineEditFloat("Estoque Atual", this);
+  tx_available_stock->setReadOnly(true);
+  addWidget(tx_available_stock, 7, 5, 1, 1);
+
+  
+
+
 
 
   // grid_form->addWidget(label, 0, 0, 1, 1);

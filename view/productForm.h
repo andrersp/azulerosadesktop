@@ -30,7 +30,9 @@ private:
 	DefaultTextEdit *tx_description;
 	DefaultComboBox *cb_enable, *cb_category, *cb_brand, *cb_unit;
 	DefaultLineEditFloat *tx_weight, *tx_height, *tx_widht, *tx_length,
-						 *tx_minimum_stock, *tx_maximum_stock;
+						 *tx_minimum_stock, *tx_maximum_stock,
+						 *tx_available_stock, *tx_purchase_price, 
+						 *percentage_sale, *tx_sale_price;
 
 };
 
