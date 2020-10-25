@@ -25,3 +25,17 @@
 	background-color: #007bff;
 	color: #FFF
 }
+
+#bt_edit {
+	background-color: #FFF;
+	border: 1px solid #6c757d;
+	border-radius: 5px;
+	color: #6c757d;
+	font-size: 16px;
+	text-align: center;
+	text-transform: uppercase;
+}
+#bt_edit:hover {
+	background-color: #6c757d;
+	color: #FFF
+}

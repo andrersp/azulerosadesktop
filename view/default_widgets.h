@@ -26,7 +26,7 @@ class ButtonMenu : public QPushButton {
   QIcon *m_active;
 };
 
-// Custom Buttom Menu
+// Custom Buttom Add
 class ButtonAdd : public QPushButton {
  public:
   explicit ButtonAdd(const QString &text,
@@ -45,6 +45,30 @@ class ButtonAdd : public QPushButton {
   QPixmap *m_active;
   bool is_focus = false;
 };
+
+// End Custom Buttom Add
+
+// Custom Buttom Edit
+class ButtonEditTable : public QPushButton {
+ public:
+  explicit ButtonEditTable(const QString &text,
+                      QWidget *parent = nullptr);
+  virtual ~ButtonEditTable();
+
+  virtual QSize sizeHint() const override;
+
+ protected:
+  virtual void paintEvent(QPaintEvent *e) override;
+  virtual bool event(QEvent *event) override;
+
+
+ private:
+  QPixmap *m_pixmap;
+  QPixmap *m_active;
+  bool is_focus = false;
+};
+
+// End Custom Buttom Edit
 
 // Line Edit With Left Icon
 class LineEditIconLeft : public QLineEdit {

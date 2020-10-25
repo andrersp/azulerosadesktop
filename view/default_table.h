@@ -9,6 +9,7 @@ class DefaultTable : public QTableView{
 public:
 	explicit DefaultTable(QWidget *parent = nullptr);
 	virtual ~DefaultTable();
+	void makePersistent();
 
 };
 

@@ -12,10 +12,14 @@ class MainProductControl : public MainProductView {
  public slots:
   void get_products();
   void set_product_grid(const QVector<QStringList> &data);
-  void tamanho();
+  
 private:
 	ModelTableProduct *table_model;
 	DelegateProduct *delegate_product;
+	void select_product(const QModelIndex &index);
+
+signals:
+	void signal_get_product(int &id);
 };
 
 #endif

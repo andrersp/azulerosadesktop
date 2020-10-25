@@ -26,5 +26,5 @@ QTableView:item {
 	font-family: 'Open Sans', sans-serif;    
     padding: 10px !important;
     border-bottom: 1px solid #dee2e6;    
-    background: none;     
+    background: none;
 }

@@ -96,6 +96,60 @@ bool ButtonAdd::event(QEvent *event) {
 ButtonAdd::~ButtonAdd() {}
 // End Custom Button Add
 
+// Custom Button Edit
+ButtonEditTable::ButtonEditTable(const QString &text, QWidget *parent)
+    : QPushButton(text, parent) {
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  setFixedHeight(40);
+  setFixedWidth(120);
+  // setFlat(true);
+  setFocusPolicy(Qt::NoFocus);
+  setCursor(Qt::PointingHandCursor);
+  setObjectName("bt_edit");
+  setCheckable(true);
+
+  m_pixmap = new QPixmap(QIcon(":Images/Images/icon_edit_active.svgz").pixmap(20, 25));
+  m_active =
+      new QPixmap(QIcon(":Images/Images/icon_edit.svgz").pixmap(20, 25));
+}
+
+QSize ButtonEditTable::sizeHint() const {
+  const auto parentHint = QPushButton::sizeHint();
+  return QSize(parentHint.width() + m_pixmap->width(),
+               std::max(parentHint.height(), m_pixmap->height()));
+}
+
+void ButtonEditTable::paintEvent(QPaintEvent *e) {
+  QPushButton::paintEvent(e);
+  QPainter painter(this);
+
+  if (is_focus) {
+    painter.drawPixmap(10, 10, *m_active);
+  } else {
+    painter.drawPixmap(10, 10, *m_pixmap);
+  }
+}
+
+bool ButtonEditTable::event(QEvent *event) {
+  switch (event->type()) {
+  case QEvent::HoverEnter:
+    is_focus = true;
+    break;
+  case QEvent::HoverLeave:
+    is_focus = false;
+    break;
+  case QEvent::MouseButtonPress:  
+      return false;      
+  default:
+    break;
+  }
+
+  return QWidget::event(event);
+}
+
+ButtonEditTable::~ButtonEditTable() {}
+// End Custom Button Edit
+
 
 // start Line Edit Icon Left
 LineEditIconLeft::LineEditIconLeft(const QIcon &icon, QWidget *parent)

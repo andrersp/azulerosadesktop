@@ -1,14 +1,24 @@
 #include "control/layout_control.h"
 #include "control/mainwindow_control.h"
+#include "view/defaultsLabel.h"
+#include "view/defaultsLineEdit.h"
 
 LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   MainWindowControl *window = qobject_cast<MainWindowControl *>(parent);
 
   dashboard_frame = new DashBoardControl(this);
+  DefaultLabel *label = new DefaultLabel("Teste", this->fr_top);
+  DefaultLineEdit *editline = new DefaultLineEdit("Nome", this->fr_top);
 
+  //  main Window Product
   main_product = new MainProductControl(this);
   // Connect Button new to this set_form_product_window
-  connect(main_product->fr_search->button, &QPushButton::clicked, [=] {set_form_product_window(0);});
+  connect(main_product->fr_search->button, &QPushButton::clicked,
+          [=] { set_form_product_window(0); });
+
+  // Connect signal to select product into set_form_product_window
+  connect(main_product, &MainProductControl::signal_get_product, this,
+          &LayoutControl::set_form_product_window);
 
   // Add Widgets into container
   container->addWidget(dashboard_frame);
@@ -36,11 +46,8 @@ void LayoutControl::tamanho() { container->setCurrentWidget(dashboard_frame); }
 void LayoutControl::set_window_produto() {
   container->setCurrentWidget(main_product);
   main_product->get_products();
-
-  
 }
 
 void LayoutControl::set_form_product_window(const int &product_id = 0) {
-
-	qDebug() << product_id;
+  qDebug() << product_id;
 }

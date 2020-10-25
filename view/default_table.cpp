@@ -1,5 +1,6 @@
 #include "view/default_table.h"
 #include <QFile>
+#include <QDebug>
 
 DefaultTable::DefaultTable(QWidget *parent) : QTableView(parent){
 	QFile table_qss(":Style/Style/table.qss");
@@ -25,8 +26,15 @@ DefaultTable::DefaultTable(QWidget *parent) : QTableView(parent){
 	// setSortingEnabled(true);
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	setCursor(Qt::PointingHandCursor);
-	setAlternatingRowColors(true);
+	// setAlternatingRowColors(true);
 
+}
+
+void DefaultTable::makePersistent(){
+	for (int i=0; i < model()->rowCount(); i++){
+		openPersistentEditor(model()->index(i, 5));
+		qDebug() << "pers";
+	}
 }
 
 DefaultTable::~DefaultTable(){}

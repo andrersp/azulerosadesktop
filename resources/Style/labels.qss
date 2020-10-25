@@ -1,4 +1,11 @@
 
+#default_label {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13px;
+	color: #212529;
+	background: red;
+}
+
 #lb_cover {
 	background: #FFF
 }
