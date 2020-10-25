@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QFrame>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -106,6 +108,37 @@ class LineEditSearch : public QLineEdit {
 
  private:
   QIcon m_icon;
+};
+
+
+// Default Frame Title
+class FrameTitle : public QFrame {
+public:
+  explicit FrameTitle(const QString &title, QWidget *parent = nullptr);
+  virtual ~FrameTitle();
+private:
+  QLabel *lb_title;
+  QHBoxLayout *grid;
+};
+
+
+
+// Default Frame Form
+class FrameForm : public QWidget {
+  Q_OBJECT
+public:
+  explicit FrameForm(const QString &title, QWidget *parent = nullptr);
+  virtual ~FrameForm();
+public slots:
+  void addWidget(QWidget *widget, int row, int col, int rowSpan, int colSpan, Qt::Alignment alignment = Qt::Alignment());
+
+
+
+private:
+  QVBoxLayout *grid;
+  QGridLayout *form_grid;
+  FrameTitle *fr_title;
+  QFrame *form_frame;
 };
 
 #endif

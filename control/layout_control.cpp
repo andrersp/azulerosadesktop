@@ -20,9 +20,17 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   connect(main_product, &MainProductControl::signal_get_product, this,
           &LayoutControl::set_form_product_window);
 
+  // Product Form
+
+  product_form = new ProductForm(this);
+
+
+
+
   // Add Widgets into container
   container->addWidget(dashboard_frame);
   container->addWidget(main_product);
+  container->addWidget(product_form);
 
   // Current widget container
   container->setCurrentWidget(dashboard_frame);
@@ -50,4 +58,5 @@ void LayoutControl::set_window_produto() {
 
 void LayoutControl::set_form_product_window(const int &product_id = 0) {
   qDebug() << product_id;
+  container->setCurrentWidget(product_form);
 }

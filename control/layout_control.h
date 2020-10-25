@@ -3,6 +3,7 @@
 #include "view/layout_view.h"
 #include "control/dashboard_control.h"
 #include "control/main_product_control.h"
+#include "view/productForm.h"
 
 
 
@@ -16,6 +17,7 @@ public:
 
 	DashBoardControl *dashboard_frame;
 	MainProductControl *main_product;
+	ProductForm *product_form;
 
 public slots:
 	void tamanho();

@@ -259,3 +259,63 @@ void LineEditSearch::paintEvent(QPaintEvent *e) {
 
 LineEditSearch::~LineEditSearch() {}
 // End Custon Line Edit Search
+
+
+//Default Frame title
+FrameTitle::FrameTitle(const QString &title, QWidget *parent): QFrame(parent) {
+
+  setFrameShape(QFrame::NoFrame);
+  setFrameShadow(QFrame::Plain);
+  setFixedHeight(40);
+  setObjectName("frame_title");
+
+  grid = new QHBoxLayout(this);
+  grid->setMargin(0);
+  grid->setSpacing(0);
+  grid->setDirection(QHBoxLayout::LeftToRight);
+  
+
+
+  lb_title = new QLabel(this);
+  lb_title->setText(title);
+  lb_title->setObjectName("label_title");
+  lb_title->setContentsMargins(5, 0, 0, 0);
+  lb_title->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+  grid->addWidget(lb_title);
+}
+
+FrameTitle::~FrameTitle(){}
+
+
+// Default Frame Forms
+FrameForm::FrameForm(const QString  &title, QWidget *parent) : QWidget(parent) {
+  setObjectName("default_frame");
+
+  grid = new QVBoxLayout(this);
+  grid->setMargin(20);
+  grid->setSpacing(0);
+
+  fr_title = new FrameTitle(title, this);
+  grid->addWidget(fr_title);
+
+  form_frame = new QFrame(this);
+  form_frame->setFrameShape(QFrame::NoFrame);
+  form_frame->setFrameShadow(QFrame::Plain);
+  form_frame->setObjectName("form_frame");
+
+  form_grid = new QGridLayout(form_frame);
+  form_grid->setVerticalSpacing(0);
+  form_grid->setHorizontalSpacing(10);
+  form_grid->setMargin(5);
+  form_grid->setAlignment(Qt::AlignTop);
+
+  grid->addWidget(form_frame);
+}
+
+void FrameForm::addWidget(QWidget *widget, int row, int col, int rowSpan, int colSpan, Qt::Alignment alignment) {
+  form_grid->addWidget(widget, row, col, rowSpan, colSpan, alignment);
+
+}
+
+FrameForm::~FrameForm(){}
