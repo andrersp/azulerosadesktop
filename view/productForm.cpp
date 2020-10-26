@@ -39,9 +39,6 @@ ProductForm::ProductForm(QWidget *parent)
   label = new DefaultLabel("Descrição", this);
   addWidget(label, 2, 4, 1, 1);
 
-  label = new DefaultLabel("Imagem da Capa", this);
-  addWidget(label, 2, 5, 1, 1);
-
   // Row 3
   tx_product_name = new DefaultLineEdit("Nome Produto", this);
   tx_product_name->setMinimumWidth(350);
@@ -57,8 +54,7 @@ ProductForm::ProductForm(QWidget *parent)
   tx_description = new DefaultTextEdit("Descrição curta", this);
   addWidget(tx_description, 3, 4, 3, 1);
 
-  img_cover = new LabelUploadImage(this);
-  addWidget(img_cover, 3, 5, 3, 1);
+  
 
   // Row 4
   label = new DefaultLabel("Peso", this);
@@ -157,7 +153,7 @@ ProductForm::ProductForm(QWidget *parent)
   label = new DefaultLabel("Descrição Completa", this);
   addWidget(label, 10, 0, 1, 2);
 
-  label = new DefaultLabel("Imagens", this);
+  label = new DefaultLabel("Imagem da Capa", this);
   addWidget(label, 10, 2, 1, 2);
 
   label = new DefaultLabel("Fornecedores", this);
@@ -168,8 +164,42 @@ ProductForm::ProductForm(QWidget *parent)
   tx_long_description = new MRichTextEdit(this);
   addWidget(tx_long_description, 11, 0, 2, 2);
 
+
+
   // img_cover = new LabelUploadImage(this);
+  // img_cover->setMaximumSize(QSize(160, 160));
   // addWidget(img_cover, 11, 2, 1, 1);
+
+  fr_images = new QFrame(this);
+  fr_images->setFrameShadow(QFrame::Plain);
+  fr_images->setFrameShape(QFrame::NoFrame);
+  fr_images->setObjectName("fr_images");
+
+  grid_images = new QGridLayout(fr_images);
+  grid_images->setMargin(0);
+  grid_images->setSpacing(10);
+
+
+  img_cover = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img_cover, 0, 0, 1, 1);
+
+  img_cover = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img_cover, 0, 1, 1, 1);
+
+  img_cover = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img_cover, 0, 2, 1, 1);
+
+  img_cover = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img_cover, 1, 0, 1, 1);
+
+  img_cover = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img_cover, 1, 1, 1, 1);
+
+  img_cover = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img_cover, 1, 2, 1, 1);
+
+
+  addWidget(fr_images, 11, 2, 2, 2);
 
   
 
@@ -191,8 +221,9 @@ ProductForm::ProductForm(QWidget *parent)
 }
 
 void ProductForm::save_product(){
+  qDebug() << tx_long_description->size();
 
-  qDebug() << tx_long_description->toHtml();
+  // qDebug() << tx_long_description->toHtml();
 }
 
 ProductForm::~ProductForm() {}

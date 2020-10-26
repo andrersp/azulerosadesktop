@@ -5,6 +5,7 @@
 #include <QFrame>
 #include <QVBoxLayout>
 #include <QGridLayout>
+#include <QFrame>
 
 #include "view/defaultsLabel.h"
 #include "view/defaultsLineEdit.h"
@@ -38,6 +39,8 @@ protected:
 						 *tx_minimum_sale, *tx_sale_price, *tx_maximum_discount;
 	MRichTextEdit *tx_long_description;
 	LabelUploadImage *img_cover;
+	QFrame *fr_images;
+	QGridLayout *grid_images;
 
 	void save_product();
 

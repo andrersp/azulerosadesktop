@@ -23,7 +23,7 @@ LabelUploadImage::LabelUploadImage(QWidget *parent) : QLabel(parent)
 	setCursor(Qt::PointingHandCursor);
 	setScaledContents(true);
 	setMinimumSize(QSize(100, 115));
-	setMaximumSize(QSize(160, 160));
+	// setMaximumSize(QSize(160, 160));
 	setContentsMargins(5, 5, 5, 5);
 	setObjectName("lb_imagem");
 
@@ -94,7 +94,7 @@ void LabelUploadImage::remove_image()
 	}
 	if (!tx_id->text().isEmpty()) {
 		qDebug() << "remove";
-		// emit remove_remote_image(tx_id->text());
+		emit remove_remote_image(tx_id->text());
 		tx_id->clear();
 		clear();
 		bt_remove->setDisabled(true);
@@ -126,6 +126,8 @@ void LabelUploadImage::upload_image() {
 	QString fname = dialog.getOpenFileName(this, tr("Selecionar Imagem"), "", tr("Image Files (*.png *.jpg *.jpeg)"));
 
 	if (!fname.isEmpty()) {
+
+		
 
 		if (this->pixmap()) {
 			DialogMsg *dialog = new  DialogMsg(parentWidget(), 2, "A Imagem Anterior será removida.\nEssa ação não poderá ser desfeita.\nContinuar?");

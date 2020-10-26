@@ -3,7 +3,7 @@
 DefaultLineEdit::DefaultLineEdit(const QString &placeholder, QWidget *parent)
     : QLineEdit(parent) {
   setObjectName("default_line_edit");
-  setMinimumHeight(30);
+  setMinimumHeight(25);
   setMaximumHeight(35);
   setMinimumWidth(100);
   setTextMargins(4, 0, 0, 0);
@@ -22,7 +22,7 @@ DefaultLineEditFloat::DefaultLineEditFloat(const QString &placeholder,
   QRegExpValidator *valida_float = new QRegExpValidator(regex, this);
   setValidator(valida_float);
   setObjectName("default_line_edit");
-  setMinimumHeight(30);
+  setMinimumHeight(25);
   setMaximumHeight(35);
   setMinimumWidth(100);
   setTextMargins(4, 0, 0, 0);
