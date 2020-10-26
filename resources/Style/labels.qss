@@ -45,3 +45,13 @@
 	font-family: 'Amble Regular';
 	color: #666
 }
+
+#lb_imagem {
+    background-color: rgba(0,0,0,.03); 
+    border: 2px solid rgba(0,0,0,.125);
+    border-radius: 5px;
+    background-image: url(":Images/Images/cam.svgz");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}

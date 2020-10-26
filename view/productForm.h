@@ -37,6 +37,7 @@ protected:
 						 *tx_available_stock, *tx_purchase_price, 
 						 *tx_minimum_sale, *tx_sale_price, *tx_maximum_discount;
 	MRichTextEdit *tx_long_description;
+	LabelUploadImage *img_cover;
 
 	void save_product();
 

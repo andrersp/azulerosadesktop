@@ -39,6 +39,9 @@ ProductForm::ProductForm(QWidget *parent)
   label = new DefaultLabel("Descrição", this);
   addWidget(label, 2, 4, 1, 1);
 
+  label = new DefaultLabel("Imagem da Capa", this);
+  addWidget(label, 2, 5, 1, 1);
+
   // Row 3
   tx_product_name = new DefaultLineEdit("Nome Produto", this);
   tx_product_name->setMinimumWidth(350);
@@ -53,6 +56,9 @@ ProductForm::ProductForm(QWidget *parent)
   
   tx_description = new DefaultTextEdit("Descrição curta", this);
   addWidget(tx_description, 3, 4, 3, 1);
+
+  img_cover = new LabelUploadImage(this);
+  addWidget(img_cover, 3, 5, 3, 1);
 
   // Row 4
   label = new DefaultLabel("Peso", this);
@@ -94,6 +100,8 @@ ProductForm::ProductForm(QWidget *parent)
   label = new DefaultLabel("Mínimo por venda", this);
   addWidget(label, 6, 3, 1, 1);
 
+
+
   // Row 7
 
   tx_purchase_price = new DefaultLineEditFloat("Valor de Compra R$", this);
@@ -107,6 +115,8 @@ ProductForm::ProductForm(QWidget *parent)
 
   tx_minimum_sale = new DefaultLineEditFloat("Mínimo por venda", this);
   addWidget(tx_minimum_sale, 7, 3, 1, 1);
+
+  
 
   // Row 8
   label = new DefaultLabel("Unidade", this);
@@ -156,11 +166,16 @@ ProductForm::ProductForm(QWidget *parent)
   // Row 11
 
   tx_long_description = new MRichTextEdit(this);
-  addWidget(tx_long_description, 11, 0, 1, 2);
+  addWidget(tx_long_description, 11, 0, 2, 2);
+
+  // img_cover = new LabelUploadImage(this);
+  // addWidget(img_cover, 11, 2, 1, 1);
+
+  
 
   QPushButton *button = new QPushButton(this);
   button->setText("AAAAA");
-  addWidget(button, 12, 0, 1, 1);
+  addWidget(button, 13, 0, 1, 1);
 
 
   
