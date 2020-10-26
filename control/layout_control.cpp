@@ -33,7 +33,7 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   container->addWidget(product_form);
 
   // Current widget container
-  container->setCurrentWidget(dashboard_frame);
+  container->setCurrentWidget(product_form);
 
   // Set Checked Menu
   fr_menu->bt_home->setChecked(true);
@@ -57,6 +57,7 @@ void LayoutControl::set_window_produto() {
 }
 
 void LayoutControl::set_form_product_window(const int &product_id = 0) {
-  qDebug() << product_id;
+  if (product_id)
+    product_form->tx_id->setText(QString::number(product_id));
   container->setCurrentWidget(product_form);
 }
