@@ -55,10 +55,25 @@ void LayoutControl::set_window_produto() {
 }
 
 void LayoutControl::set_form_product_window(const int &product_id = 0) {
+  erase_form(product_form);
   product_form->get_selects();
   if (product_id)
     product_form->tx_id->setText(QString::number(product_id));
   container->setCurrentWidget(product_form);
+}
+
+void LayoutControl::erase_form(QWidget *widget) {
+
+  QList<QLineEdit *>  lineedits = widget->findChildren<QLineEdit *>();
+  foreach(const auto &wid, lineedits) {
+    wid->clear();
+  }
+
+  QList<QComboBox *> cbox = widget->findChildren<QComboBox *>();
+
+  foreach(const auto &wid, cbox) {
+    wid->clear();
+  }
 
 
 }

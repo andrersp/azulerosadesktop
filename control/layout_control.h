@@ -1,5 +1,7 @@
 #ifndef LAYOUT_CONTROL_H
 #define LAYOUT_CONTROL_H
+#include <QList>
+#include <QComboBox>
 #include "view/layout_view.h"
 #include "control/dashboard_control.h"
 #include "control/main_product_control.h"
@@ -26,6 +28,8 @@ public slots:
 signals:
 	void dialog_msg(int status, QString msg);
 
+private slots:
+	void erase_form(QWidget *widget);
 
 
 
