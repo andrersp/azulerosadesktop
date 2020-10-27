@@ -22,15 +22,18 @@ int main(int argc, char *argv[])
 	QFile labels_qss(":Style/Style/labels.qss");
 	QFile buttons_qss(":Style/Style/buttons.qss");
 	QFile text_edit_qss(":Style/Style/text_edit.qss");
+	QFile cbox_qss(":Style/Style/combobox.qss");
 	layout_qss.open(QFile::ReadOnly);
 	labels_qss.open(QFile::ReadOnly);
 	buttons_qss.open(QFile::ReadOnly);
 	text_edit_qss.open(QFile::ReadOnly);
+	cbox_qss.open(QFile::ReadOnly);
 	app.setStyleSheet(QLatin1String(
 		layout_qss.readAll() + 
 		labels_qss.readAll() +
 		buttons_qss.readAll() +
-		text_edit_qss.readAll()
+		text_edit_qss.readAll() + 
+		cbox_qss.readAll()
 		));
 
 	MainWindowControl main;

@@ -1,3 +1,32 @@
+QPushButton {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	color: #FFF;	
+	border-radius: 5px;
+}
+
+#bt_save {
+	background-color: #28a745;
+	text-transform: uppercase;
+	border: 1px solid #28a745;
+}
+#bt_save:hover {
+	background-color: #218838;
+	border: 1px solid #1e7e34;
+}
+
+#bt_cancel {
+	background-color: #dc3545;
+	text-transform: uppercase;
+	border: 1px solid #dc3545;
+}
+#bt_cancel:hover {
+	background-color: #c82333;
+	border: 1px solid #bd2130;
+}
+
+
+
 #bt_edit {
 	background-color: #007bff;
 	border: none;
@@ -38,4 +67,9 @@
 #bt_edit:hover {
 	background-color: #6c757d;
 	color: #FFF
+}
+
+#bt_popup, #bt_popup:hover {
+	background: #FFF;
+	border: none;
 }

@@ -9,7 +9,6 @@
 #include <QVBoxLayout>
 #include <QStatusBar>
 #include <QPushButton>
-#include <QDebug>
 
 #include "view/frame_side_menu.h"
 class MainWindowView : public QWidget{

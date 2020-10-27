@@ -23,10 +23,11 @@
 		<file>Images/active_menu.svgz</file>
 		<file>Images/icon_add.svgz</file>
 		<file>Images/icon_add_active.svgz</file>
-		<file>Images/icon_remove_image.svg</file>
+		<file>Images/icon_remove_image.svgz</file>
 		<file>Images/icon_add_image.svgz</file>
-		<file>Images/icon_show_image.svg</file>
+		<file>Images/icon_show_image.svgz</file>
 		<file>Images/cam.svgz</file>
+		<file>Images/icon_down.svg</file>
 	</qresource>
 
 	<qresource prefix="/Style">
@@ -36,6 +37,7 @@
 		<file>Style/table.qss</file>
 		<file>Style/buttons.qss</file>
 		<file>Style/text_edit.qss</file>
+		<file>Style/combobox.qss</file>
 	</qresource>
 
 	<qresource prefix="/Fonts">

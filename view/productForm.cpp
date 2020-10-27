@@ -1,4 +1,5 @@
 #include "view/productForm.h"
+#include <QSpacerItem>
 #include <QDebug>
 
 ProductForm::ProductForm(QWidget *parent)
@@ -34,8 +35,6 @@ ProductForm::ProductForm(QWidget *parent)
   label = new DefaultLabel("Marca", this);
   addWidget(label, 2, 3, 1, 1);
 
-  
-
   label = new DefaultLabel("Descrição", this);
   addWidget(label, 2, 4, 1, 1);
 
@@ -50,11 +49,8 @@ ProductForm::ProductForm(QWidget *parent)
   cb_brand = new DefaultComboBox(this);
   addWidget(cb_brand, 3, 3, 1, 1);
 
-  
   tx_description = new DefaultTextEdit("Descrição curta", this);
   addWidget(tx_description, 3, 4, 3, 1);
-
-  
 
   // Row 4
   label = new DefaultLabel("Peso", this);
@@ -96,12 +92,10 @@ ProductForm::ProductForm(QWidget *parent)
   label = new DefaultLabel("Mínimo por venda", this);
   addWidget(label, 6, 3, 1, 1);
 
-
-
   // Row 7
 
   tx_purchase_price = new DefaultLineEditFloat("Valor de Compra R$", this);
-  addWidget(tx_purchase_price, 7, 0, 1, 1);  
+  addWidget(tx_purchase_price, 7, 0, 1, 1);
 
   tx_sale_price = new DefaultLineEditFloat("Valor de Venda R$", this);
   addWidget(tx_sale_price, 7, 1, 1, 1);
@@ -111,8 +105,6 @@ ProductForm::ProductForm(QWidget *parent)
 
   tx_minimum_sale = new DefaultLineEditFloat("Mínimo por venda", this);
   addWidget(tx_minimum_sale, 7, 3, 1, 1);
-
-  
 
   // Row 8
   label = new DefaultLabel("Unidade", this);
@@ -129,8 +121,6 @@ ProductForm::ProductForm(QWidget *parent)
 
   label = new DefaultLabel("Reduzir Estoque?", this);
   addWidget(label, 8, 4, 1, 1);
-
-  
 
   // Row 9
   cb_unit = new DefaultComboBox(this);
@@ -153,18 +143,17 @@ ProductForm::ProductForm(QWidget *parent)
   label = new DefaultLabel("Descrição Completa", this);
   addWidget(label, 10, 0, 1, 2);
 
-  label = new DefaultLabel("Imagem da Capa", this);
+  label = new DefaultLabel("Imagens", this);
   addWidget(label, 10, 2, 1, 2);
 
   label = new DefaultLabel("Fornecedores", this);
+  label->setMinimumWidth(200);
   addWidget(label, 10, 4, 1, 1);
 
   // Row 11
 
   tx_long_description = new MRichTextEdit(this);
   addWidget(tx_long_description, 11, 0, 2, 2);
-
-
 
   // img_cover = new LabelUploadImage(this);
   // img_cover->setMaximumSize(QSize(160, 160));
@@ -179,51 +168,43 @@ ProductForm::ProductForm(QWidget *parent)
   grid_images->setMargin(0);
   grid_images->setSpacing(10);
 
-
   img_cover = new LabelUploadImage(fr_images);
+  img_cover->setToolTip("Imagem da Capa");
   grid_images->addWidget(img_cover, 0, 0, 1, 1);
 
-  img_cover = new LabelUploadImage(fr_images);
-  grid_images->addWidget(img_cover, 0, 1, 1, 1);
+  img1 = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img1, 0, 1, 1, 1);
 
-  img_cover = new LabelUploadImage(fr_images);
-  grid_images->addWidget(img_cover, 0, 2, 1, 1);
+  img2 = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img2, 0, 2, 1, 1);
 
-  img_cover = new LabelUploadImage(fr_images);
-  grid_images->addWidget(img_cover, 1, 0, 1, 1);
+  img3 = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img3, 1, 0, 1, 1);
 
-  img_cover = new LabelUploadImage(fr_images);
-  grid_images->addWidget(img_cover, 1, 1, 1, 1);
+  img4 = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img4, 1, 1, 1, 1);
 
-  img_cover = new LabelUploadImage(fr_images);
-  grid_images->addWidget(img_cover, 1, 2, 1, 1);
+  img5 = new LabelUploadImage(fr_images);
+  grid_images->addWidget(img5, 1, 2, 1, 1);
 
+  // QSpacerItem *spaceItem  = ;
+  grid_images->addItem(new QSpacerItem(10, 10, QSizePolicy::Fixed, QSizePolicy::Expanding), 2, 0, 1, 1);
 
   addWidget(fr_images, 11, 2, 2, 2);
 
-  
+  tx_provider = new DefaultCompleter("Fornecedor", this);
+  addWidget(tx_provider, 11, 4, 1, 1);
 
-  QPushButton *button = new QPushButton(this);
-  button->setText("AAAAA");
-  addWidget(button, 13, 0, 1, 1);
+  tb_providers = new DefaultTable(this);
+  tb_providers->horizontalHeader()->setVisible(false);
+  addWidget(tb_providers, 12, 4, 1, 1);
 
-
-  
-
-
-
-
-  // grid_form->addWidget(label, 0, 0, 1, 1);
-
-  connect(button, &QPushButton::clicked, this, &ProductForm::save_product);
-
-  // grid->addWidget(form_frame);
 }
 
-void ProductForm::save_product(){
+void ProductForm::save_product() {
   qDebug() << tx_long_description->size();
 
-  // qDebug() << tx_long_description->toHtml();
+  qDebug() << tx_long_description->toHtml();
 }
 
 ProductForm::~ProductForm() {}

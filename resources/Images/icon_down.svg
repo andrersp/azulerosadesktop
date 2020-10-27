@@ -7,12 +7,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="10"
-   height="10"
-   viewBox="0 0 10 10"
+   width="24.291498"
+   height="15"
+   viewBox="0 0 24.291498 15"
    version="1.1"
    id="svg6"
-   sodipodi:docname="icon_remove_image.svg"
+   sodipodi:docname="icon_down.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata12">
@@ -22,7 +22,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -37,25 +36,20 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1264"
-     inkscape:window-height="761"
+     inkscape:window-width="1920"
+     inkscape:window-height="995"
      id="namedview8"
      showgrid="false"
      inkscape:zoom="9.8333333"
-     inkscape:cx="10"
-     inkscape:cy="10"
-     inkscape:window-x="271"
-     inkscape:window-y="83"
-     inkscape:window-maximized="0"
+     inkscape:cx="6.2033898"
+     inkscape:cy="4"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg6" />
   <path
-     d="M -2,-12 H 22 V 12 H -2 Z"
+     d="M 21.437247,0 12.145749,9.271256 2.854251,0 0,2.854251 12.145749,15 24.291498,2.854251 Z"
      id="path2"
      inkscape:connector-curvature="0"
-     style="fill:none" />
-  <path
-     d="m 2.5,4.5 v 1 h 5 v -1 z M 5,0 C 2.24,0 0,2.24 0,5 0,7.76 2.24,10 5,10 7.76,10 10,7.76 10,5 10,2.24 7.76,0 5,0 Z M 5,9 C 2.795,9 1,7.205 1,5 1,2.795 2.795,1 5,1 7.205,1 9,2.795 9,5 9,7.205 7.205,9 5,9 Z"
-     id="path4"
-     style="fill:#d40000;stroke-width:0.5"
-     inkscape:connector-curvature="0" />
+     style="stroke-width:2.02429152" />
 </svg>

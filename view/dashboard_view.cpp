@@ -1,15 +1,15 @@
 #include "view/dashboard_view.h"
-#include <QtCharts/QChartView>
-#include <QtCharts/QPieSeries>
-#include <QtCharts/QPieSlice>
-#include <QtCharts/QBarSeries>
-#include <QtCharts/QBarSet>
-#include <QtCharts/QLegend>
-#include <QtCharts/QBarCategoryAxis>
-#include <QtCharts/QValueAxis>
+// #include <QtCharts/QChartView>
+// #include <QtCharts/QPieSeries>
+// #include <QtCharts/QPieSlice>
+// #include <QtCharts/QBarSeries>
+// #include <QtCharts/QBarSet>
+// #include <QtCharts/QLegend>
+// #include <QtCharts/QBarCategoryAxis>
+// #include <QtCharts/QValueAxis>
 
 #include "view/customshadow.h"
-QT_CHARTS_USE_NAMESPACE
+// QT_CHARTS_USE_NAMESPACE
 
 
 FrameInfo::FrameInfo(QString text, QPixmap *img, QWidget *parent) : QFrame(parent) {

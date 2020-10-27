@@ -1,14 +1,10 @@
 #include "control/layout_control.h"
 #include "control/mainwindow_control.h"
-#include "view/defaultsLabel.h"
-#include "view/defaultsLineEdit.h"
 
 LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   MainWindowControl *window = qobject_cast<MainWindowControl *>(parent);
 
-  dashboard_frame = new DashBoardControl(this);
-  DefaultLabel *label = new DefaultLabel("Teste", this->fr_top);
-  DefaultLineEdit *editline = new DefaultLineEdit("Nome", this->fr_top);
+  dashboard_frame = new DashBoardControl(this); 
 
   //  main Window Product
   main_product = new MainProductControl(this);
@@ -20,9 +16,10 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   connect(main_product, &MainProductControl::signal_get_product, this,
           &LayoutControl::set_form_product_window);
 
-  // Product Form
-
-  product_form = new ProductForm(this);
+  
+  // ** Product Form
+  product_form = new ProductFormControl(this);
+  connect(product_form->bt_cancel, &QPushButton::clicked, this, &LayoutControl::set_window_produto);
 
 
 
@@ -33,7 +30,8 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   container->addWidget(product_form);
 
   // Current widget container
-  container->setCurrentWidget(product_form);
+  container->setCurrentWidget(dashboard_frame);
+  set_form_product_window(0);
 
   // Set Checked Menu
   fr_menu->bt_home->setChecked(true);
@@ -57,7 +55,10 @@ void LayoutControl::set_window_produto() {
 }
 
 void LayoutControl::set_form_product_window(const int &product_id = 0) {
+  product_form->get_selects();
   if (product_id)
     product_form->tx_id->setText(QString::number(product_id));
   container->setCurrentWidget(product_form);
+
+
 }

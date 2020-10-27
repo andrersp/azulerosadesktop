@@ -11,6 +11,7 @@
 #include "view/defaultsLineEdit.h"
 #include "view/defaultComboBox.h"
 #include "view/default_widgets.h"
+#include "view/default_table.h"
 #include "view/mrichtextedit.h"
 #include <QPushButton>
 
@@ -30,7 +31,8 @@ public:
 
 protected:
 	DefaultLabel *label;
-	DefaultLineEdit *tx_product_name, *tx_internal_code;
+	DefaultLineEdit *tx_product_name, *tx_internal_code ;
+	DefaultCompleter *tx_provider;
 	DefaultTextEdit *tx_description;
 	DefaultComboBox *cb_enable, *cb_category, *cb_brand, *cb_unit, *cb_subtract;
 	DefaultLineEditFloat *tx_weight, *tx_height, *tx_widht, *tx_length,
@@ -38,9 +40,11 @@ protected:
 						 *tx_available_stock, *tx_purchase_price, 
 						 *tx_minimum_sale, *tx_sale_price, *tx_maximum_discount;
 	MRichTextEdit *tx_long_description;
-	LabelUploadImage *img_cover;
+	LabelUploadImage *img_cover, *img1, *img2, *img3, *img4, *img5;
 	QFrame *fr_images;
+	DefaultTable *tb_providers;
 	QGridLayout *grid_images;
+	
 
 	void save_product();
 

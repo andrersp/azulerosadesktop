@@ -118,14 +118,27 @@ QStatusBar {
 
 #form_frame {
 	background-color: #FFF;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+
 }
 
-#frame_title, #f_toolbar {
+#fr_buttons {
+	background-color: rgba(0,0,0,.03);
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top: 2px solid rgba(0,0,0,.125)
+}
+
+#frame_title {
 	background-color: rgba(0,0,0,.03);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	border-bottom: 2px solid rgba(0,0,0,.125)
+}
+
+#f_toolbar {
+	background-color: rgba(0,0,0,.03);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border: 2px solid rgba(0,0,0,.125)
 }
 

@@ -129,6 +129,8 @@ class FrameForm : public QWidget {
 public:
   explicit FrameForm(const QString &title, QWidget *parent = nullptr);
   virtual ~FrameForm();
+  QPushButton *bt_save, *bt_cancel;
+
 public slots:
   void addWidget(QWidget *widget, int row, int col, int rowSpan, int colSpan, Qt::Alignment alignment = Qt::Alignment());
 
@@ -138,7 +140,9 @@ private:
   QVBoxLayout *grid;
   QGridLayout *form_grid;
   FrameTitle *fr_title;
-  QFrame *form_frame;
+  QFrame *form_frame, *fr_buttons;
+  QHBoxLayout *grid_buttons;
+  
 };
 
 #endif

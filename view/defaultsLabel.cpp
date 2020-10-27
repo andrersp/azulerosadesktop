@@ -22,10 +22,11 @@ LabelUploadImage::LabelUploadImage(QWidget *parent) : QLabel(parent)
 	setAlignment(Qt::AlignCenter);
 	setCursor(Qt::PointingHandCursor);
 	setScaledContents(true);
-	setMinimumSize(QSize(100, 115));
-	// setMaximumSize(QSize(160, 160));
+	setMinimumSize(QSize(100, 65));
+	setMaximumSize(QSize(200, 112));
 	setContentsMargins(5, 5, 5, 5);
 	setObjectName("lb_imagem");
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 	layout = new QVBoxLayout(this);
 	layout->setSpacing(3);
@@ -48,7 +49,7 @@ LabelUploadImage::LabelUploadImage(QWidget *parent) : QLabel(parent)
 	bt_show->setIconSize(QSize(15, 15));
 	bt_show->setFocusPolicy(Qt::NoFocus);
 	bt_show->setToolTip("Ampliar Imagem");
-	bt_show->setIcon(QIcon(":Images/Images/icon_show_image.svg"));
+	bt_show->setIcon(QIcon(":Images/Images/icon_show_image.svgz"));
 	bt_show->setObjectName("bt_ver_image");
 	bt_show->setDisabled(true);
 	layout->addWidget(bt_show, 0, Qt::AlignRight | Qt::AlignTop);
@@ -59,7 +60,7 @@ LabelUploadImage::LabelUploadImage(QWidget *parent) : QLabel(parent)
 	bt_remove->setIconSize(QSize(15, 15));
 	bt_remove->setFocusPolicy(Qt::NoFocus);
 	bt_remove->setToolTip("Remover Imagem");
-	bt_remove->setIcon(QIcon(":Images/Images/icon_remove_image.svg"));
+	bt_remove->setIcon(QIcon(":Images/Images/icon_remove_image.svgz"));
 	bt_remove->setObjectName("bt_remove_image");
 	bt_remove->setDisabled(true);
 	layout->addWidget(bt_remove, 0, Qt::AlignRight | Qt::AlignTop);
@@ -151,7 +152,4 @@ void LabelUploadImage::upload_image() {
 }
 
 
-LabelUploadImage::~LabelUploadImage()
-{
-	qDebug() << "Delete Lbale Imagem";
-}
+LabelUploadImage::~LabelUploadImage(){}

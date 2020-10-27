@@ -5,6 +5,9 @@
 #include <QTextEdit>
 #include <QRegExp>
 #include <QRegExpValidator>
+#include <QCompleter>
+#include <QToolButton>
+#include <QHBoxLayout>
 
 
 // Default Line Edit
@@ -31,4 +34,23 @@ public:
 	explicit DefaultTextEdit(const QString &placeholder, QWidget *parent = nullptr);
 	virtual ~DefaultTextEdit();
 };
+
+// Custom Completer
+
+class DefaultCompleter : public QLineEdit {
+	Q_OBJECT
+public:
+	explicit DefaultCompleter(const QString &placeholder, QWidget *parent = nullptr);
+	virtual ~DefaultCompleter();
+
+	QCompleter *completation;
+private slots:
+	void show_popup();
+
+private:
+	QToolButton *bt_popup;
+	QHBoxLayout *cp_layout;
+
+};
+
 #endif

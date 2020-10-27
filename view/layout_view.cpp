@@ -54,4 +54,4 @@ MainWindowView::MainWindowView(QObject *parent) {
   QMetaObject::connectSlotsByName(parent);
 }
 
-MainWindowView::~MainWindowView() { qDebug() << "delete View"; }
+MainWindowView::~MainWindowView() {}

@@ -311,6 +311,36 @@ FrameForm::FrameForm(const QString  &title, QWidget *parent) : QWidget(parent) {
   form_grid->setAlignment(Qt::AlignTop);
 
   grid->addWidget(form_frame);
+
+  fr_buttons = new QFrame(this);
+  fr_buttons->setObjectName("fr_buttons");
+  fr_buttons->setFixedHeight(50);
+
+  grid_buttons = new QHBoxLayout(fr_buttons);
+  grid_buttons->setMargin(5);
+
+  bt_cancel = new QPushButton(fr_buttons);
+  bt_cancel->setFixedHeight(35);
+  bt_cancel->setFixedWidth(140);
+  bt_cancel->setCursor(Qt::PointingHandCursor);
+  bt_cancel->setText("Cancelar");
+  bt_cancel->setObjectName("bt_cancel");
+
+  grid_buttons->addWidget(bt_cancel);
+
+  grid_buttons->addItem(new QSpacerItem(10, 10, QSizePolicy::Expanding, QSizePolicy::Fixed));
+
+  bt_save = new QPushButton(fr_buttons);
+  bt_save->setFixedHeight(35);
+  bt_save->setFixedWidth(140);
+  bt_save->setCursor(Qt::PointingHandCursor);
+  bt_save->setText("Salvar");
+  bt_save->setObjectName("bt_save");
+
+  grid_buttons->addWidget(bt_save);
+
+
+  grid->addWidget(fr_buttons);
 }
 
 void FrameForm::addWidget(QWidget *widget, int row, int col, int rowSpan, int colSpan, Qt::Alignment alignment) {
