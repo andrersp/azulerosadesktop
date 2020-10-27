@@ -23,6 +23,8 @@ ProductForm::ProductForm(QWidget *parent)
   addWidget(tx_internal_code, 1, 1, 1, 1);
 
   cb_enable = new DefaultComboBox(this);
+  cb_enable->addItem("Sim", true);
+  cb_enable->addItem("Não", false);
   addWidget(cb_enable, 1, 2, 1, 1);
 
   // Row 2
