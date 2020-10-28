@@ -33,5 +33,5 @@
 
 *.sublime*
 build/
-*CMakeLists*
-CMake*
+CMakeLists.txt
+
