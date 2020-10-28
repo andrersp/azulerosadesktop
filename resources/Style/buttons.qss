@@ -1,0 +1,75 @@
+QPushButton {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	color: #FFF;	
+	border-radius: 5px;
+}
+
+#bt_save {
+	background-color: #28a745;
+	text-transform: uppercase;
+	border: 1px solid #28a745;
+}
+#bt_save:hover {
+	background-color: #218838;
+	border: 1px solid #1e7e34;
+}
+
+#bt_cancel {
+	background-color: #dc3545;
+	text-transform: uppercase;
+	border: 1px solid #dc3545;
+}
+#bt_cancel:hover {
+	background-color: #c82333;
+	border: 1px solid #bd2130;
+}
+
+
+
+#bt_edit {
+	background-color: #007bff;
+	border: none;
+	color: #FFF;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	} 
+#bt_edit:hover {
+	background-color: #0069d9
+}
+
+#bt_new {
+	background-color: #FFF;
+	border: 1px solid #007bff;
+	border-radius: 5px;
+	color: #007bff;
+	font-size: 16px;
+	text-align: center;
+	text-transform: uppercase;
+}
+#bt_new:hover {
+	background-color: #007bff;
+	color: #FFF
+}
+
+#bt_edit {
+	background-color: #FFF;
+	border: 1px solid #6c757d;
+	border-radius: 5px;
+	color: #6c757d;
+	font-size: 16px;
+	text-align: center;
+	text-transform: uppercase;
+}
+#bt_edit:hover {
+	background-color: #6c757d;
+	color: #FFF
+}
+
+#bt_popup, #bt_popup:hover {
+	background: #FFF;
+	border: none;
+}

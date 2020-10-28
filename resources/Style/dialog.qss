@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+}
+#dialog_confirm {
+    background-color: #f4f4f4;
+}
+
+#titulo_dialog {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #bbb;
+    border-bottom: 1px solid #bbb;
+    
+    /* background-color: #0d682f; */
+ }
+
+ #label_confirm {
+    
+    font-size: 16px;
+    color: #3b7aba;
+    /* background-color: red; */
+}
+
+
+ #lb_dialog_msg {
+    
+    font-size: 16px;
+    color: #3b7aba;
+    /* background-color: red; */
+ }
+
+ #lb_dialog_dica {
+    
+    font-size: 13px;
+    color: #bbb;
+ }
+
+#bt_confirm {
+    
+    font-size: 16px;
+    border-radius: 5px;
+    color: #3a7aba;
+    text-transform: uppercase;
+    background-color: #d2deea;
+    font-weight: bold;
+    
+}
+
+#bt_cancel {
+    
+    font-size: 14px;
+    border-radius: 5px;
+    color: #3a7aba;
+    text-transform: uppercase;
+    background-color: #d2deea;
+    font-weight: bold;    
+}
+
+#bt_confirm:hover, #bt_cancel:hover {
+    background-color: #3a7aba;
+    color: #fff;
+}
