@@ -23,6 +23,7 @@ ProductForm::ProductForm(QWidget *parent)
   addWidget(tx_internal_code, 1, 1, 1, 1);
 
   cb_enable = new DefaultComboBox(this);
+  cb_enable->addItem("Ativo?");
   cb_enable->addItem("Sim", true);
   cb_enable->addItem("Não", false);
   addWidget(cb_enable, 1, 2, 1, 1);
@@ -139,6 +140,9 @@ ProductForm::ProductForm(QWidget *parent)
   addWidget(tx_available_stock, 9, 3, 1, 1);
 
   cb_subtract = new DefaultComboBox(this);
+  cb_subtract->addItem("Reduzir Estoque?");
+  cb_subtract->addItem("Sim", true);
+  cb_subtract->addItem("Não", false);
   addWidget(cb_subtract, 9, 4, 1, 1);
 
   // Row 10

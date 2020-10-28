@@ -10,6 +10,7 @@ class MainWindowControl : public QMainWindow {
 	Q_OBJECT
 public:
 	explicit MainWindowControl(QWidget *parent = nullptr);
+	virtual ~MainWindowControl();
 
 	void window_login();
 	void window_layout();

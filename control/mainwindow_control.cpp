@@ -82,3 +82,6 @@ void MainWindowControl::dialog_err(int status, QString msg) {
   // DialogMsg dialog(this, status, msg);
   // dialog.exec();
 }
+
+
+MainWindowControl::~MainWindowControl(){}

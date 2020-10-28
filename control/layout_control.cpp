@@ -69,11 +69,11 @@ void LayoutControl::erase_form(QWidget *widget) {
     wid->clear();
   }
 
-  QList<QComboBox *> cbox = widget->findChildren<QComboBox *>();
+  // QList<QComboBox *> cbox = widget->findChildren<QComboBox *>();
 
-  foreach(const auto &wid, cbox) {
-    wid->clear();
-  }
+  // foreach(const auto &wid, cbox) {
+  //   wid->clear();
+  // }
 
 
 }

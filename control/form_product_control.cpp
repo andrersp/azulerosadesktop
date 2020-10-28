@@ -12,6 +12,9 @@ ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
 }
 
 void ProductFormControl::get_selects() {
+
+  cb_category->clear();
+
   ModelFormProduct model = ModelFormProduct(this);
   connect(&model, &ModelFormProduct::signal_category, this,
           &ProductFormControl::set_categories);
