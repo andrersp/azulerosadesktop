@@ -137,10 +137,15 @@ MRichTextEdit::MRichTextEdit(QWidget *parent) : QWidget(parent) {
     connect(textsource, SIGNAL(triggered()), this, SLOT(textSource()));
     f_textedit->addAction(textsource);
 
+    QAction *clearText = new QAction(tr("Clear all content"), this);
+    connect(clearText, SIGNAL(triggered()), this, SLOT(clearSource()));
+    f_textedit->addAction(clearText);
+
     QMenu *menu = new QMenu(this);
     menu->addAction(removeAllFormat);
     menu->addAction(removeFormat);
     menu->addAction(textsource);
+    menu->addAction(clearText);
     f_menu->setMenu(menu);
     f_menu->setPopupMode(QToolButton::InstantPopup);
 
@@ -207,6 +212,9 @@ void MRichTextEdit::textSource() {
     delete dialog;
 }
 
+void MRichTextEdit::clearSource(){
+    f_textedit->clear();
+}
 
 void MRichTextEdit::textRemoveFormat() {
     QTextCharFormat fmt;

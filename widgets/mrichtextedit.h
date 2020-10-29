@@ -39,11 +39,11 @@ class MRichTextEdit : public QWidget, protected Ui::MRichTextEdit {
     QString toHtml() const;
     QTextDocument *document() { return f_textedit->document(); }
     QTextCursor    textCursor() const { return f_textedit->textCursor(); }
-    void           setTextCursor(const QTextCursor& cursor) { f_textedit->setTextCursor(cursor); }
-    void clear() {return f_textedit->clear();}
+    void           setTextCursor(const QTextCursor& cursor) { f_textedit->setTextCursor(cursor); }    
 
   public slots:
     void setText(const QString &text);
+    void clearSource();
 
   protected slots:
     void setPlainText(const QString &text) { f_textedit->setPlainText(text); }

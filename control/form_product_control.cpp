@@ -21,7 +21,7 @@ void ProductFormControl::get_selects() {
   cb_category->clear();
   cb_brand->clear();
   cb_unit->clear();
-  tx_long_description->clear();
+  tx_long_description->clearSource();
 
   ModelFormProduct model = ModelFormProduct(this);
   connect(&model, &ModelFormProduct::signal_category, this,
