@@ -17,6 +17,7 @@ MainProductView::MainProductView(QWidget *parent) : QWidget(parent) {
   table_products = new DefaultTable(this);
   table_products->verticalHeader()->setDefaultSectionSize(80);
   table_products->setSelectionMode(QAbstractItemView::NoSelection);
+  table_products->setMouseTracking(true);
   grid_main_product->addWidget(table_products);
 
   

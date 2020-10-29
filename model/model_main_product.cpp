@@ -7,7 +7,7 @@
 #include <QJsonObject>
 #include <QLabel>
 #include <QPixmap>
-
+#include <QAbstractItemView>
 ModelMainProduct::ModelMainProduct(QObject *parent) : QObject(parent) {}
 
 void ModelMainProduct::get_products() {
@@ -185,14 +185,6 @@ void DelegateProduct::setEditorData(QWidget *editor,
   }
 }
 
-// void DelegateProduct::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
-  
-//   opt.rect = QApplication::style()->subElementRect( QStyle::SE_CheckBoxIndicator, &opt, NULL );
-//         const int x = option.rect.center().x() - opt.rect.width() / 2;
-//         const int y = option.rect.center().y() - opt.rect.height() / 2;
-//         opt.rect.moveTo( x, y );
-
-// }
 
 void DelegateProduct::updateEditorGeometry(
     QWidget *editor, const QStyleOptionViewItem &option,
@@ -206,4 +198,21 @@ void DelegateProduct::updateEditorGeometry(
   }
 
   editor->setGeometry(rect);
+}
+
+void DelegateProduct::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    if (QAbstractItemView* tableView = qobject_cast<QAbstractItemView*>(this->parent()))
+    {
+        QModelIndex hover = tableView->indexAt(tableView->viewport()->mapFromGlobal(QCursor::pos()));
+        if (hover.row() == index.row())
+        {
+
+            painter->fillRect(QRectF(option.rect.width(), option.rect.height() - 2, option.rect.width(), 2), QColor("#069"));
+          // painter->drawLine(option.rect.width() - 2, option.rect.height() -2 , option.rect.width() - 2, option.rect.height() - 2);
+
+        }
+    }
+ 
+    QStyledItemDelegate::paint(painter, option, index);
 }

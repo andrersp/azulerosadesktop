@@ -190,9 +190,12 @@ DialogImg::DialogImg(const QPixmap &img) : QDialog() {
 
   lb_imagem = new QLabel(this);
   lb_imagem->setMaximumSize(QSize(780, 440));
-  lb_imagem->setScaledContents(true);
-  lb_imagem->setPixmap(img);
+  // lb_imagem->setScaledContents(true);
+  lb_imagem->setAlignment(Qt::AlignCenter);
   grid_dialog->addWidget(lb_imagem);
+
+  lb_imagem->setPixmap(img.scaledToHeight(440, Qt::SmoothTransformation));
+  
 
   connect(bt_close, &QAbstractButton::clicked, this, &DialogImg::close);
 }

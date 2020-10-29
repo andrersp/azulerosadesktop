@@ -21,6 +21,14 @@ void ProductFormControl::get_selects() {
   cb_category->clear();
   cb_brand->clear();
   cb_unit->clear();
+  QList<LabelUploadImage *> lb_images = {img_cover, img1, img2, img3, img4, img5};
+
+  // Clear Images
+  for (int i = 0; i < lb_images.count(); i ++) {
+    lb_images[i]->clearContent();
+  }
+
+  // Clear long_description
   tx_long_description->clearSource();
 
   ModelFormProduct model = ModelFormProduct(this);
@@ -89,7 +97,7 @@ void ProductFormControl::set_product(const QJsonObject &product) {
   tx_long_description->setText(product.value("long_description").toString());
 
 
-  
+  // Provider
   QJsonArray array_providers = product.value("providers").toArray();
   QVector<QStringList> data = {};
 
@@ -100,9 +108,28 @@ void ProductFormControl::set_product(const QJsonObject &product) {
 
   model_provider->set_data(data);
 
+  //cover
+  ModelRequest request = ModelRequest(this);
+
+  QString cover(request.get_image(product.value("cover").toString()));
+
+  if (!cover.isEmpty())
+    img_cover->set_image_url(request.get_image(cover), "");
+
+  // Images
+  QList<LabelUploadImage *> lb_images = {img1, img2, img3, img4, img5};
+  QJsonArray array_images = product.value("images").toArray();
+
+  int i = 0;
+  foreach (const QJsonValue &value, array_images) {
+    QJsonObject obj = value.toObject();
+    lb_images[i]->set_image_url(request.get_image(obj.value("url").toString()), QString::number(obj.value("id").toInt()));
+    i++;
+  }
 
 
 
+  // Stock
   QJsonObject stock = product.value("stock").toObject();
   tx_purchase_price->setText(QString::number(stock.value("purchase_price").toDouble(), 'f', 2));
   tx_available_stock->setText(QString::number(stock.value("available_stock").toDouble(), 'f', 2));

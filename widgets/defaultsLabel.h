@@ -33,12 +33,15 @@ private:
 	QToolButton *bt_add, *bt_remove, *bt_show;
 public slots:
 	void set_image_url(const QByteArray &img, const QString &id_img);
+	void clearContent();
+	
 
 	//	void remove_image();
 private slots:
 	void remove_image();
 	void show_image();
 	void upload_image();
+
 
 signals:
 

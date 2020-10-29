@@ -21,7 +21,7 @@ LabelUploadImage::LabelUploadImage(QWidget *parent) : QLabel(parent)
 
 	setAlignment(Qt::AlignCenter);
 	setCursor(Qt::PointingHandCursor);
-	setScaledContents(true);
+	// setScaledContents(true);
 	setMinimumSize(QSize(100, 65));
 	setMaximumSize(QSize(200, 112));
 	setContentsMargins(5, 5, 5, 5);
@@ -76,7 +76,7 @@ void LabelUploadImage::set_image_url(const QByteArray &img, const QString &id_im
 {
 
 	img_data.loadFromData(img);
-	setPixmap(img_data);
+	setPixmap(img_data.scaledToHeight(this->height(), Qt::SmoothTransformation));
 	tx_id->setText(id_img);
 	// bt_add->setDisabled(true);
 	bt_show->setEnabled(true);
@@ -90,11 +90,9 @@ void LabelUploadImage::remove_image()
 	bool result = dialog->exec();
 
 	if (!result) {
-		qDebug() << "Not";
 		return;
 	}
 	if (!tx_id->text().isEmpty()) {
-		qDebug() << "remove";
 		emit remove_remote_image(tx_id->text());
 		tx_id->clear();
 		clear();
@@ -114,7 +112,7 @@ void LabelUploadImage::show_image()
 {
 
 	DialogImg *dialog = new DialogImg(img_data);
-	MaskWidget *mask = new MaskWidget(parentWidget()->parentWidget());
+	MaskWidget *mask = new MaskWidget(parentWidget()->parentWidget()->parentWidget()->parentWidget()->parentWidget());
 	mask->show();
 	dialog->exec();
 	mask->close();
@@ -149,6 +147,13 @@ void LabelUploadImage::upload_image() {
 		bt_show->setEnabled(true);
 		bt_remove->setEnabled(true);
 	}
+}
+
+void LabelUploadImage::clearContent(){
+	tx_id->clear();
+	bt_remove->setDisabled(true);
+	bt_show->setDisabled(true);
+	clear();
 }
 
 
