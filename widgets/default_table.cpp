@@ -1,4 +1,4 @@
-#include "view/default_table.h"
+#include "widgets/default_table.h"
 #include <QFile>
 #include <QDebug>
 

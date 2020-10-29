@@ -7,7 +7,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QLabel>
-#include "view/default_widgets.h"
+#include "widgets/default_widgets.h"
 
 class LoginView : public QWidget{
 	

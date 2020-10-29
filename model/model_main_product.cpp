@@ -1,6 +1,6 @@
 #include "model/model_main_product.h"
 #include "model/request.h"
-#include "view/default_widgets.h"
+#include "widgets/default_widgets.h"
 
 #include <QDebug>
 #include <QFont>

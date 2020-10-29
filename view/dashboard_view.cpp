@@ -8,7 +8,7 @@
 // #include <QtCharts/QBarCategoryAxis>
 // #include <QtCharts/QValueAxis>
 
-#include "view/customshadow.h"
+#include "widgets/customshadow.h"
 // QT_CHARTS_USE_NAMESPACE
 
 

@@ -75,8 +75,8 @@ ProductForm::ProductForm(QWidget *parent)
   tx_height = new DefaultLineEditFloat("Altura", this);
   addWidget(tx_height, 5, 1, 1, 1);
 
-  tx_widht = new DefaultLineEditFloat("Largura", this);
-  addWidget(tx_widht, 5, 2, 1, 1);
+  tx_width = new DefaultLineEditFloat("Largura", this);
+  addWidget(tx_width, 5, 2, 1, 1);
 
   tx_length = new DefaultLineEditFloat("Comprimento", this);
   addWidget(tx_length, 5, 3, 1, 1);
@@ -98,6 +98,8 @@ ProductForm::ProductForm(QWidget *parent)
   // Row 7
 
   tx_purchase_price = new DefaultLineEditFloat("Valor de Compra R$", this);
+  tx_purchase_price->setReadOnly(true);
+  tx_purchase_price->setFocusPolicy(Qt::NoFocus);
   addWidget(tx_purchase_price, 7, 0, 1, 1);
 
   tx_sale_price = new DefaultLineEditFloat("Valor de Venda R$", this);
@@ -137,6 +139,7 @@ ProductForm::ProductForm(QWidget *parent)
 
   tx_available_stock = new DefaultLineEditFloat("Estoque Atual", this);
   tx_available_stock->setReadOnly(true);
+  tx_available_stock->setFocusPolicy(Qt::NoFocus);
   addWidget(tx_available_stock, 9, 3, 1, 1);
 
   cb_subtract = new DefaultComboBox(this);

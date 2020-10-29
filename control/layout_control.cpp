@@ -30,23 +30,30 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   container->addWidget(product_form);
 
   // Current widget container
-  container->setCurrentWidget(dashboard_frame);
-  set_form_product_window(0);
+  // container->setCurrentWidget(dashboard_frame);
+  set_dashboard_widow();
 
-  // Set Checked Menu
+  // Set Checked Menu current dashboard
   fr_menu->bt_home->setChecked(true);
+
+
+
+  // Layout Connects
   connect(this, &LayoutControl::dialog_msg, window,
           &MainWindowControl::dialog_err);
 
   connect(fr_menu->bt_home, &QPushButton::clicked, this,
-          &LayoutControl::tamanho);
+          &LayoutControl::set_dashboard_widow);
   connect(fr_menu->bt_product, &QPushButton::clicked, this,
           &LayoutControl::set_window_produto);
 }
 
-LayoutControl::~LayoutControl() {}
 
-void LayoutControl::tamanho() { container->setCurrentWidget(dashboard_frame); }
+
+// Set DhashBoard Window
+void LayoutControl::set_dashboard_widow() { 
+  container->setCurrentWidget(dashboard_frame); 
+}
 
 // set  Main Window Product current
 void LayoutControl::set_window_produto() {
@@ -54,11 +61,14 @@ void LayoutControl::set_window_produto() {
   main_product->get_products();
 }
 
+
+// Set Form Product Current or Select Product to edit
 void LayoutControl::set_form_product_window(const int &product_id = 0) {
-  erase_form(product_form);
-  product_form->get_selects();
+
+  erase_form(product_form);  // Erase line edit
   if (product_id)
     product_form->tx_id->setText(QString::number(product_id));
+  product_form->get_selects();
   container->setCurrentWidget(product_form);
 }
 
@@ -68,12 +78,8 @@ void LayoutControl::erase_form(QWidget *widget) {
   foreach(const auto &wid, lineedits) {
     wid->clear();
   }
-
-  // QList<QComboBox *> cbox = widget->findChildren<QComboBox *>();
-
-  // foreach(const auto &wid, cbox) {
-  //   wid->clear();
-  // }
-
-
 }
+
+
+
+LayoutControl::~LayoutControl() {}

@@ -8,7 +8,7 @@
 #include <QPixmap>
 #include <QLabel>
 
-#include "view/default_widgets.h"
+#include "widgets/default_widgets.h"
 
 class FrameMenu : public QFrame {
 

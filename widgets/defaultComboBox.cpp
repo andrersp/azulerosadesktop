@@ -1,4 +1,4 @@
-#include "view/defaultComboBox.h"
+#include "widgets/defaultComboBox.h"
 #include <QLineEdit>
 
 DefaultComboBox::DefaultComboBox(QWidget *parent) : QComboBox(parent){

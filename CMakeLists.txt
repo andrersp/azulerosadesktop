@@ -56,7 +56,9 @@ file(GLOB TARGET_SRC
     control/*.cpp
     control/*.h
     "model/*.cpp"
-    "model/*.h"    
+    "model/*.h"
+    "widgets/*.cpp"
+    "widgets/*.h"
     
     ${RESOURCE_FILES} )
 

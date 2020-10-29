@@ -15,10 +15,17 @@ public:
 
 public slots:
 	void get_selects();
+	void get_product(const int &id);
 
 signals:
 	void signal_category(int id, QString category);
 	void signal_providers(QVector<QStringList> providers);
+	void signal_units(int id, QString unit);
+	void signal_brands(int id, QString brand);
+	void signal_check_id();
+	void signal_product(QJsonObject product);
+
+
 
 
 };

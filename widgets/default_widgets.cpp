@@ -1,4 +1,4 @@
-#include "view/default_widgets.h"
+#include "widgets/default_widgets.h"
 #include <QEvent>
 #include <QPainter>
 #include <QPainterPath>

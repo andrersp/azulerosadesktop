@@ -1,7 +1,7 @@
 #include "view/main_product_view.h"
 #include <QDebug>
 #include "model/request.h"
-#include "view/customshadow.h"
+#include "widgets/customshadow.h"
 
 
 

@@ -9,8 +9,8 @@
 #include <QScrollArea>
 #include <QPushButton>
 #include <QJsonObject>
-#include "view/default_widgets.h"
-#include "view/default_table.h"
+#include "widgets/default_widgets.h"
+#include "widgets/default_table.h"
 
 
 

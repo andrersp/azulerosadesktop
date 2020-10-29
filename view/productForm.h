@@ -7,12 +7,12 @@
 #include <QGridLayout>
 #include <QFrame>
 
-#include "view/defaultsLabel.h"
-#include "view/defaultsLineEdit.h"
-#include "view/defaultComboBox.h"
-#include "view/default_widgets.h"
-#include "view/default_table.h"
-#include "view/mrichtextedit.h"
+#include "widgets/defaultsLabel.h"
+#include "widgets/defaultsLineEdit.h"
+#include "widgets/defaultComboBox.h"
+#include "widgets/default_widgets.h"
+#include "widgets/default_table.h"
+#include "widgets/mrichtextedit.h"
 #include <QPushButton>
 
 class ProductForm : public FrameForm {
@@ -35,7 +35,7 @@ protected:
 	DefaultCompleter *tx_provider;
 	DefaultTextEdit *tx_description;
 	DefaultComboBox *cb_enable, *cb_category, *cb_brand, *cb_unit, *cb_subtract;
-	DefaultLineEditFloat *tx_weight, *tx_height, *tx_widht, *tx_length,
+	DefaultLineEditFloat *tx_weight, *tx_height, *tx_width, *tx_length,
 						 *tx_minimum_stock, *tx_maximum_stock,
 						 *tx_available_stock, *tx_purchase_price, 
 						 *tx_minimum_sale, *tx_sale_price, *tx_maximum_discount;

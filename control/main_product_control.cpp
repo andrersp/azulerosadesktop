@@ -46,11 +46,16 @@ void MainProductControl::set_product_grid(const QVector<QStringList> &data) {
 }
 
 void MainProductControl::select_product(const QModelIndex &index) {
-  qDebug() << index;
 
   int col = index.column();
-  qDebug() << col;
-  emit signal_get_product(col);
+
+  if (col == 7) {
+  	int id_product;
+  	id_product = index.sibling(index.row(), 0).data().toInt();
+
+  	emit signal_get_product(id_product);
+  }
+
 }
 
 MainProductControl::~MainProductControl() {}

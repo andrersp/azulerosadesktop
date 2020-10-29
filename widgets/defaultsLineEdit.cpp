@@ -1,4 +1,4 @@
-#include "view/defaultsLineEdit.h"
+#include "widgets/defaultsLineEdit.h"
 
 DefaultLineEdit::DefaultLineEdit(const QString &placeholder, QWidget *parent)
     : QLineEdit(parent) {

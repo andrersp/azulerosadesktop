@@ -12,9 +12,14 @@ public:
 
 public slots:
 	void get_selects();
-	void set_categories(const int &id, const QString &category);		
+	void set_categories(const int &id, const QString &category);
+	void set_units(const int &id, const QString &unit);
+	void set_brands(const int &id, const QString &brand);
+
+	void check_id();
 private slots:
 	void save_product();
+	void set_product(const QJsonObject &product);
 private:
 	ModelCompleter *complete_provider, *model_provider;
 

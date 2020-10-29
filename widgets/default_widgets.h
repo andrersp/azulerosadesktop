@@ -1,7 +1,7 @@
 #ifndef DEFAULT_WIDGETS_H
 #define DEFAULT_WIDGETS_H
 
-#include <view/customshadow.h>
+#include <widgets/customshadow.h>
 #include <QDebug>
 #include <QFrame>
 #include <QHBoxLayout>

@@ -1,4 +1,4 @@
-#include "view/defaultsLabel.h"
+#include "widgets/defaultsLabel.h"
 
 DefaultLabel::DefaultLabel(const QString &text, QWidget *parent)
     : QLabel(text, parent) {

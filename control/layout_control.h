@@ -22,7 +22,7 @@ public:
 	ProductFormControl *product_form;
 
 public slots:
-	void tamanho();
+	void set_dashboard_widow();
 	void set_window_produto();
 	void set_form_product_window(const int &product_id);
 signals:
