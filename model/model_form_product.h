@@ -16,6 +16,8 @@ public:
 public slots:
 	void get_selects();
 	void get_product(const int &id);
+	void delete_image(const QString &id_image);
+	void save_product(const QJsonObject &data);
 
 signals:
 	void signal_category(int id, QString category);
@@ -24,6 +26,7 @@ signals:
 	void signal_brands(int id, QString brand);
 	void signal_check_id();
 	void signal_product(QJsonObject product);
+	void signal_msg(int status, QString msg);
 
 
 

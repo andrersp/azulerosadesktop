@@ -26,7 +26,7 @@ DefaultTable::DefaultTable(QWidget *parent) : QTableView(parent){
 	// setSortingEnabled(true);
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	setCursor(Qt::PointingHandCursor);	
-	// setAlternatingRowColors(true);
+	setAlternatingRowColors(true);
 
 }
 

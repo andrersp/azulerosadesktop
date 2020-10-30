@@ -95,6 +95,10 @@ QVariant ModelTableProduct::data(const QModelIndex &index, int role) const {
     }
   }
 
+  if (role == Qt::ForegroundRole && index.column() == 1) {
+    return QColor(Qt::white);
+  }
+
   if (role == Qt::DisplayRole || role == Qt::EditRole) {
 
     if (index.column() == 7) {
@@ -147,6 +151,7 @@ QWidget *DelegateProduct::createEditor(QWidget *parent,
 
   if (index.column() == 1) {
     QLabel *editor = new QLabel(parent);
+    editor->setContentsMargins(2, 2, 2, 2);
     return editor;
   }
   else if (index.column() == 7) {
@@ -207,9 +212,17 @@ void DelegateProduct::paint(QPainter *painter, const QStyleOptionViewItem &optio
         QModelIndex hover = tableView->indexAt(tableView->viewport()->mapFromGlobal(QCursor::pos()));
         if (hover.row() == index.row())
         {
+            // qDebug() << option.rect;
+            // painter->fillRect(option.rect, QColor("#069"));
+            QRect position(option.rect.x(), option.rect.y() + 78, option.rect.width(), 1);
+            painter->fillRect(position ,QColor("#069"));
 
-            painter->fillRect(QRectF(option.rect.width(), option.rect.height() - 2, option.rect.width(), 2), QColor("#069"));
-          // painter->drawLine(option.rect.width() - 2, option.rect.height() -2 , option.rect.width() - 2, option.rect.height() - 2);
+            position = QRect(option.rect.x(), option.rect.y(), option.rect.width(), 1);
+            painter->fillRect(position ,QColor("#069"));
+
+
+            
+          
 
         }
     }

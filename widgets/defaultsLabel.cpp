@@ -93,7 +93,7 @@ void LabelUploadImage::remove_image()
 		return;
 	}
 	if (!tx_id->text().isEmpty()) {
-		emit remove_remote_image(tx_id->text());
+		emit signal_remove_image(tx_id->text());
 		tx_id->clear();
 		clear();
 		bt_remove->setDisabled(true);
@@ -128,7 +128,7 @@ void LabelUploadImage::upload_image() {
 
 		
 
-		if (this->pixmap()) {
+		if (!this->pixmap(Qt::ReturnByValue).isNull()) {
 			DialogMsg *dialog = new  DialogMsg(parentWidget(), 2, "A Imagem Anterior será removida.\nEssa ação não poderá ser desfeita.\nContinuar?");
 			bool result = dialog->exec();
 
@@ -136,7 +136,7 @@ void LabelUploadImage::upload_image() {
 				return;
 			}
 			if (!tx_id->text().isEmpty()) {
-				emit remove_remote_image(tx_id->text());
+				emit signal_remove_image(tx_id->text());
 				tx_id->clear();
 
 			}

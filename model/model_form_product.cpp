@@ -77,4 +77,35 @@ void ModelFormProduct::get_product(const int &id){
 
 }
 
+// Action delete image
+void ModelFormProduct::delete_image(const QString &id_image) {
+
+  ModelRequest request = ModelRequest(this);
+
+  auto [status, response] = request.DEL("/product/image/" + id_image );
+
+  if (status) {
+    qDebug() << response;
+  }
+  qDebug() << response;
+}
+
+// Save Product
+void ModelFormProduct::save_product(const QJsonObject &data) {
+
+  ModelRequest request = ModelRequest(this);
+
+  auto [status, responde] = request.post("/product", data);
+
+  if (status) {
+    emit signal_msg(status, responde.value("message").toString());
+    return;
+  }
+  emit signal_msg(status, responde.value("message").toString());
+
+
+
+
+}
+
 ModelFormProduct::~ModelFormProduct() {}

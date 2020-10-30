@@ -45,7 +45,7 @@ private slots:
 
 signals:
 
-void remove_remote_image(const QString &id_image);
+void signal_remove_image(const QString &id_image);
 
 };
 

@@ -37,7 +37,6 @@ LayoutControl::LayoutControl(QObject *parent) : MainWindowView(parent) {
   fr_menu->bt_home->setChecked(true);
 
 
-
   // Layout Connects
   connect(this, &LayoutControl::dialog_msg, window,
           &MainWindowControl::dialog_err);
