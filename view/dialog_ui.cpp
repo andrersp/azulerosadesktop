@@ -44,7 +44,7 @@ DialogMsg::DialogMsg(QWidget *frame, const int status, const QString msg)
   }
   setWindowTitle(titulo);
   setObjectName("dialog_confirm");
-  resize(400, 250);
+  resize(400, 300);
 
   setWindowFlags(Qt::FramelessWindowHint);
   setAttribute(Qt::WA_DeleteOnClose);
@@ -58,7 +58,7 @@ DialogMsg::DialogMsg(QWidget *frame, const int status, const QString msg)
 
   label_titulo = new QLabel(this);
   label_titulo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-  label_titulo->setFixedHeight(30);
+  label_titulo->setFixedHeight(25);
   label_titulo->setTextFormat(Qt::AutoText);
   label_titulo->setText(titulo);
   label_titulo->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -78,7 +78,7 @@ DialogMsg::DialogMsg(QWidget *frame, const int status, const QString msg)
   bt_close->setFlat(true);
   grid_titulo->addWidget(bt_close, 0, Qt::AlignRight);
 
-  grid_dialog->addSpacing(10);
+  grid_dialog->addSpacing(5);
 
   lb_icon = new QLabel(this);
   lb_icon->setFixedSize(QSize(50, 50));
@@ -91,7 +91,7 @@ DialogMsg::DialogMsg(QWidget *frame, const int status, const QString msg)
 
   lb_msg = new QLabel(this);
   lb_msg->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  lb_msg->setFixedHeight(50);
+  lb_msg->setFixedHeight(110);
   lb_msg->setTextFormat(Qt::AutoText);
   lb_msg->setText(msg);
   lb_msg->setWordWrap(true);

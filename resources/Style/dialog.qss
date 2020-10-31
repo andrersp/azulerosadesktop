@@ -30,7 +30,7 @@
     
     font-size: 16px;
     color: #3b7aba;
-    /* background-color: red; */
+    /*background-color: red; */
  }
 
  #lb_dialog_dica {

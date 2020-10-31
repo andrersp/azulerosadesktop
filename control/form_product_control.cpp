@@ -16,6 +16,9 @@ ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
   connect(bt_save, &QPushButton::clicked, this,
           &ProductFormControl::save_product);
 
+  // Connect Provider completer
+  connect(tx_provider->completation, QOverload<const QModelIndex &>::of(&QCompleter::activated), this, &ProductFormControl::select_provider);
+
   // Coonect LabelUpload remove Image
   connect(img1, &LabelUploadImage::signal_remove_image, this, &ProductFormControl::remove_image);
   connect(img2, &LabelUploadImage::signal_remove_image, this, &ProductFormControl::remove_image);
@@ -86,6 +89,28 @@ void ProductFormControl::check_id() {
 
     model.get_product(id_product);
   }
+}
+
+void ProductFormControl::select_provider(const QModelIndex &index){
+  
+  
+
+  if (index.row() == 0) {
+    dialog_err(2, "Selecione um fornecedor");
+    tx_provider->setFocus();
+    tx_provider->show_popup();
+
+    return;
+  }
+
+  QStringList data{index.sibling(index.row(), 0).data().toString(), index.sibling(index.row(), 1).data().toString()};
+
+  int row = model_provider->rowCount();
+  int col = model_provider->columnCount();
+  // model_provider->insertRows(row, 1, QModelIndex());
+  // QModelIndex index_complete(model_provider->index(row, col));
+  model_provider->setData(model_provider->index(row, col), data, Qt::EditRole);
+
 }
 
 // Set product selected
@@ -162,6 +187,59 @@ void ProductFormControl::set_product(const QJsonObject &product) {
 }
 
 void ProductFormControl::save_product() {
+
+
+  if (tx_internal_code->text().isEmpty()){
+    dialog_err(2, "Código interno não digitado");
+    tx_internal_code->setFocus();
+    return;
+  }
+
+  if (tx_product_name->text().isEmpty()) {
+    dialog_err(2, "Nome do produto não digitado");
+    tx_product_name->setFocus();
+    return;
+  }
+
+  if (cb_category->currentIndex() == 0 ){
+    dialog_err(2, "Nenhuma categoria selecionada");
+    cb_category->setFocus();
+    cb_category->showPopup();
+    return;    
+  }
+
+  if (tx_description->toPlainText().isEmpty()) {
+    dialog_err(2, "Digite uma descrição para o produto");
+    tx_description->setFocus();
+    return;
+  }
+
+  if (tx_minimum_sale->text().isEmpty()) {
+    dialog_err(2, "Digite a quantidade mínima permitida por venda");
+    tx_minimum_sale->setFocus();
+    return;
+  }
+
+  if (cb_unit->currentIndex() == 0){
+    dialog_err(2, "Selecione a unidade de medida do produto");
+    cb_unit->setFocus();
+    cb_unit->showPopup();
+    return;
+  }
+
+  if (tx_minimum_stock->text().isEmpty()) {
+    dialog_err(2, "Digite a quantidade mínima para estoque");
+    tx_minimum_stock->setFocus();
+    return;
+  }
+
+  if (tx_maximum_stock->text().isEmpty()) {
+    dialog_err(2, "Digite a quantidade máxima para estoque");
+    tx_maximum_stock->setFocus();
+    return;
+  }
+
+
   QJsonObject data;
   data.insert("id", tx_id->text().toInt());
   data.insert("internal_code", tx_internal_code->text());
@@ -179,7 +257,7 @@ void ProductFormControl::save_product() {
   if (!img_cover->pixmap(Qt::ReturnByValue).isNull()) {
     QByteArray bytearray;
     QBuffer buffer(&bytearray);
-    img_cover->pixmap(Qt::ReturnByValue).save(&buffer, "PNG");
+    img_cover->img_data.save(&buffer, "PNG");
     data.insert("cover", QString::fromLatin1(bytearray.toBase64().data()));
   } else {
     data.insert("cover", "");
@@ -212,7 +290,7 @@ void ProductFormControl::save_product() {
       if (!lb_images[i]->pixmap(Qt::ReturnByValue).isNull()) {
         QByteArray bytearray;
         QBuffer buffer(&bytearray);
-        lb_images[i]->pixmap(Qt::ReturnByValue).save(&buffer, "PNG");
+        lb_images[i]->img_data.save(&buffer, "PNG");
         data_images.append(QString::fromLatin1(bytearray.toBase64().data()));
       }
     }

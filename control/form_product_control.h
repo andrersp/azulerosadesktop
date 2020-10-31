@@ -16,6 +16,7 @@ public slots:
 	void set_categories(const int &id, const QString &category);
 	void set_units(const int &id, const QString &unit);
 	void set_brands(const int &id, const QString &brand);
+	void select_provider(const QModelIndex &index);
 
 	void check_id();
 private slots:

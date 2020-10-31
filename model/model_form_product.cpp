@@ -63,7 +63,7 @@ void ModelFormProduct::get_selects() {
 void ModelFormProduct::get_product(const int &id){
 
 	if (!id) {
-		qDebug() << "Not Id";		
+		return;
 	}
 
 	ModelRequest request = ModelRequest(this);
@@ -85,9 +85,9 @@ void ModelFormProduct::delete_image(const QString &id_image) {
   auto [status, response] = request.DEL("/product/image/" + id_image );
 
   if (status) {
-    qDebug() << response;
+    return;
   }
-  qDebug() << response;
+  emit signal_msg(status, response.value("message").toString());
 }
 
 // Save Product
@@ -95,13 +95,35 @@ void ModelFormProduct::save_product(const QJsonObject &data) {
 
   ModelRequest request = ModelRequest(this);
 
-  auto [status, responde] = request.post("/product", data);
+  auto [status, response] = request.post("/product", data);
 
   if (status) {
-    emit signal_msg(status, responde.value("message").toString());
+    emit signal_msg(status, response.value("message").toString());
     return;
   }
-  emit signal_msg(status, responde.value("message").toString());
+  // qDebug() << response;
+  if (response.value("message").isObject()) {
+    QString msg = "";
+    foreach (const QString &key, response.keys()) {
+      QJsonObject value = response.value(key).toObject();
+      foreach (const QString &key2, value.keys()) {
+
+        QString msg_data = "";
+        QJsonArray array_msg = value.value(key2).toArray();
+
+        foreach (const QJsonValue &msg2, array_msg) {
+          msg_data = msg2.toString() + "," ;
+        }
+        msg = msg + key2 + " - " +  msg_data + "\n";
+        // msg = msg + key2 + " - " + value.value(key2).toString() + "\n";
+      }
+    }
+
+    emit signal_msg(status, msg);
+    return;
+    
+  }
+  emit signal_msg(status, response.value("message").toString());
 
 
 

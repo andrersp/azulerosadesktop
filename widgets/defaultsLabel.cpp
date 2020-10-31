@@ -138,12 +138,10 @@ void LabelUploadImage::upload_image() {
 			if (!tx_id->text().isEmpty()) {
 				emit signal_remove_image(tx_id->text());
 				tx_id->clear();
-
 			}
-
 		}
 		img_data.load(fname);
-		this->setPixmap(img_data);
+		this->setPixmap(img_data.scaledToHeight(this->height(), Qt::SmoothTransformation));
 		bt_show->setEnabled(true);
 		bt_remove->setEnabled(true);
 	}

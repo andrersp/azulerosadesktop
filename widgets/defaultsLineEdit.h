@@ -44,7 +44,7 @@ public:
 	virtual ~DefaultCompleter();
 
 	QCompleter *completation;
-private slots:
+public slots:
 	void show_popup();
 
 private:
