@@ -20,7 +20,7 @@ public slots:
 	void save_product(const QJsonObject &data);
 
 signals:
-	void signal_category(int id, QString category);
+	void signal_category(QVector<QStringList> categories);
 	void signal_providers(QVector<QStringList> providers);
 	void signal_units(int id, QString unit);
 	void signal_brands(int id, QString brand);

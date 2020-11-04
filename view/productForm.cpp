@@ -46,8 +46,8 @@ ProductForm::ProductForm(QWidget *parent)
   tx_product_name->setMinimumWidth(350);
   addWidget(tx_product_name, 3, 0, 1, 2);
 
-  cb_category = new DefaultComboBox(this);
-  addWidget(cb_category, 3, 2, 1, 1);
+  tx_category = new DefaultLineEditSearchAdd("Categoria", this);
+  addWidget(tx_category, 3, 2, 1, 1);
 
   cb_brand = new DefaultComboBox(this);
   addWidget(cb_brand, 3, 3, 1, 1);

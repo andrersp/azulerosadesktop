@@ -10,7 +10,7 @@
 class ModelRequest : public QObject {
   Q_OBJECT
 public:
-  explicit ModelRequest(QObject *parent = nullptr);
+  ModelRequest(QObject *parent = nullptr);
   ~ModelRequest();
 
   QNetworkAccessManager *manager;

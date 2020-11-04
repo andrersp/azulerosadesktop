@@ -3,8 +3,17 @@
 
 MainProductControl::MainProductControl(QWidget *parent)
     : MainProductView(parent) {
+
+  
+  
+
+  // Model
   table_model = new ModelTableProduct(this);
-  table_products->setModel(table_model);
+  // Filter
+  filter = new FilterProduct(this);
+  filter->setDynamicSortFilter(true);
+  filter->setSourceModel(table_model);
+  table_products->setModel(filter);
 
   delegate_product = new DelegateProduct(table_products);
   table_products->setItemDelegate(delegate_product);
@@ -16,6 +25,9 @@ MainProductControl::MainProductControl(QWidget *parent)
   header->setSectionResizeMode(4, QHeaderView::ResizeToContents);
   table_products->setColumnWidth(0, 70);
   table_products->setColumnWidth(7, 140);
+
+  // Connect Filter
+  connect(fr_search->tx_search, &LineEditSearch::textChanged, this, &MainProductControl::filter_product);
 
   // Connect Table into select product
   connect(table_products, &DefaultTable::clicked, this,
@@ -39,10 +51,7 @@ void MainProductControl::set_product_grid(const QVector<QStringList> &data) {
   // Objectcast to layout control
   table_model->set_data(data);
 
-  for (int i = 0; i < table_model->rowCount(); i++) {
-    table_products->openPersistentEditor(table_model->index(i, 1));
-    table_products->openPersistentEditor(table_model->index(i, 7));
-  }
+  set_persistent();
 }
 
 void MainProductControl::select_product(const QModelIndex &index) {
@@ -54,6 +63,20 @@ void MainProductControl::select_product(const QModelIndex &index) {
   	id_product = index.sibling(index.row(), 0).data().toInt();
 
   	emit signal_get_product(id_product);
+  }
+  fr_search->tx_search->clear();
+
+}
+
+void MainProductControl::filter_product(const QString &index) {
+  filter->setFilterRegExp(QRegExp(index, Qt::CaseInsensitive));
+  set_persistent();  
+}
+
+void MainProductControl::set_persistent(){
+  for (int i = 0; i < filter->rowCount(); i++) {
+    table_products->openPersistentEditor(filter->index(i, 1));
+    table_products->openPersistentEditor(filter->index(i, 7));
   }
 
 }

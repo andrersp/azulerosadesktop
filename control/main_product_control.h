@@ -7,7 +7,7 @@
 class MainProductControl : public MainProductView {
   Q_OBJECT
  public:
-  explicit MainProductControl(QWidget *parent = nullptr);
+  MainProductControl(QWidget *parent = nullptr);
   virtual ~MainProductControl();
  public slots:
   void get_products();
@@ -16,7 +16,10 @@ class MainProductControl : public MainProductView {
 private:
 	ModelTableProduct *table_model;
 	DelegateProduct *delegate_product;
+	FilterProduct *filter;
 	void select_product(const QModelIndex &index);
+	void filter_product(const QString &index);
+	void set_persistent();
 
 signals:
 	void signal_get_product(int &id);

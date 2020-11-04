@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QPainter>
 #include <QStyledItemDelegate>
+#include <QSortFilterProxyModel>
 
 #include "model/request.h"
 
@@ -66,5 +67,25 @@ class DelegateProduct : public QStyledItemDelegate {
   virtual void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
                             const QModelIndex &index) const override;
 };
+
+
+// Filter Product
+
+class FilterProduct : public QSortFilterProxyModel
+{
+  Q_OBJECT
+public:
+  explicit FilterProduct(QObject *parent = nullptr);
+  virtual ~FilterProduct();
+
+protected:
+  bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
+
+
+
+
+
+};
+
 
 #endif

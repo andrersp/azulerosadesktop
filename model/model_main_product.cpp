@@ -152,6 +152,7 @@ QWidget *DelegateProduct::createEditor(QWidget *parent,
   if (index.column() == 1) {
     QLabel *editor = new QLabel(parent);
     editor->setContentsMargins(2, 2, 2, 2);
+    editor->setAttribute(Qt::WA_TransparentForMouseEvents);
     return editor;
   }
   else if (index.column() == 7) {
@@ -208,7 +209,7 @@ void DelegateProduct::updateEditorGeometry(
 void DelegateProduct::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (QAbstractItemView* tableView = qobject_cast<QAbstractItemView*>(this->parent()))
-    {
+    {   
         QModelIndex hover = tableView->indexAt(tableView->viewport()->mapFromGlobal(QCursor::pos()));
         if (hover.row() == index.row())
         {
@@ -229,3 +230,19 @@ void DelegateProduct::paint(QPainter *painter, const QStyleOptionViewItem &optio
  
     QStyledItemDelegate::paint(painter, option, index);
 }
+
+
+// Filter Product
+FilterProduct::FilterProduct(QObject *parent) : QSortFilterProxyModel(parent){}
+
+bool FilterProduct::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const {
+
+  QModelIndex index = sourceModel()->index(sourceRow, 2, sourceParent);
+
+  return (
+    sourceModel()->data(index).toString().contains(filterRegExp())
+    );
+
+}
+
+FilterProduct::~FilterProduct(){}

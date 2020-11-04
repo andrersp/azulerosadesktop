@@ -86,17 +86,6 @@ class LineEditIconLeft : public QLineEdit {
   QIcon _icon;
 };
 
-class FrameSearch : public QFrame {
- public:
-  explicit FrameSearch(const QString &title, QWidget *parent = nullptr);
-  virtual ~FrameSearch();
-  ButtonAdd *button;
-
- private:
-  QLabel *title;
-  QHBoxLayout *grid;
-};
-
 class LineEditSearch : public QLineEdit {
   Q_OBJECT
  public:
@@ -108,6 +97,19 @@ class LineEditSearch : public QLineEdit {
 
  private:
   QIcon m_icon;
+};
+
+// Frame Search Default
+class FrameSearch : public QFrame {
+ public:
+  explicit FrameSearch(const QString &title, QWidget *parent = nullptr);
+  virtual ~FrameSearch();
+  ButtonAdd *button;
+  LineEditSearch *tx_search;
+
+ private:
+  QLabel *title;
+  QHBoxLayout *grid;
 };
 
 

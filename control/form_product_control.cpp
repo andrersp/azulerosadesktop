@@ -2,8 +2,14 @@
 #include <QBuffer>
 #include <QDebug>
 ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
+
   model_provider = new ModelCompleter(this);
   tb_providers->setModel(model_provider);
+
+  // Model Category
+  model_category = new ModelCompleter(this);
+  tx_category->completation->setModel(model_category);
+
   // Tb Provider
   tb_providers->setColumnHidden(0, true);
   tb_providers->setFocusPolicy(Qt::NoFocus);
@@ -17,7 +23,7 @@ ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
           &ProductFormControl::save_product);
 
   // Connect Provider completer
-  connect(tx_provider->completation, QOverload<const QModelIndex &>::of(&QCompleter::activated), this, &ProductFormControl::select_provider);
+  // connect(tx_provider->completation, QOverload<const QModelIndex &>::of(&QCompleter::activated), this, &ProductFormControl::select_provider);
 
   // Coonect LabelUpload remove Image
   connect(img1, &LabelUploadImage::signal_remove_image, this, &ProductFormControl::remove_image);
@@ -34,7 +40,7 @@ ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
 
 
 void ProductFormControl::get_selects() {
-  cb_category->clear();
+  // cb_category->clear();
   cb_brand->clear();
   cb_unit->clear();
   QList<LabelUploadImage *> lb_images = {img_cover, img1, img2,
@@ -49,8 +55,8 @@ void ProductFormControl::get_selects() {
   tx_long_description->clearSource();
 
   ModelFormProduct model = ModelFormProduct(this);
-  connect(&model, &ModelFormProduct::signal_category, this,
-          &ProductFormControl::set_categories);
+  connect(&model, &ModelFormProduct::signal_category, model_category,
+          &ModelCompleter::set_data);
   connect(&model, &ModelFormProduct::signal_brands, this,
           &ProductFormControl::set_brands);
   connect(&model, &ModelFormProduct::signal_units, this,
@@ -65,7 +71,8 @@ void ProductFormControl::get_selects() {
 // Set categories data into cb_category
 void ProductFormControl::set_categories(const int &id,
                                         const QString &category) {
-  cb_category->addItem(category, id);
+  // cb_category->addItem(category, id);
+  qDebug() << id;
 }
 
 // set units data into cb_unit
@@ -119,8 +126,8 @@ void ProductFormControl::set_product(const QJsonObject &product) {
   cb_enable->setCurrentIndex(
       cb_enable->findData(product.value("available").toBool()));
   tx_product_name->setText(product.value("name").toString());
-  cb_category->setCurrentIndex(
-      cb_category->findData(product.value("category").toInt()));
+  // cb_category->setCurrentIndex(
+  //     cb_category->findData(product.value("category").toInt()));
   cb_brand->setCurrentIndex(cb_brand->findData(product.value("brand").toInt()));
   tx_description->setPlainText(product.value("short_description").toString());
   tx_weight->setText(
@@ -201,12 +208,22 @@ void ProductFormControl::save_product() {
     return;
   }
 
-  if (cb_category->currentIndex() == 0 ){
-    dialog_err(2, "Nenhuma categoria selecionada");
-    cb_category->setFocus();
-    cb_category->showPopup();
-    return;    
+  int category_id;
+  qDebug() << tx_category->completation->pathFromIndex(tx_category->completation->currentIndex());
+
+  category_id = tx_category->completation->model()->index(tx_category->completation->currentRow(), 0).data().toInt();
+
+  if (!category_id) {
+    qDebug() << "Não Tem";
   }
+  return;
+
+  // if (cb_category->currentIndex() == 0 ){
+  //   dialog_err(2, "Nenhuma categoria selecionada");
+  //   cb_category->setFocus();
+  //   cb_category->showPopup();
+  //   return;    
+  // }
 
   if (tx_description->toPlainText().isEmpty()) {
     dialog_err(2, "Digite uma descrição para o produto");
@@ -244,7 +261,7 @@ void ProductFormControl::save_product() {
   data.insert("id", tx_id->text().toInt());
   data.insert("internal_code", tx_internal_code->text());
   data.insert("name", tx_product_name->text());
-  data.insert("category", cb_category->currentData().toInt());
+  // data.insert("category", cb_category->currentData().toInt());
   data.insert("brand", cb_brand->currentData().toInt());
   data.insert("unit", cb_unit->currentData().toInt());
   data.insert("minimum_stock", tx_minimum_stock->text().toDouble());

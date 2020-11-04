@@ -224,7 +224,7 @@ FrameSearch::FrameSearch(const QString &title, QWidget *parent)
   button = new ButtonAdd("Novo", this);
   grid->addWidget(button);
 
-  LineEditSearch *tx_search = new LineEditSearch("Buscar", this);
+  tx_search = new LineEditSearch("Buscar", this);
   grid->addWidget(tx_search, 0, Qt::AlignRight);
 }
 

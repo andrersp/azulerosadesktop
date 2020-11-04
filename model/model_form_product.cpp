@@ -13,12 +13,18 @@ void ModelFormProduct::get_selects() {
     QJsonArray array_units = data.value("units").toArray();
 
     // Categories
-    emit signal_category(0, "Categoria");
+
+    QVector<QStringList> v_categories;
+    QStringList l_category = {"", "Categoria"};
+    v_categories.append(l_category);
+
+    
     foreach (const QJsonValue &value, array_categories) {
       QJsonObject obj = value.toObject();
-      emit signal_category(obj.value("id").toInt(),
-                           obj.value("name").toString());
+      QStringList v = {QString::number(obj.value("id").toInt()), obj.value("name").toString()};
+      v_categories.append(v);     
     }
+    emit signal_category(v_categories);
 
     // Brands
     emit signal_brands(0, "Marca");
