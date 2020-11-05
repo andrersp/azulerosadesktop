@@ -38,7 +38,6 @@ class DefaultTextEdit : public QTextEdit {
 };
 
 // Custom Completer
-
 class DefaultCompleter : public QLineEdit {
   Q_OBJECT
  public:
@@ -49,12 +48,17 @@ class DefaultCompleter : public QLineEdit {
   QCompleter *completation;
  public slots:
   void show_popup();
+private slots:
+  void set_current_row(const QModelIndex &index);
+
 
  private:
   QToolButton *bt_popup;
   QHBoxLayout *cp_layout;
 };
 
+
+// Custom Ccompleter with add Button
 class DefaultLineEditSearchAdd : public QLineEdit {
   Q_OBJECT
  public:

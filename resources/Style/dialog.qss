@@ -64,3 +64,13 @@
     background-color: #3a7aba;
     color: #fff;
 }
+
+#bt_cancel_input {
+    background-color: #dc3545;
+    text-transform: uppercase;
+    border: 1px solid #dc3545;
+}
+#bt_cancel_input:hover {
+    background-color: #c82333;
+    border: 1px solid #bd2130;
+}

@@ -88,12 +88,20 @@ DefaultCompleter::DefaultCompleter(const QString &placeholder, QWidget *parent)
   // Connect
   connect(bt_popup, &QToolButton::clicked, this, &DefaultCompleter::show_popup);
 
+  // Set Current Row
+  connect(completation, QOverload<const QModelIndex &>::of(&QCompleter::activated), [=](const QModelIndex &index) {set_current_row(index);});
+
 
 }
 
 void DefaultCompleter::show_popup() {
   completation->setCompletionPrefix("");
   completation->complete();
+}
+
+void DefaultCompleter::set_current_row(const QModelIndex &index) {
+  int row {index.row()};
+  completation->setCurrentRow(row);
 }
 
 DefaultCompleter::~DefaultCompleter() {}
@@ -144,7 +152,7 @@ DefaultLineEditSearchAdd::DefaultLineEditSearchAdd(const QString &placeholder, Q
   connect(bt_popup, &QToolButton::clicked, this, &DefaultLineEditSearchAdd::show_popup);
 
   // Set Current Index
-  connect(completation, QOverload<const QModelIndex&>::of(&QCompleter::activated), this, &DefaultLineEditSearchAdd::set_current_index);
+  connect(completation, QOverload<const QModelIndex &>::of(&QCompleter::activated), [=] (const QModelIndex &index) {set_current_index(index);});
 
 
 
@@ -157,8 +165,8 @@ void DefaultLineEditSearchAdd::show_popup() {
 
 void DefaultLineEditSearchAdd::set_current_index(const QModelIndex &index) {
 
-  qDebug() << index;
-
+  int row {index.row()};
+  completation->setCurrentRow(row);
 }
 
 DefaultLineEditSearchAdd::~DefaultLineEditSearchAdd() {}

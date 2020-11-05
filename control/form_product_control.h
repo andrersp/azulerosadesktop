@@ -26,6 +26,9 @@ private slots:
 	void dialog_err(int status, QString msg);
 private:
 	ModelCompleter *complete_provider, *model_provider, *model_category;
+	void dialog_add_category();
+
+	void add_category(const QString &category);
 
 
 

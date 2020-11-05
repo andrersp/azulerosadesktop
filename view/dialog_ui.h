@@ -13,7 +13,7 @@
 #include <QPushButton>
 #include <QDialogButtonBox>
 #include <QPixmap>
-
+#include <widgets/defaultsLineEdit.h>
 class MaskWidget : public QWidget
 {
   Q_OBJECT
@@ -53,4 +53,24 @@ public:
   QPushButton *bt_close;
   QVBoxLayout *grid_dialog;
   QHBoxLayout *grid_titulo;
+};
+
+
+class DialogInput : public QDialog {
+  Q_OBJECT
+public:
+  DialogInput(const QString &title, QWidget *frame = nullptr);
+  ~DialogInput();
+  QLabel *label_titulo, *lb_dica;
+  DefaultLineEdit *tx_name;
+  QPushButton  *bt_confirm, *bt_cancel;
+  QVBoxLayout *grid_dialog;
+  QHBoxLayout *grid_titulo;
+  QDialogButtonBox *button_box;
+  QPixmap *icon_dialog;
+  MaskWidget *mask;
+private:
+  QPushButton *bt_close;
+
+
 };
