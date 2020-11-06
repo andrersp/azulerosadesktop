@@ -29,6 +29,7 @@
 		<file>Images/cam.svgz</file>
 		<file>Images/icon_down.svg</file>
 		<file>Images/icon_add.svg</file>
+		<file>Images/icon.svgz</file>
 	</qresource>
 
 	<qresource prefix="/Style">

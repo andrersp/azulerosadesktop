@@ -1,17 +1,22 @@
-#include "model/model_completer.h"
+#include "model/modelMiniTable.h"
 
-int ModelCompleter::rowCount(const QModelIndex &index) const {
+// Model For Mini Tables
+int ModelMiniTable::rowCount(const QModelIndex &index) const {
   return itens.count();
 }
 
-int ModelCompleter::columnCount(const QModelIndex &index) const { return 2; }
+int ModelMiniTable::columnCount(const QModelIndex &index) const { return 3; }
 
-Qt::ItemFlags ModelCompleter::flags(const QModelIndex &index) const {
+Qt::ItemFlags ModelMiniTable::flags(const QModelIndex &index) const {
   return QAbstractTableModel::flags(index) | Qt::ItemIsSelectable |
          Qt::ItemIsEnabled;
 }
 
-QVariant ModelCompleter::data(const QModelIndex &index, int role) const {
+QVariant ModelMiniTable::data(const QModelIndex &index, int role) const {
+
+	if (role == Qt::DecorationRole && index.column() == 2) {
+		return  QIcon(":Images/Images/icon_remove_image.svgz");
+	}	
   if (role == Qt::DisplayRole || role == Qt::EditRole) {
     return itens.at(index.row()).at(index.column());
   }
@@ -19,7 +24,7 @@ QVariant ModelCompleter::data(const QModelIndex &index, int role) const {
   return QVariant();
 }
 
-bool ModelCompleter::setData(const QModelIndex &index, const QStringList &value,
+bool ModelMiniTable::setData(const QModelIndex &index, const QStringList &value,
                              int role) {
   if (role == Qt::EditRole) {
     if (!checkIndex(index)) {
@@ -36,7 +41,7 @@ bool ModelCompleter::setData(const QModelIndex &index, const QStringList &value,
   return false;
 }
 
-bool ModelCompleter::insertRows(int position, int rows,
+bool ModelMiniTable::insertRows(int position, int rows,
                                 const QModelIndex &index) {
   Q_UNUSED(index);
   beginInsertRows(QModelIndex(), position, position + rows - 1);
@@ -49,11 +54,22 @@ bool ModelCompleter::insertRows(int position, int rows,
   return true;
 }
 
-void ModelCompleter::set_data(const QVector<QStringList> &itens) {
+bool ModelMiniTable::removeRows(int position, int rows, const QModelIndex &index) {
+	Q_UNUSED(index);
+	beginRemoveRows(QModelIndex(), position,  position + rows - 1);
+
+	for (int row = 0; row < rows; ++row) {
+		itens.remove(position);
+	}
+	endRemoveRows();
+
+	return true;
+}
+
+void ModelMiniTable::set_data(const QVector<QStringList> &itens) {
   beginResetModel();
   this->itens = itens;
   endResetModel();
 }
 
-ModelCompleter::~ModelCompleter() {}
-
+ModelMiniTable::~ModelMiniTable() {}

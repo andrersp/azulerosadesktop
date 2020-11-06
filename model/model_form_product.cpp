@@ -27,13 +27,21 @@ void ModelFormProduct::get_selects() {
     emit signal_category(v_categories);
 
     // Brands
-    emit signal_brands(0, "Marca");
+    QVector<QStringList> v_brands;
+    QStringList l_brand = {"", "Marca"};
+    v_brands.append(l_brand);
+
+    // emit signal_brands(0, "Marca");
 
     foreach (const QJsonValue &value, array_brands) {
       QJsonObject obj = value.toObject();
 
-      emit signal_brands(obj.value("id").toInt(), obj.value("name").toString());
+      QStringList v = {QString::number(obj.value("id").toInt()),
+                       obj.value("name").toString()};
+      v_brands.append(v);
     }
+
+    emit signal_brands(v_brands);
 
     // Units
     emit signal_units(0, "Unidade");
@@ -100,10 +108,13 @@ void ModelFormProduct::save_product(const QJsonObject &data) {
   auto [status, response] = request.post("/product", data);
 
   if (status) {
-    emit signal_msg(status, response.value("message").toString());
+    QJsonObject resp = response.value("data").toObject();
+    int product_id = resp.value("id").toInt();
+    
+    emit signal_msg_sucess(status, response.value("message").toString(), product_id);
     return;
   }
-  
+
   // Array response error
   if (response.value("message").isObject()) {
     QString msg = "";
@@ -127,25 +138,19 @@ void ModelFormProduct::save_product(const QJsonObject &data) {
   emit signal_msg(status, response.value("message").toString());
 }
 
-void ModelFormProduct::save_category(const QString &category) {
-
-  QJsonObject data = {};
-  data.insert("id", "");
-  data.insert("name", category);
-  data.insert("description", "");
-
+void ModelFormProduct::save_category(const QJsonObject &data) {
   ModelRequest request;
 
   auto [status, response] = request.post("/product/category", data);
 
-  if (status){
-      QJsonObject obj = response.value("data").toObject();
+  if (status) {
+    QJsonObject obj = response.value("data").toObject();
 
-      int id_category = obj.value("id").toInt();
-      QString name_category = obj.value("name").toString();
+    int id_category = obj.value("id").toInt();
+    QString name_category = obj.value("name").toString();
 
-      emit signal_new_category(id_category, name_category);
-      return;
+    emit signal_new_category(id_category, name_category);
+    return;
   }
   // Array response error
   if (response.value("message").isObject()) {
@@ -168,10 +173,45 @@ void ModelFormProduct::save_category(const QString &category) {
     return;
   }
   emit signal_msg(status, response.value("message").toString());
+}
 
 
+// Save New Brand
+void ModelFormProduct::save_brand(const QJsonObject &data) {
+  ModelRequest request;
 
-  
+  auto [status, response] = request.post("/product/brand", data);
+
+  if (status) {
+    QJsonObject obj = response.value("data").toObject();
+
+    int id_category = obj.value("id").toInt();
+    QString name_category = obj.value("name").toString();
+
+    emit signal_new_brand(id_category, name_category);
+    return;
+  }
+  // Array response error
+  if (response.value("message").isObject()) {
+    QString msg = "";
+    foreach (const QString &key, response.keys()) {
+      QJsonObject value = response.value(key).toObject();
+      foreach (const QString &key2, value.keys()) {
+        QString msg_data = "";
+        QJsonArray array_msg = value.value(key2).toArray();
+
+        foreach (const QJsonValue &msg2, array_msg) {
+          msg_data = msg2.toString() + ",";
+        }
+        msg = msg + key2 + " - " + msg_data + "\n";
+        // msg = msg + key2 + " - " + value.value(key2).toString() + "\n";
+      }
+    }
+
+    emit signal_msg(status, msg);
+    return;
+  }
+  emit signal_msg(status, response.value("message").toString());
 }
 
 ModelFormProduct::~ModelFormProduct() {}

@@ -7,13 +7,18 @@ ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
   model_category = new ModelCompleter(this);
   tx_category->completation->setModel(model_category);
 
+  completer_brand = new ModelCompleter(this);
+  tx_brand->completation->setModel(completer_brand);
+
   // Tb Provider
-  model_provider = new ModelCompleter(this);
+  model_provider = new ModelMiniTable(this);
   tb_providers->setModel(model_provider);
   tb_providers->setColumnHidden(0, true);
+  tb_providers->setColumnWidth(2, 35);
   tb_providers->setFocusPolicy(Qt::NoFocus);
   QHeaderView *header = tb_providers->horizontalHeader();
-  // header->setSectionResizeMode(1, header->Stretch);
+  header->setSectionResizeMode(1, header->Stretch);
+
 
   complete_provider = new ModelCompleter(this);
   tx_provider->completation->setModel(complete_provider);
@@ -25,6 +30,8 @@ ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
   connect(tx_provider->completation,
           QOverload<const QModelIndex &>::of(&QCompleter::activated), this,
           &ProductFormControl::select_provider);
+  // Connect Remove Provider
+  connect(tb_providers, QOverload<const QModelIndex &>::of(&DefaultTable::clicked), this, &ProductFormControl::remove_provider);
 
   // Coonect LabelUpload remove Image
   connect(img1, &LabelUploadImage::signal_remove_image, this,
@@ -42,14 +49,17 @@ ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
   connect(tx_category->bt_add, &QPushButton::clicked, this,
           &ProductFormControl::dialog_add_category);
 
+  // Connect Add brand Dialog
+  connect(tx_brand->bt_add, &QPushButton::clicked, this, &ProductFormControl::dialog_add_brand);
+
   // Connect Dialog
   // connect(this, SIGNAL(signal_dialog(int status, QString msg)),
   // this->parent(), SLOT(dialog_err(int status, QString msg)));
 }
 
 void ProductFormControl::get_selects() {
-  // cb_category->clear();
-  cb_brand->clear();
+
+  tx_description->clear();
   cb_unit->clear();
   model_provider->itens.clear();
   QList<LabelUploadImage *> lb_images = {img_cover, img1, img2,
@@ -66,8 +76,8 @@ void ProductFormControl::get_selects() {
   ModelFormProduct model = ModelFormProduct(this);
   connect(&model, &ModelFormProduct::signal_category, model_category,
           &ModelCompleter::set_data);
-  connect(&model, &ModelFormProduct::signal_brands, this,
-          &ProductFormControl::set_brands);
+  connect(&model, &ModelFormProduct::signal_brands, completer_brand,
+          &ModelCompleter::set_data);
   connect(&model, &ModelFormProduct::signal_units, this,
           &ProductFormControl::set_units);
   connect(&model, &ModelFormProduct::signal_providers, complete_provider,
@@ -80,11 +90,6 @@ void ProductFormControl::get_selects() {
 // set units data into cb_unit
 void ProductFormControl::set_units(const int &id, const QString &unit) {
   cb_unit->addItem(unit, id);
-}
-
-// set brands into cb_brand
-void ProductFormControl::set_brands(const int &id, const QString &brand) {
-  cb_brand->addItem(brand, id);
 }
 
 // get product if id is not empyt
@@ -117,11 +122,23 @@ void ProductFormControl::select_provider(const QModelIndex &index) {
   }
 
   QStringList data{index.sibling(index.row(), 0).data().toString(),
-                   index.sibling(index.row(), 1).data().toString()};
+                   index.sibling(index.row(), 1).data().toString(), ""};
 
   int row = model_provider->rowCount();
   int col = model_provider->columnCount();
   model_provider->setData(model_provider->index(row, col), data, Qt::EditRole);
+}
+
+// remove Provider of table
+
+void ProductFormControl::remove_provider(const QModelIndex &index) {
+
+  int col = index.column();
+
+  if (col == 2) {
+    model_provider->removeRows(index.row(), 1, QModelIndex());
+  }
+
 }
 
 // Set product selected
@@ -139,9 +156,19 @@ void ProductFormControl::set_product(const QJsonObject &product) {
       tx_category->setText(tx_category->completation->currentCompletion());
     }
   }
-  // cb_category->setCurrentIndex(
-  //     cb_category->findData(product.value("category").toInt()));
-  cb_brand->setCurrentIndex(cb_brand->findData(product.value("brand").toInt()));
+
+  int id_brand{product.value("brand").toInt()};
+  qDebug() << id_brand;
+
+  for (int i = 0; i < completer_brand->rowCount(); i++) {
+    if (completer_brand->index(i, 0).data().toInt() == id_brand) {
+      qDebug() << i;
+      tx_brand->completation->setCurrentRow(i);
+      tx_brand->setText(tx_brand->completation->currentCompletion());
+    }
+  }
+
+  // cb_brand->setCurrentIndex(cb_brand->findData(product.value("brand").toInt()));
   tx_description->setPlainText(product.value("short_description").toString());
   tx_weight->setText(
       QString::number(product.value("weight").toDouble(), 'f', 2));
@@ -172,7 +199,7 @@ void ProductFormControl::set_product(const QJsonObject &product) {
   foreach (const QJsonValue &value, array_providers) {
     QJsonObject obj = value.toObject();
     data.append(QStringList({QString::number(obj.value("id").toInt()),
-                             obj.value("fancy_name").toString()}));
+                             obj.value("fancy_name").toString(), ""}));
   }
 
   model_provider->set_data(data);
@@ -266,12 +293,21 @@ void ProductFormControl::save_product() {
     return;
   }
 
+
+  QAbstractProxyModel *proxy_brand = qobject_cast<QAbstractProxyModel *>(
+      tx_brand->completation->completionModel());
+  QModelIndex index_brand =
+      proxy_brand->mapToSource(tx_brand->completation->currentIndex());
+
+  int id_brand{
+      index_brand.sibling(index_brand.row(), 0).data().toInt()};
+
   QJsonObject data;
   data.insert("id", tx_id->text().toInt());
   data.insert("internal_code", tx_internal_code->text());
   data.insert("name", tx_product_name->text());
   data.insert("category", id_category);
-  data.insert("brand", cb_brand->currentData().toInt());
+  data.insert("brand", id_brand);
   data.insert("unit", cb_unit->currentData().toInt());
   data.insert("minimum_stock", tx_minimum_stock->text().toDouble());
   data.insert("maximum_stock", tx_maximum_stock->text().toDouble());
@@ -325,6 +361,8 @@ void ProductFormControl::save_product() {
   data.insert("images", data_images);
 
   ModelFormProduct model = ModelFormProduct(this);
+  connect(&model, &ModelFormProduct::signal_msg_sucess, this,
+          &ProductFormControl::dialog_sucess);
   connect(&model, &ModelFormProduct::signal_msg, this,
           &ProductFormControl::dialog_err);
   model.save_product(data);
@@ -333,15 +371,6 @@ void ProductFormControl::save_product() {
 void ProductFormControl::remove_image(const QString &id_image) {
   ModelFormProduct model = ModelFormProduct(this);
   model.delete_image(id_image);
-}
-
-void ProductFormControl::dialog_err(int status, QString msg) {
-  DialogMsg *dialog = new DialogMsg(this, status, msg);
-  int resp = dialog->show();
-
-  if (status != 1) return;
-
-  if (resp) emit bt_cancel->clicked();
 }
 
 void ProductFormControl::dialog_add_category() {
@@ -353,12 +382,18 @@ void ProductFormControl::dialog_add_category() {
 
   if (resp) {
     QString category_name = dialog.tx_name->text();
+    QString description = dialog.tx_description->toPlainText();
 
     if (category_name.isEmpty()) {
       dialog_err(2, "Nome não informado. \nTente Novamente");
       dialog_add_category();
       return;
     }
+
+    QJsonObject data;
+    data.insert("id", "");
+    data.insert("name", category_name);
+    data.insert("description", description);
 
     ModelFormProduct model;
 
@@ -367,7 +402,7 @@ void ProductFormControl::dialog_add_category() {
             &ProductFormControl::dialog_err);
     connect(&model, &ModelFormProduct::signal_new_category, this,
             &ProductFormControl::select_new_categorry);
-    model.save_category(category_name);
+    model.save_category(data);
   }
 }
 
@@ -387,6 +422,79 @@ void ProductFormControl::select_new_categorry(const int &id_category,
       tx_category->setText(tx_category->completation->currentCompletion());
     }
   }
+}
+
+
+void ProductFormControl::dialog_add_brand() {
+  DialogInput dialog = DialogInput("Nova Marca", this);
+  MaskWidget mask = MaskWidget(this);
+  mask.show();
+  int resp = dialog.exec();
+  mask.close();
+
+  if (resp) {
+    QString category_name = dialog.tx_name->text();
+    QString description = dialog.tx_description->toPlainText();
+
+    if (category_name.isEmpty()) {
+      dialog_err(2, "Nome não informado. \nTente Novamente");
+      dialog_add_brand();
+      return;
+    }
+
+    QJsonObject data;
+    data.insert("id", "");
+    data.insert("name", category_name);
+    data.insert("description", description);
+
+    ModelFormProduct model;
+
+    // Connect Signal
+    connect(&model, &ModelFormProduct::signal_msg, this,
+            &ProductFormControl::dialog_err);
+    connect(&model, &ModelFormProduct::signal_new_brand, this,
+            &ProductFormControl::select_new_brand);
+    model.save_brand(data);
+  }
+}
+
+void ProductFormControl::select_new_brand(const int &id_category,
+                                              const QString &name_brand) {
+  tx_brand->completation->setCompletionPrefix("");
+  int row = completer_brand->rowCount();
+  int col = completer_brand->columnCount();
+
+  QStringList data{QString::number(id_category), name_brand};
+  completer_brand->setData(completer_brand->index(row, col), data, Qt::EditRole);
+
+  for (int i = 0; i < completer_brand->rowCount(); i++) {
+    
+    if (id_category == completer_brand->index(i, 0).data().toInt()) {
+      tx_brand->completation->setCurrentRow(i);
+      tx_brand->setText(tx_brand->completation->currentCompletion());
+    }
+  }
+}
+
+
+void ProductFormControl::dialog_err(int status, QString msg) {
+  DialogMsg *dialog = new DialogMsg(this, status, msg);
+  int resp = dialog->show();
+
+  if (status != 1) return;
+
+  if (resp) emit bt_cancel->clicked();
+}
+
+void ProductFormControl::dialog_sucess(int status, QString msg, int product_id) {
+  DialogMsg *dialog = new DialogMsg(this, status, msg);
+  int resp = dialog->show();
+
+  if (status != 1) return;
+
+  tx_id->setText(QString::number(product_id));
+
+  if (resp) emit bt_cancel->clicked();
 }
 
 ProductFormControl::~ProductFormControl() {}

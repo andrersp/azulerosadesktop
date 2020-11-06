@@ -63,6 +63,7 @@ public:
   ~DialogInput();
   QLabel *label_titulo, *lb_dica;
   DefaultLineEdit *tx_name;
+  DefaultTextEdit *tx_description;
   QPushButton  *bt_confirm, *bt_cancel;
   QVBoxLayout *grid_dialog;
   QHBoxLayout *grid_titulo;

@@ -129,7 +129,7 @@ DialogMsg::DialogMsg(QWidget *frame, const int status, const QString msg)
 
   grid_dialog->addWidget(button_box, 0, Qt::AlignCenter);
 
-  connect(bt_close, &QAbstractButton::clicked, this, &QDialog::accept);
+  connect(bt_close, &QAbstractButton::clicked, this, &QDialog::close);
   connect(bt_cancel, &QAbstractButton::clicked, this, &QDialog::close);
   connect(bt_confirm, &QAbstractButton::clicked, this, &QDialog::accept);
 
@@ -213,7 +213,7 @@ DialogInput::DialogInput(const QString &title, QWidget *frame)
 
   setWindowTitle(title);
   setObjectName("dialog_confirm");
-  resize(400, 150);
+  resize(400, 250);
 
   setWindowFlags(Qt::FramelessWindowHint);
   // setAttribute(Qt::WA_DeleteOnClose);
@@ -252,8 +252,10 @@ DialogInput::DialogInput(const QString &title, QWidget *frame)
   grid_dialog->addSpacing(5);
 
   tx_name = new DefaultLineEdit(title, this);
-
   grid_dialog->addWidget(tx_name);
+
+  tx_description = new DefaultTextEdit("Descrição", this);
+  grid_dialog->addWidget(tx_description);
 
   lb_dica = new QLabel(this);
   lb_dica->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -284,7 +286,7 @@ DialogInput::DialogInput(const QString &title, QWidget *frame)
 
   grid_dialog->addWidget(button_box, 0, Qt::AlignCenter);
 
-  connect(bt_close, &QAbstractButton::clicked, this, &QDialog::accept);
+  connect(bt_close, &QAbstractButton::clicked, this, &QDialog::close);
   connect(bt_cancel, &QAbstractButton::clicked, this, &QDialog::close);
   connect(bt_confirm, &QAbstractButton::clicked, this, &QDialog::accept);
 

@@ -49,8 +49,8 @@ ProductForm::ProductForm(QWidget *parent)
   tx_category = new DefaultLineEditSearchAdd("Categoria", this);
   addWidget(tx_category, 3, 2, 1, 1);
 
-  cb_brand = new DefaultComboBox(this);
-  addWidget(cb_brand, 3, 3, 1, 1);
+  tx_brand = new DefaultLineEditSearchAdd("Marca", this);
+  addWidget(tx_brand, 3, 3, 1, 1);
 
   tx_description = new DefaultTextEdit("Descrição curta", this);
   addWidget(tx_description, 3, 4, 3, 1);

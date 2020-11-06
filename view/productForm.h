@@ -34,8 +34,8 @@ protected:
 	DefaultLineEdit *tx_product_name, *tx_internal_code ;
 	DefaultCompleter *tx_provider;
 	DefaultTextEdit *tx_description;
-	DefaultLineEditSearchAdd *tx_category;
-	DefaultComboBox *cb_enable, *cb_brand, *cb_unit, *cb_subtract;
+	DefaultLineEditSearchAdd *tx_brand, *tx_category;
+	DefaultComboBox *cb_enable, *cb_unit, *cb_subtract;
 	DefaultLineEditFloat *tx_weight, *tx_height, *tx_width, *tx_length,
 						 *tx_minimum_stock, *tx_maximum_stock,
 						 *tx_available_stock, *tx_purchase_price, 

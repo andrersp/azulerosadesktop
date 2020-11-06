@@ -13,12 +13,9 @@ MainWindowControl::MainWindowControl(QWidget *parent) : QMainWindow(parent) {
   resize(1268, 684);
   setMinimumSize(QSize(1268, 684));
   setUnifiedTitleAndToolBarOnMac(true);
-  // takeCentralWidget();
   setWindowTitle("Azul E Rosa Personalizados");
-  window_layout();
-  // connect(quit2, &QAction::triggered, this,
-  // &MainWindowControl::window_layout); connect(login, &QAction::triggered,
-  // this, &MainWindowControl::window_login);
+  setWindowIcon(QIcon(":Images/Images/icon.svgz"));
+  window_login();
 }
 
 void MainWindowControl::window_login() {
@@ -62,7 +59,6 @@ void MainWindowControl::closeEvent(QCloseEvent *e) {
   model_login.logout();
 }
 
-
 // Main Layout
 void MainWindowControl::window_layout() {
   view = new LayoutControl(this);
@@ -73,7 +69,6 @@ void MainWindowControl::window_layout() {
   // &MainWindowControl::window_login);
 }
 
-
 // Dialog Err
 void MainWindowControl::dialog_err(int status, QString msg) {
   DialogMsg *dialog = new DialogMsg(this, status, msg);
@@ -83,5 +78,4 @@ void MainWindowControl::dialog_err(int status, QString msg) {
   // dialog.exec();
 }
 
-
-MainWindowControl::~MainWindowControl(){}
+MainWindowControl::~MainWindowControl() {}
