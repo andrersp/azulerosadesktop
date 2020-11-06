@@ -12,17 +12,19 @@ class MainProductControl : public MainProductView {
  public slots:
   void get_products();
   void set_product_grid(const QVector<QStringList> &data);
-  
-private:
-	ModelTableProduct *table_model;
-	DelegateProduct *delegate_product;
-	FilterProduct *filter;
-	void select_product(const QModelIndex &index);
-	void filter_product(const QString &index);
-	void set_persistent();
 
-signals:
-	void signal_get_product(int &id);
+ private:
+  ModelTableProduct *table_model;
+  DelegateProduct *delegate_product;
+  FilterProduct *filter;
+  void select_product(const QModelIndex &index);
+  void filter_product(const QString &index);
+  void set_persistent();
+ private slots:
+  void dialog_err(int status, QString msg);
+
+ signals:
+  void signal_get_product(int &id);
 };
 
 #endif

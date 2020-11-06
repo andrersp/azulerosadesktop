@@ -36,6 +36,7 @@ void ModelMainProduct::get_products() {
     }
 
     emit signal_product(products);
+    return;
   }
 
   if (response.value("message").isObject()) {
@@ -57,8 +58,7 @@ void ModelMainProduct::get_products() {
     }
 
     emit signal_err(status, msg);
-    return;
-    // qDebug() << msg;
+    return;    
   }
 
   emit signal_err(status, response.value("message").toString());

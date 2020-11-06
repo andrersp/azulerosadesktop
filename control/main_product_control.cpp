@@ -3,10 +3,6 @@
 
 MainProductControl::MainProductControl(QWidget *parent)
     : MainProductView(parent) {
-
-  
-  
-
   // Model
   table_model = new ModelTableProduct(this);
   // Filter
@@ -27,7 +23,8 @@ MainProductControl::MainProductControl(QWidget *parent)
   table_products->setColumnWidth(7, 140);
 
   // Connect Filter
-  connect(fr_search->tx_search, &LineEditSearch::textChanged, this, &MainProductControl::filter_product);
+  connect(fr_search->tx_search, &LineEditSearch::textChanged, this,
+          &MainProductControl::filter_product);
 
   // Connect Table into select product
   connect(table_products, &DefaultTable::clicked, this,
@@ -41,6 +38,8 @@ void MainProductControl::get_products() {
   // Connect Model signal product with this set product grid
   connect(&model, &ModelMainProduct::signal_product, this,
           &MainProductControl::set_product_grid);
+  connect(&model, &ModelMainProduct::signal_err, this,
+          &MainProductControl::dialog_err);
 
   // Call Model get produtos
   model.get_products();
@@ -55,30 +54,32 @@ void MainProductControl::set_product_grid(const QVector<QStringList> &data) {
 }
 
 void MainProductControl::select_product(const QModelIndex &index) {
-
   int col = index.column();
 
   if (col == 7) {
-  	int id_product;
-  	id_product = index.sibling(index.row(), 0).data().toInt();
+    int id_product;
+    id_product = index.sibling(index.row(), 0).data().toInt();
 
-  	emit signal_get_product(id_product);
+    emit signal_get_product(id_product);
   }
   fr_search->tx_search->clear();
-
 }
 
 void MainProductControl::filter_product(const QString &index) {
   filter->setFilterRegExp(QRegExp(index, Qt::CaseInsensitive));
-  set_persistent();  
+  set_persistent();
 }
 
-void MainProductControl::set_persistent(){
+void MainProductControl::set_persistent() {
   for (int i = 0; i < filter->rowCount(); i++) {
     table_products->openPersistentEditor(filter->index(i, 1));
     table_products->openPersistentEditor(filter->index(i, 7));
   }
+}
 
+void MainProductControl::dialog_err(int status, QString msg) {
+  DialogMsg *dialog = new DialogMsg(this, status, msg);
+  int resp = dialog->show();
 }
 
 MainProductControl::~MainProductControl() {}

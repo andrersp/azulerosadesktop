@@ -84,6 +84,8 @@ void ProductFormControl::get_selects() {
           &ModelCompleter::set_data);
   connect(&model, &ModelFormProduct::signal_check_id, this,
           &ProductFormControl::check_id);
+  connect(&model, &ModelFormProduct::signal_msg, this,
+          &ProductFormControl::dialog_err);
   model.get_selects();
 }
 
