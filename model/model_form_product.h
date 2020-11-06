@@ -18,6 +18,9 @@ public slots:
 	void get_product(const int &id);
 	void delete_image(const QString &id_image);
 	void save_product(const QJsonObject &data);
+	void save_category(const QString &category);
+	
+	
 
 signals:
 	void signal_category(QVector<QStringList> categories);
@@ -27,10 +30,7 @@ signals:
 	void signal_check_id();
 	void signal_product(QJsonObject product);
 	void signal_msg(int status, QString msg);
-
-
-
-
+	void signal_new_category(int id_category, QString name_category);;
 };
 
 

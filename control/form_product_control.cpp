@@ -1,20 +1,19 @@
 #include "control/form_product_control.h"
 #include <QAbstractProxyModel>
 #include <QBuffer>
-#include <QDebug>
-ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
-  model_provider = new ModelCompleter(this);
-  tb_providers->setModel(model_provider);
 
+ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
   // Model Category
   model_category = new ModelCompleter(this);
   tx_category->completation->setModel(model_category);
 
   // Tb Provider
+  model_provider = new ModelCompleter(this);
+  tb_providers->setModel(model_provider);
   tb_providers->setColumnHidden(0, true);
   tb_providers->setFocusPolicy(Qt::NoFocus);
   QHeaderView *header = tb_providers->horizontalHeader();
-  header->setSectionResizeMode(1, header->Stretch);
+  // header->setSectionResizeMode(1, header->Stretch);
 
   complete_provider = new ModelCompleter(this);
   tx_provider->completation->setModel(complete_provider);
@@ -40,7 +39,8 @@ ProductFormControl::ProductFormControl(QWidget *parent) : ProductForm(parent) {
           &ProductFormControl::remove_image);
 
   // Connect Add Category dialog
-  connect(tx_category->bt_add, &QPushButton::clicked, this, &ProductFormControl::dialog_add_category);
+  connect(tx_category->bt_add, &QPushButton::clicked, this,
+          &ProductFormControl::dialog_add_category);
 
   // Connect Dialog
   // connect(this, SIGNAL(signal_dialog(int status, QString msg)),
@@ -77,13 +77,6 @@ void ProductFormControl::get_selects() {
   model.get_selects();
 }
 
-// Set categories data into cb_category
-void ProductFormControl::set_categories(const int &id,
-                                        const QString &category) {
-  // cb_category->addItem(category, id);
-  qDebug() << id;
-}
-
 // set units data into cb_unit
 void ProductFormControl::set_units(const int &id, const QString &unit) {
   cb_unit->addItem(unit, id);
@@ -117,7 +110,6 @@ void ProductFormControl::select_provider(const QModelIndex &index) {
   int id_provider = index.sibling(index.row(), 0).data().toInt();
 
   for (int i = 0; i < model_provider->rowCount(); i++) {
-
     if (model_provider->index(i, 0).data().toInt() == id_provider) {
       dialog_err(2, "Fornecedor ja cadastrado");
       return;
@@ -139,13 +131,13 @@ void ProductFormControl::set_product(const QJsonObject &product) {
       cb_enable->findData(product.value("available").toBool()));
   tx_product_name->setText(product.value("name").toString());
 
-  int id_category {product.value("category").toInt()};
+  int id_category{product.value("category").toInt()};
 
-  for (int i = 0; i < model_category->rowCount(); i ++) {
-      if (model_category->index(i, 0).data().toInt() == id_category){
-        tx_category->completation->setCurrentRow(i);
-        tx_category->setText(tx_category->completation->currentCompletion());
-      }
+  for (int i = 0; i < model_category->rowCount(); i++) {
+    if (model_category->index(i, 0).data().toInt() == id_category) {
+      tx_category->completation->setCurrentRow(i);
+      tx_category->setText(tx_category->completation->currentCompletion());
+    }
   }
   // cb_category->setCurrentIndex(
   //     cb_category->findData(product.value("category").toInt()));
@@ -346,23 +338,55 @@ void ProductFormControl::remove_image(const QString &id_image) {
 void ProductFormControl::dialog_err(int status, QString msg) {
   DialogMsg *dialog = new DialogMsg(this, status, msg);
   int resp = dialog->show();
-  
+
   if (status != 1) return;
 
   if (resp) emit bt_cancel->clicked();
 }
 
+void ProductFormControl::dialog_add_category() {
+  DialogInput dialog = DialogInput("Nova Categoria", this);
+  MaskWidget mask = MaskWidget(this);
+  mask.show();
+  int resp = dialog.exec();
+  mask.close();
 
-void ProductFormControl::dialog_add_category(){
-  DialogInput *dialog = new DialogInput("Nova Categoria", this);
-  MaskWidget *mask = new MaskWidget(this);
-  mask->show();
-  int resp = dialog->exec();
-  mask->close();
+  if (resp) {
+    QString category_name = dialog.tx_name->text();
+
+    if (category_name.isEmpty()) {
+      dialog_err(2, "Nome não informado. \nTente Novamente");
+      dialog_add_category();
+      return;
+    }
+
+    ModelFormProduct model;
+
+    // Connect Signal
+    connect(&model, &ModelFormProduct::signal_msg, this,
+            &ProductFormControl::dialog_err);
+    connect(&model, &ModelFormProduct::signal_new_category, this,
+            &ProductFormControl::select_new_categorry);
+    model.save_category(category_name);
+  }
 }
 
-void ProductFormControl::add_category(const QString &category) {
-  qDebug() << category;
+void ProductFormControl::select_new_categorry(const int &id_category,
+                                              const QString &name_category) {
+  tx_category->completation->setCompletionPrefix("");
+  int row = model_category->rowCount();
+  int col = model_category->columnCount();
+
+  QStringList data{QString::number(id_category), name_category};
+  model_category->setData(model_category->index(row, col), data, Qt::EditRole);
+
+  for (int i = 0; i < model_category->rowCount(); i++) {
+    
+    if (id_category == model_category->index(i, 0).data().toInt()) {
+      tx_category->completation->setCurrentRow(i);
+      tx_category->setText(tx_category->completation->currentCompletion());
+    }
+  }
 }
 
 ProductFormControl::~ProductFormControl() {}

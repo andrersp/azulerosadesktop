@@ -13,10 +13,10 @@ public:
 
 public slots:
 	void get_selects();
-	void set_categories(const int &id, const QString &category);
 	void set_units(const int &id, const QString &unit);
 	void set_brands(const int &id, const QString &brand);
 	void select_provider(const QModelIndex &index);
+	void select_new_categorry(const int &id_category, const QString &name_category);
 
 	void check_id();
 private slots:

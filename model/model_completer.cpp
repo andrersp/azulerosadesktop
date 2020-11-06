@@ -1,5 +1,5 @@
 #include "model/model_completer.h"
-#include <QDebug>
+
 int ModelCompleter::rowCount(const QModelIndex &index) const {
   return itens.count();
 }
@@ -19,29 +19,25 @@ QVariant ModelCompleter::data(const QModelIndex &index, int role) const {
   return QVariant();
 }
 
-bool ModelCompleter::setData(const QModelIndex &index, const QStringList &value, int role)  {
-
+bool ModelCompleter::setData(const QModelIndex &index, const QStringList &value,
+                             int role) {
   if (role == Qt::EditRole) {
-    if (!checkIndex(index)){
+    if (!checkIndex(index)) {
       return false;
     }
-    qDebug() << index;
-    qDebug() << value;
-
     beginResetModel();
     // this->itens[index.row()][index.column()] = value.toString();
     this->itens.append(value);
     endResetModel();
     emit dataChanged(index, index, {Qt::DisplayRole, Qt::EditRole});
     return true;
-
   }
 
   return false;
-
 }
 
-bool ModelCompleter::insertRows(int position, int rows, const QModelIndex &index) {
+bool ModelCompleter::insertRows(int position, int rows,
+                                const QModelIndex &index) {
   Q_UNUSED(index);
   beginInsertRows(QModelIndex(), position, position + rows - 1);
 
@@ -54,10 +50,9 @@ bool ModelCompleter::insertRows(int position, int rows, const QModelIndex &index
 }
 
 void ModelCompleter::set_data(const QVector<QStringList> &itens) {
-	beginResetModel();
-	this->itens = itens;
-	endResetModel();
-
+  beginResetModel();
+  this->itens = itens;
+  endResetModel();
 }
 
-ModelCompleter::~ModelCompleter(){}
+ModelCompleter::~ModelCompleter() {}

@@ -216,7 +216,7 @@ DialogInput::DialogInput(const QString &title, QWidget *frame)
   resize(400, 150);
 
   setWindowFlags(Qt::FramelessWindowHint);
-  setAttribute(Qt::WA_DeleteOnClose);
+  // setAttribute(Qt::WA_DeleteOnClose);
   QPainterPath path;
   path.addRoundedRect(QRect(this->rect()), 10, 10);
   QRegion mask = QRegion(path.toFillPolygon().toPolygon());
