@@ -228,8 +228,6 @@ QByteArray ModelRequest::get_image(const QString &url_image) {
   if (timer->isActive()) {
     timer->stop();
     if (reply->error() == QNetworkReply::NoError) {
-    //   QVariant fromCache = reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute);
-    // qDebug() << "page from cache?" << fromCache.toBool();
       image_data = reply->readAll();
     }
   }

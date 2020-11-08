@@ -1,6 +1,6 @@
 #include "control/mainwindow_control.h"
 
-#include <QDebug>
+
 #include <QPushButton>
 
 #include "model/data_user.h"
@@ -16,7 +16,7 @@ MainWindowControl::MainWindowControl(QWidget *parent) : QMainWindow(parent) {
   setWindowTitle("Azul E Rosa Personalizados");
   setWindowIcon(QIcon(":Images/Images/icon.svgz"));
 
-  window_layout();
+  window_login();
 }
 
 void MainWindowControl::window_login() {

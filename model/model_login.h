@@ -2,7 +2,7 @@
 #define MODEL_LOGIN_H
 
 #include <QObject>
-#include <QDebug>
+
 class ModelLogin : public QObject {
 	Q_OBJECT
 public:

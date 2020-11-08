@@ -1,8 +1,6 @@
 #include "model/model_main_product.h"
 #include "model/request.h"
 #include "widgets/default_widgets.h"
-
-#include <QDebug>
 #include <QFont>
 #include <QJsonObject>
 #include <QLabel>
@@ -213,8 +211,7 @@ void DelegateProduct::paint(QPainter *painter, const QStyleOptionViewItem &optio
         QModelIndex hover = tableView->indexAt(tableView->viewport()->mapFromGlobal(QCursor::pos()));
         if (hover.row() == index.row())
         {
-            // qDebug() << option.rect;
-            // painter->fillRect(option.rect, QColor("#069"));
+            
             QRect position(option.rect.x(), option.rect.y() + 78, option.rect.width(), 1);
             painter->fillRect(position ,QColor("#069"));
 

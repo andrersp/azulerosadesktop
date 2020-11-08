@@ -57,7 +57,9 @@ void LayoutControl::set_dashboard_widow() {
 // set  Main Window Product current
 void LayoutControl::set_window_produto() {
   container->setCurrentWidget(main_product);
-  main_product->get_products();
+
+  QTimer::singleShot(2, main_product, SLOT(get_products()));
+  
 }
 
 

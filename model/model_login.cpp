@@ -17,7 +17,7 @@ void ModelLogin::login() {
 
   };
 
-  auto [status, response] = request.post("/login", data);
+  auto [status, response] = request.post("login/", data);
 
   if (status) {
     QJsonObject data{response.value("data").toObject()};
@@ -28,7 +28,6 @@ void ModelLogin::login() {
   if (response.value("message").isObject()) {
     QString msg = "";
     foreach (const QString &key, response.keys()) {
-      // qDebug() << response.value(key);
       QJsonObject value = response.value(key).toObject();
       foreach (const QString &key2, value.keys()) {
         QJsonArray data_array = value.value(key2).toArray();
@@ -46,12 +45,12 @@ void ModelLogin::login() {
 
     emit err(status, msg);
     return;
-    // qDebug() << msg;
+    
   }
 
   emit err(status, response.value("message").toString());
 
-  // qDebug() << response;
+  
 }
 
 void ModelLogin::logout(){

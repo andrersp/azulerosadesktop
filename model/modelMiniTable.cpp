@@ -1,5 +1,5 @@
 #include "model/modelMiniTable.h"
-#include <QDebug>
+
 
 // Model For Mini Tables
 int ModelMiniTable::rowCount(const QModelIndex &index) const {
@@ -73,7 +73,7 @@ bool ModelMiniTable::removeRows(int position, int rows,
 
 void ModelMiniTable::set_data(const QVector<QStringList> &itens) {
   beginResetModel();
-  qDebug() << itens;
+  
   this->itens = itens;
   endResetModel();
 }
