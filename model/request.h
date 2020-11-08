@@ -21,7 +21,7 @@ public:
   // QNetworkReply *reply;
   //   QJsonObject resp;
 
-  // QString url_base{"http://azulerosapersonalizados.com.br/api/v1/admin"};
+  // QString url_base{"https://azulerosapersonalizados.com.br/api/v1/admin"};
   QString url_base{"http://127.0.0.1:5000/api/v1/admin"};
 
   std::tuple<bool, QJsonObject> post(const QString &endpoint,

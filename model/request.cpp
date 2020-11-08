@@ -72,6 +72,7 @@ std::tuple<bool, QJsonObject> ModelRequest::post(const QString &endpoint,
 std::tuple<bool, QJsonObject> ModelRequest::GET(const QString endpoint) {
   QString url = url_base + endpoint;
   QNetworkRequest request;
+  request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
   request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
   QByteArray jsonString = "Bearer " + token.toLocal8Bit();
 

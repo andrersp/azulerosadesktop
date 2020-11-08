@@ -9,13 +9,14 @@
 QString token = "";
 
 MainWindowControl::MainWindowControl(QWidget *parent) : QMainWindow(parent) {
-  // view = new MainWindowView(this);
+  showMaximized();
   resize(1268, 684);
   setMinimumSize(QSize(1268, 684));
   setUnifiedTitleAndToolBarOnMac(true);
   setWindowTitle("Azul E Rosa Personalizados");
   setWindowIcon(QIcon(":Images/Images/icon.svgz"));
-  window_login();
+
+  window_layout();
 }
 
 void MainWindowControl::window_login() {
