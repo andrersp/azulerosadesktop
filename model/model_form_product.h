@@ -17,7 +17,7 @@ public slots:
 	void get_selects();
 	void get_product(const int &id);
 	void delete_image(const QString &id_image);
-	void save_product(const QJsonObject &data);
+	void save_product(const QJsonObject &data, const int &product_id = 0);
 	void save_category(const QJsonObject &data);
 	void save_brand(const QJsonObject &data);
 	

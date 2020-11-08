@@ -12,7 +12,7 @@ ModelMainProduct::ModelMainProduct(QObject *parent) : QObject(parent) {}
 
 void ModelMainProduct::get_products() {
   ModelRequest request = ModelRequest(this);
-  auto [status, response] = request.GET("/products");
+  auto [status, response] = request.GET("products/");
 
   if (status) {
     QJsonArray data_array = response.value("data").toArray();

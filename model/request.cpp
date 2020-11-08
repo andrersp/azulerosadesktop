@@ -68,6 +68,55 @@ std::tuple<bool, QJsonObject> ModelRequest::post(const QString &endpoint,
   return {status, data};
 }
 
+// Put
+std::tuple<bool, QJsonObject> ModelRequest::put(const QString &endpoint,
+                                                 const QJsonObject &dados) {
+  QString url = url_base + endpoint;
+  QNetworkRequest request;
+  request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+  QByteArray jsonString = "Bearer " + token.toLocal8Bit();
+  request.setRawHeader("Authorization", jsonString);
+  request.setUrl(QUrl(url));
+  QNetworkReply *reply =
+      this->manager->put(request, QJsonDocument(dados).toJson());
+
+  timer->start(5000);
+  loop->exec();
+  QJsonObject data;
+  bool status;
+  if (timer->isActive()) {
+    timer->stop();
+
+    //    emit requestFinished(reply);
+    if (reply->error() == QNetworkReply::NoError) {
+      status = true;
+      data = QJsonDocument::fromJson(reply->readAll()).object();
+    } else {
+      int status_code =
+          reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+      if (status_code) {
+        status = false;
+        data = QJsonDocument::fromJson(reply->readAll()).object();
+      } else {
+        QJsonObject resp;
+        resp.insert("message", reply->errorString());
+        status = false;
+        data = QJsonDocument(resp).object();
+      }
+    }
+  } else {
+    QJsonObject resp;
+    resp.insert("message", reply->errorString());
+    status = false;
+    data = QJsonDocument(resp).object();
+  }
+
+  //  return
+  reply->deleteLater();
+  return {status, data};
+}
+
 // Get
 std::tuple<bool, QJsonObject> ModelRequest::GET(const QString endpoint) {
   QString url = url_base + endpoint;

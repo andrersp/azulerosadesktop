@@ -1,4 +1,5 @@
 #include "model/modelMiniTable.h"
+#include <QDebug>
 
 // Model For Mini Tables
 int ModelMiniTable::rowCount(const QModelIndex &index) const {
@@ -14,9 +15,12 @@ Qt::ItemFlags ModelMiniTable::flags(const QModelIndex &index) const {
 
 QVariant ModelMiniTable::data(const QModelIndex &index, int role) const {
 
-	if (role == Qt::DecorationRole && index.column() == 2) {
-		return  QIcon(":Images/Images/icon_remove_image.svgz");
-	}	
+  if (index.column() == 2) {
+    if (role == Qt::DecorationRole && index.column() == 2) {
+      return QIcon(":Images/Images/icon_remove_image.svgz");
+    }
+  }
+
   if (role == Qt::DisplayRole || role == Qt::EditRole) {
     return itens.at(index.row()).at(index.column());
   }
@@ -54,20 +58,22 @@ bool ModelMiniTable::insertRows(int position, int rows,
   return true;
 }
 
-bool ModelMiniTable::removeRows(int position, int rows, const QModelIndex &index) {
-	Q_UNUSED(index);
-	beginRemoveRows(QModelIndex(), position,  position + rows - 1);
+bool ModelMiniTable::removeRows(int position, int rows,
+                                const QModelIndex &index) {
+  Q_UNUSED(index);
+  beginRemoveRows(QModelIndex(), position, position + rows - 1);
 
-	for (int row = 0; row < rows; ++row) {
-		itens.remove(position);
-	}
-	endRemoveRows();
+  for (int row = 0; row < rows; ++row) {
+    itens.remove(position);
+  }
+  endRemoveRows();
 
-	return true;
+  return true;
 }
 
 void ModelMiniTable::set_data(const QVector<QStringList> &itens) {
   beginResetModel();
+  qDebug() << itens;
   this->itens = itens;
   endResetModel();
 }

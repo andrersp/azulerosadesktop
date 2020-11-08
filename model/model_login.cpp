@@ -59,7 +59,7 @@ void ModelLogin::logout(){
 
   QJsonObject data{};
 
-  request.post("/logout", data);
+  request.post("logout/", data);
 }
 
 ModelLogin::~ModelLogin() {}

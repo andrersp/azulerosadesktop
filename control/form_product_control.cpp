@@ -159,12 +159,10 @@ void ProductFormControl::set_product(const QJsonObject &product) {
     }
   }
 
-  int id_brand{product.value("brand").toInt()};
-  qDebug() << id_brand;
+  int id_brand{product.value("brand").toInt()};  
 
   for (int i = 0; i < completer_brand->rowCount(); i++) {
     if (completer_brand->index(i, 0).data().toInt() == id_brand) {
-      qDebug() << i;
       tx_brand->completation->setCurrentRow(i);
       tx_brand->setText(tx_brand->completation->currentCompletion());
     }
@@ -203,6 +201,7 @@ void ProductFormControl::set_product(const QJsonObject &product) {
     data.append(QStringList({QString::number(obj.value("id").toInt()),
                              obj.value("fancy_name").toString(), ""}));
   }
+
 
   model_provider->set_data(data);
 
@@ -305,7 +304,6 @@ void ProductFormControl::save_product() {
       index_brand.sibling(index_brand.row(), 0).data().toInt()};
 
   QJsonObject data;
-  data.insert("id", tx_id->text().toInt());
   data.insert("internal_code", tx_internal_code->text());
   data.insert("name", tx_product_name->text());
   data.insert("category", id_category);
@@ -367,7 +365,7 @@ void ProductFormControl::save_product() {
           &ProductFormControl::dialog_sucess);
   connect(&model, &ModelFormProduct::signal_msg, this,
           &ProductFormControl::dialog_err);
-  model.save_product(data);
+  model.save_product(data, tx_id->text().toInt());
 }
 
 void ProductFormControl::remove_image(const QString &id_image) {
@@ -393,7 +391,6 @@ void ProductFormControl::dialog_add_category() {
     }
 
     QJsonObject data;
-    data.insert("id", "");
     data.insert("name", category_name);
     data.insert("description", description);
 
@@ -445,7 +442,6 @@ void ProductFormControl::dialog_add_brand() {
     }
 
     QJsonObject data;
-    data.insert("id", "");
     data.insert("name", category_name);
     data.insert("description", description);
 

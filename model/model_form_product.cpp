@@ -2,7 +2,7 @@
 
 void ModelFormProduct::get_selects() {
   ModelRequest request = ModelRequest(this);
-  auto [status, response] = request.GET("/product/selects");
+  auto [status, response] = request.GET("products/selects/");
 
   if (status) {
     QJsonObject data = response.value("data").toObject();
@@ -104,7 +104,7 @@ void ModelFormProduct::get_product(const int &id) {
 
   ModelRequest request = ModelRequest(this);
 
-  auto [status, response] = request.GET(QString("/product/%1").arg(id));
+  auto [status, response] = request.GET(QString("products/%1").arg(id));
 
   if (status) {
     QJsonObject data = response.value("data").toObject();
@@ -116,7 +116,7 @@ void ModelFormProduct::get_product(const int &id) {
 void ModelFormProduct::delete_image(const QString &id_image) {
   ModelRequest request = ModelRequest(this);
 
-  auto [status, response] = request.DEL("/product/image/" + id_image);
+  auto [status, response] = request.DEL("products/image/" + id_image);
 
   if (status) {
     return;
@@ -125,10 +125,11 @@ void ModelFormProduct::delete_image(const QString &id_image) {
 }
 
 // Save Product
-void ModelFormProduct::save_product(const QJsonObject &data) {
+void ModelFormProduct::save_product(const QJsonObject &data, const int &product_id) {
   ModelRequest request = ModelRequest(this);
+  
 
-  auto [status, response] = request.post("/product", data);
+  auto [status, response] = product_id ?  request.put(QString("products/%1").arg(product_id), data) :  request.post(QString("products/"), data);
 
   if (status) {
     QJsonObject resp = response.value("data").toObject();
@@ -165,7 +166,7 @@ void ModelFormProduct::save_product(const QJsonObject &data) {
 void ModelFormProduct::save_category(const QJsonObject &data) {
   ModelRequest request;
 
-  auto [status, response] = request.post("/product/category", data);
+  auto [status, response] = request.post("products/categories/", data);
 
   if (status) {
     QJsonObject obj = response.value("data").toObject();
@@ -203,7 +204,7 @@ void ModelFormProduct::save_category(const QJsonObject &data) {
 void ModelFormProduct::save_brand(const QJsonObject &data) {
   ModelRequest request;
 
-  auto [status, response] = request.post("/product/brand", data);
+  auto [status, response] = request.post("products/brands/", data);
 
   if (status) {
     QJsonObject obj = response.value("data").toObject();
