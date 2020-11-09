@@ -61,6 +61,7 @@ void ProductFormControl::get_selects() {
 
   tx_description->clear();
   cb_unit->clear();
+  cb_subtract->setCurrentIndex(1);
   model_provider->itens.clear();
   QList<LabelUploadImage *> lb_images = {img_cover, img1, img2,
                                          img3,      img4, img5};
