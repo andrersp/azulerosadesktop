@@ -16,7 +16,7 @@ public:
 	FrameMenu(QWidget *parent = nullptr);
 	~FrameMenu();
 	QVBoxLayout *grid;
-	ButtonMenu *bt_home, *bt_product;
+	ButtonMenu *bt_home, *bt_product, *bt_category, *bt_brand;
 
 	QLabel *label;
 

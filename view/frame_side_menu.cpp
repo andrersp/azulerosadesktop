@@ -26,6 +26,12 @@ FrameMenu::FrameMenu(QWidget *parent) : QFrame(parent) {
   bt_product = new ButtonMenu("Produtos", QIcon(":Images/Images/products.svgz"), this);
   grid->addWidget(bt_product);
 
+  bt_category = new ButtonMenu("Categorias", QIcon(":Images/Images/products.svgz"), this);
+  grid->addWidget(bt_category);
+
+  bt_brand = new ButtonMenu("Marcas", QIcon(":Images/Images/products.svgz"), this);
+  grid->addWidget(bt_brand);
+
 
   // QIcon icon_tag(":Images/Images/tag.svgz");
   // bt_product = new ButtonMenu("Categorias", icon_tag, this);

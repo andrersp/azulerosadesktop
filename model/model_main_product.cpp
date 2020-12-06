@@ -235,11 +235,13 @@ FilterProduct::FilterProduct(QObject *parent) : QSortFilterProxyModel(parent){}
 bool FilterProduct::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const {
 
   QModelIndex index = sourceModel()->index(sourceRow, 2, sourceParent);
+  QModelIndex index1 = sourceModel()->index(sourceRow, 0, sourceParent);
 
   return (
-    sourceModel()->data(index).toString().contains(filterRegExp())
+    sourceModel()->data(index).toString().contains(filterRegExp()) or  
+    sourceModel()->data(index1).toString().contains(filterRegExp())
     );
 
 }
 
-FilterProduct::~FilterProduct(){}
+FilterProduct::~FilterProduct(){} 
