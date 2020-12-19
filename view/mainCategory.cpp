@@ -1,1 +1,1 @@
-mainCategory.h
+#include "view/mainCategory.h"

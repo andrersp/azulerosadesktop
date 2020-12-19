@@ -128,7 +128,7 @@ void LabelUploadImage::upload_image() {
 
 		
 
-		if (!this->pixmap(Qt::ReturnByValue).isNull()) {
+		if (!this->pixmap()) {
 			DialogMsg *dialog = new  DialogMsg(parentWidget(), 2, "A Imagem Anterior será removida.\nEssa ação não poderá ser desfeita.\nContinuar?");
 			bool result = dialog->exec();
 
