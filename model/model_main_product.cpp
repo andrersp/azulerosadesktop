@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QAbstractItemView>
+#include <QTableView>
+#include <QDebug>
 ModelMainProduct::ModelMainProduct(QObject *parent) : QObject(parent) {}
 
 void ModelMainProduct::get_products() {
@@ -172,20 +174,9 @@ void DelegateProduct::setEditorData(QWidget *editor,
 
     QLabel *label = static_cast<QLabel *>(editor);
     label->setContentsMargins(2, 2, 2, 2);
-    ModelRequest request = ModelRequest();
-    QByteArray img = request.get_image(value);
-    pixmap.loadFromData(img);
+    pixmap.load(":Images/Images/products.svgz");
+    label->setPixmap(pixmap.scaledToHeight(50, Qt::SmoothTransformation));
 
-    try {
-      if (pixmap.isNull()) {
-        throw 1;
-      } else {
-        label->setPixmap(pixmap.scaledToHeight(50, Qt::SmoothTransformation));
-      }
-    } catch (int e) {
-      pixmap.load(":Images/Images/products.svgz");
-      label->setPixmap(pixmap.scaledToHeight(50, Qt::SmoothTransformation));
-    }
   }
 }
 
@@ -210,19 +201,18 @@ void DelegateProduct::paint(QPainter *painter, const QStyleOptionViewItem &optio
     {   
         QModelIndex hover = tableView->indexAt(tableView->viewport()->mapFromGlobal(QCursor::pos()));
         if (hover.row() == index.row())
-        {
-            
+        {            
             QRect position(option.rect.x(), option.rect.y() + 78, option.rect.width(), 1);
             painter->fillRect(position ,QColor("#069"));
-
             position = QRect(option.rect.x(), option.rect.y(), option.rect.width(), 1);
             painter->fillRect(position ,QColor("#069"));
+        }        
+    }
 
-
-            
-          
-
-        }
+    QTableView *table = qobject_cast<QTableView*>(this->parent());
+    if (index.column() == 7) {
+        table->openPersistentEditor(index);     
+      
     }
  
     QStyledItemDelegate::paint(painter, option, index);

@@ -49,8 +49,9 @@ void MainProductControl::get_products() {
 void MainProductControl::set_product_grid(const QVector<QStringList> &data) {
   // Objectcast to layout control
   table_model->set_data(data);
+  // QTimer::singleShot(1, this, &MainProductControl::set_persistent);
 
-  set_persistent();
+  // set_persistent();
 }
 
 void MainProductControl::select_product(const QModelIndex &index) {
@@ -67,12 +68,12 @@ void MainProductControl::select_product(const QModelIndex &index) {
 
 void MainProductControl::filter_product(const QString &index) {
   filter->setFilterRegExp(QRegExp(index, Qt::CaseInsensitive));
-  set_persistent();
+  // set_persistent();
 }
 
 void MainProductControl::set_persistent() {
   for (int i = 0; i < filter->rowCount(); i++) {
-    table_products->openPersistentEditor(filter->index(i, 1));
+    // table_products->openPersistentEditor(filter->index(i, 1));
     table_products->openPersistentEditor(filter->index(i, 7));
   }
 }
